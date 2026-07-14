@@ -1,30 +1,32 @@
 import Link from "next/link";
+import Script from "next/script";
 import ProductCard from "../components/ProductCard";
 import { TrendingUp, Sparkles, ShieldCheck, Mail, Clock, ArrowRight } from "lucide-react";
 
 export default function Home() {
   return (
     <div className="max-w-7xl mx-auto px-4 pb-16">
-      
+
       {/* TOP AD ADVERTISEMENT SLOT */}
       <div className="my-6">
         <div className="bg-slate-50 border border-slate-200/50 rounded-xl p-4 text-center relative overflow-hidden group">
           <div className="absolute top-0 left-0 bg-slate-200 text-slate-500 text-[8px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-br-md">
             ADVERTISEMENT
           </div>
-          <p className="text-xs sm:text-sm text-slate-600 font-medium">
-            🔥 <span className="font-bold text-slate-900">Limited Time Offer:</span> Get 3 Months of TheCodeBrains Club Premium for Free! Access ad-free reading and exclusive price alerts.{" "}
-            <Link href="/join" className="text-indigo-600 font-bold hover:underline inline-flex items-center gap-0.5">
-              Claim Offer <ArrowRight size={12} />
-            </Link>
-          </p>
+          <div className="advertisement-box flex justify-center items-center py-2">
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `(function(s){s.dataset.zone='11284701';s.src='https://omg10.com/4/11284701'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`
+              }}
+            />
+          </div>
         </div>
       </div>
 
       {/* AFFILIATE DISCLOSURE BANNER */}
       <div className="mb-8 border-b border-slate-100 pb-4">
         <p className="text-[11px] text-slate-400 leading-relaxed">
-          <span className="font-bold text-slate-500 uppercase tracking-wide mr-1">Affiliate Disclosure:</span> 
+          <span className="font-bold text-slate-500 uppercase tracking-wide mr-1">Affiliate Disclosure:</span>
           TheCodeBrains is an independent, reader-supported review site. When you buy through links on our site, we may earn an affiliate commission from our merchant partners (like Amazon and Best Buy). This does not affect our product evaluation ratings or editorial independence.
         </p>
       </div>
@@ -35,29 +37,29 @@ export default function Home() {
         <div className="lg:col-span-2 flex flex-col justify-between border border-slate-100 rounded-2xl p-6 bg-white shadow-xs hover:shadow-md transition-shadow duration-300 group">
           <div>
             <Link href="/phones/best-picks" className="block relative w-full h-80 sm:h-96 rounded-xl overflow-hidden bg-slate-100 border border-slate-100">
-              <img 
-                src="/images/modern_smartphone.png" 
-                alt="Best Smartphones 2026" 
+              <img
+                src="/images/modern_smartphone.png"
+                alt="Best Smartphones 2026"
                 className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
               />
               <span className="absolute top-4 left-4 bg-indigo-600 text-white text-[10px] font-extrabold tracking-wider px-3 py-1 rounded-full uppercase shadow-md">
                 Featured Guide
               </span>
             </Link>
-            
+
             <div className="mt-6">
               <div className="flex items-center gap-3 text-xs text-slate-400 font-semibold mb-3">
                 <span className="text-indigo-600 font-extrabold uppercase tracking-wider bg-indigo-50 px-2.5 py-1 rounded-md">Phones</span>
                 <span>•</span>
                 <span className="flex items-center gap-1"><Clock size={12} /> 12 Min Read</span>
               </div>
-              
+
               <Link href="/phones/best-picks">
                 <h1 className="text-2xl sm:text-4xl font-black text-slate-900 leading-tight tracking-tight hover:text-indigo-600 transition group-hover:underline">
                   Best phones of 2026 — 9 flagships worth your money
                 </h1>
               </Link>
-              
+
               <p className="mt-4 text-slate-500 text-base leading-relaxed">
                 We've spent hundreds of hours testing every major flagship release this year, evaluating cameras under low light, battery drain under heavy use, and absolute computing power. Here is our definitive buying advice for what you should actually buy.
               </p>
@@ -87,7 +89,7 @@ export default function Home() {
               <TrendingUp size={18} className="text-indigo-600" />
               Trending Guides
             </h2>
-            
+
             <div className="divide-y divide-slate-100">
               {[
                 {
@@ -205,38 +207,38 @@ export default function Home() {
             Browse All Deals <ArrowRight size={12} />
           </Link>
         </div>
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <ProductCard 
-            title="Samsung Galaxy S26 Ultra 5G (512GB, Unlocked)" 
-            price={999} 
-            oldPrice={1299} 
-            link="https://www.amazon.in/s?k=Samsung+Galaxy+S24+Ultra" 
-            image="/images/modern_smartphone.png" 
+          <ProductCard
+            title="Samsung Galaxy S26 Ultra 5G (512GB, Unlocked)"
+            price={999}
+            oldPrice={1299}
+            link="https://www.amazon.in/s?k=Samsung+Galaxy+S24+Ultra"
+            image="/images/modern_smartphone.png"
             merchant="Amazon"
           />
-          <ProductCard 
-            title="Dell XPS 13 OLED (2026 Ultra-thin, 32GB RAM)" 
-            price={1149} 
-            oldPrice={1499} 
-            link="https://www.flipkart.com/search?q=Dell+XPS+13+OLED" 
-            image="/images/modern_laptop.png" 
+          <ProductCard
+            title="Dell XPS 13 OLED (2026 Ultra-thin, 32GB RAM)"
+            price={1149}
+            oldPrice={1499}
+            link="https://www.flipkart.com/search?q=Dell+XPS+13+OLED"
+            image="/images/modern_laptop.png"
             merchant="Flipkart"
           />
-          <ProductCard 
-            title="LG G6 OLED 55-inch Evo 4K HDR Smart TV" 
-            price={1399} 
-            oldPrice={1799} 
-            link="https://www.amazon.in/s?k=LG+OLED+55+inch+TV" 
-            image="/images/oled_tv.png" 
+          <ProductCard
+            title="LG G6 OLED 55-inch Evo 4K HDR Smart TV"
+            price={1399}
+            oldPrice={1799}
+            link="https://www.amazon.in/s?k=LG+OLED+55+inch+TV"
+            image="/images/oled_tv.png"
             merchant="Amazon"
           />
-          <ProductCard 
-            title="Sony WH-1000XM6 Active Noise Cancelling Headphones" 
-            price={299} 
-            oldPrice={399} 
-            link="https://www.flipkart.com/search?q=Sony+WH-1000XM5" 
-            image="/images/premium_headphones.png" 
+          <ProductCard
+            title="Sony WH-1000XM6 Active Noise Cancelling Headphones"
+            price={299}
+            oldPrice={399}
+            link="https://www.flipkart.com/search?q=Sony+WH-1000XM5"
+            image="/images/premium_headphones.png"
             merchant="Flipkart"
           />
         </div>
@@ -248,10 +250,10 @@ export default function Home() {
           <span className="absolute top-2 right-2 text-[8px] font-bold text-slate-400 uppercase tracking-widest">ADVERTISEMENT</span>
           <p className="text-sm font-bold text-slate-700 mt-2">Need a reliable VPN for your new tech?</p>
           <p className="text-xs text-slate-400 mt-1">Get 70% off NordVPN 2-Year plan + 3 months free. Verified security recommendation.</p>
-          <a 
-            href="https://www.amazon.in/s?k=NordVPN" 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            href="https://www.amazon.in/s?k=NordVPN"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block mt-3 text-xs font-bold text-indigo-600 hover:underline"
           >
             Get NordVPN Deal →
@@ -261,10 +263,10 @@ export default function Home() {
           <span className="absolute top-2 right-2 text-[8px] font-bold text-slate-400 uppercase tracking-widest">ADVERTISEMENT</span>
           <p className="text-sm font-bold text-slate-700 mt-2">Protective Cases for iPhone 17 & Galaxy S26</p>
           <p className="text-xs text-slate-400 mt-1">Buy 1 Get 1 50% Off on military-grade protective cases at Spigen Amazon Store.</p>
-          <a 
-            href="https://www.amazon.in/s?k=Spigen+Cases" 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            href="https://www.amazon.in/s?k=Spigen+Cases"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block mt-3 text-xs font-bold text-indigo-600 hover:underline"
           >
             Shop Spigen Cases →
@@ -342,14 +344,14 @@ export default function Home() {
               Join 50,000+ tech enthusiasts. Get the best tech reviews, buying guides, and verified coupons delivered daily to your inbox.
             </p>
             <form className="mt-4 space-y-3">
-              <input 
-                type="email" 
-                placeholder="Enter your email address" 
-                className="w-full bg-slate-900 border border-slate-800 text-slate-200 text-xs rounded-lg px-3.5 py-2.5 outline-none focus:border-indigo-500 transition" 
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                className="w-full bg-slate-900 border border-slate-800 text-slate-200 text-xs rounded-lg px-3.5 py-2.5 outline-none focus:border-indigo-500 transition"
                 required
               />
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs tracking-wider uppercase py-2.5 rounded-lg transition"
               >
                 Subscribe Now
