@@ -14,7 +14,9 @@ export default function Home() {
             ADVERTISEMENT
           </div>
           <div className="advertisement-box flex justify-center items-center py-2">
-            <script
+            <Script
+              id="ad-script-11284701"
+              strategy="afterInteractive"
               dangerouslySetInnerHTML={{
                 __html: `(function(s){s.dataset.zone='11284701';s.src='https://omg10.com/4/11284701'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`
               }}
@@ -92,6 +94,13 @@ export default function Home() {
 
             <div className="divide-y divide-slate-100">
               {[
+                {
+                  category: "AI & Automation",
+                  title: "Jotform AI Agents: Build Custom AI Assistants to Automate Your Business Workflows",
+                  href: "/blog/jotform-ai-agents",
+                  image: "/images/modern_laptop.png",
+                  readTime: "6 min"
+                },
                 {
                   category: "OLED TVs",
                   title: "Best OLED TVs in 2026 — tested and ranked",
@@ -284,6 +293,15 @@ export default function Home() {
           <div className="space-y-6">
             {[
               {
+                tag: "AI & AUTOMATION",
+                title: "Jotform AI Agents: Build Custom AI Assistants to Automate Your Business Workflows",
+                excerpt: "Discover how to build conversational AI agents that automate customer data entry, lead qualification, and document generation without code.",
+                author: "Dev Kapoor",
+                date: "Jul 15, 2026",
+                image: "/images/modern_laptop.png",
+                customHref: "/blog/jotform-ai-agents"
+              },
+              {
                 tag: "ANTIVIRUS",
                 title: "The best Android antivirus apps in 2026",
                 excerpt: "The top Android antivirus apps guard against malware and typically bundle in a VPN, password manager, and phishing protection to secure your personal mobile files.",
@@ -308,7 +326,7 @@ export default function Home() {
                 image: "/images/oled_tv.png"
               }
             ].map((article, idx) => (
-              <Link href="/browse" key={idx} className="flex flex-col sm:flex-row gap-6 p-5 border border-slate-100 rounded-xl hover:shadow-md transition duration-300 bg-white group block">
+              <Link href={article.customHref || "/browse"} key={idx} className="flex flex-col sm:flex-row gap-6 p-5 border border-slate-100 rounded-xl hover:shadow-md transition duration-300 bg-white group block">
                 <div className="w-full sm:w-48 h-32 rounded-lg overflow-hidden shrink-0 bg-slate-50 border border-slate-100">
                   <img src={article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-102 transition duration-300" />
                 </div>

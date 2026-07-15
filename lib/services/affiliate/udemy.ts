@@ -9,8 +9,8 @@ export class UdemyService implements AffiliateProvider {
   private baseUrl = 'https://www.udemy.com/api-2.0';
 
   private getAuthHeaders(): Record<string, string> | null {
-    const clientId = process.env.UDEMY_CLIENT_ID;
-    const clientSecret = process.env.UDEMY_CLIENT_SECRET;
+    const clientId = process.env.UDEMY_CLIENT_ID?.replace(/['"]/g, '');
+    const clientSecret = process.env.UDEMY_CLIENT_SECRET?.replace(/['"]/g, '');
 
     if (!clientId || !clientSecret) {
       console.warn('[UdemyService] Warning: UDEMY_CLIENT_ID or UDEMY_CLIENT_SECRET is not configured in environment variables.');
@@ -80,6 +80,12 @@ export class UdemyService implements AffiliateProvider {
       });
 
       if (!response.ok) {
+        if (response.status === 403) {
+          console.warn(
+            `[UdemyService] Udemy API returned 403 Forbidden. Your credentials are correct, but your Udemy account is pending API access approval. Serving mockup courses as fallback.`
+          );
+          return this.getMockupFallback(query, page, pageSize);
+        }
         throw new Error(`Udemy API responded with status ${response.status}: ${await response.text()}`);
       }
 

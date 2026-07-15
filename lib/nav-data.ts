@@ -141,6 +141,11 @@ export const navData: NavItem[] = [
     ],
   },
   {
+    label: "Blog",
+    slug: "blog",
+    href: "/blog",
+  },
+  {
     label: "Home",
     slug: "home",
     columns: [
