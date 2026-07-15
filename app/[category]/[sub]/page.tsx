@@ -11,8 +11,11 @@ export function generateStaticParams() {
     if (!item.columns) continue;
     for (const col of item.columns) {
       for (const link of col.links) {
+        if (link.disabled) continue;
         const parts = link.href.split("/").filter(Boolean);
         if (parts.length === 2) {
+          // Exclude dedicated paths like "learning" that have custom routes
+          if (parts[0] === "learning") continue;
           params.push({ category: parts[0], sub: parts[1] });
         }
       }
@@ -27,6 +30,10 @@ export default async function CategoryPage({
   params: Promise<{ category: string; sub: string }>;
 }) {
   const { category, sub } = await params;
+  
+  // Custom categories have their own directories and route structures
+  if (category === "learning") notFound();
+
   const href = `/${category}/${sub}`;
 
   const validTop = navData.some((item) => item.slug === category && item.columns);

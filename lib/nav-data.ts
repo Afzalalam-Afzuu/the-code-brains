@@ -5,6 +5,7 @@
 export interface NavLink {
   label: string;
   href: string; // e.g. "/phones/best-picks"
+  disabled?: boolean;
 }
 
 export interface NavColumn {
@@ -127,6 +128,19 @@ export const navData: NavItem[] = [
     ],
   },
   {
+    label: "Learning",
+    slug: "learning",
+    columns: [
+      {
+        heading: "Online Courses",
+        links: [
+          { label: "Udemy", href: "/learning/udemy" },
+          { label: "Coursera", href: "/learning/coursera", disabled: true },
+        ],
+      },
+    ],
+  },
+  {
     label: "Home",
     slug: "home",
     columns: [
@@ -156,7 +170,7 @@ export const navData: NavItem[] = [
 // link in the header has a working, statically-generated page behind it.
 export const allNavHrefs: string[] = navData.flatMap((item) => {
   if (item.columns) {
-    return item.columns.flatMap((col) => col.links.map((l) => l.href));
+    return item.columns.flatMap((col) => col.links.filter((l) => !l.disabled).map((l) => l.href));
   }
   return item.href ? [item.href] : [];
 });

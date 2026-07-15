@@ -136,13 +136,20 @@ export default function Navbar() {
                             <ul className="space-y-2">
                               {col.links.map((link) => (
                                 <li key={link.href}>
-                                  <Link
-                                    href={link.href}
-                                    onClick={() => setOpenSlug(null)}
-                                    className="text-slate-500 hover:text-indigo-600 hover:underline text-sm font-medium transition-colors"
-                                  >
-                                    {link.label}
-                                  </Link>
+                                  {link.disabled ? (
+                                    <span className="text-slate-400 cursor-not-allowed text-sm font-medium select-none flex items-center justify-between gap-1 opacity-70">
+                                      <span>{link.label}</span>
+                                      <span className="text-[9px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded-full font-bold scale-90">Soon</span>
+                                    </span>
+                                  ) : (
+                                    <Link
+                                      href={link.href}
+                                      onClick={() => setOpenSlug(null)}
+                                      className="text-slate-500 hover:text-indigo-600 hover:underline text-sm font-medium transition-colors"
+                                    >
+                                      {link.label}
+                                    </Link>
+                                  )}
                                 </li>
                               ))}
                             </ul>
