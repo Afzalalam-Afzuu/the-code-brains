@@ -2,8 +2,10 @@ import Link from "next/link";
 import Script from "next/script";
 import ProductCard from "../components/ProductCard";
 import { TrendingUp, Sparkles, ShieldCheck, Mail, Clock, ArrowRight } from "lucide-react";
+import { getBlogs } from "../lib/db-actions";
 
-export default function Home() {
+export default async function Home() {
+  const blogs = await getBlogs();
   return (
     <div className="max-w-7xl mx-auto px-4 pb-16">
 
@@ -91,47 +93,18 @@ export default function Home() {
               <TrendingUp size={18} className="text-indigo-600" />
               Trending Guides
             </h2>
-
             <div className="divide-y divide-slate-100">
-              {[
-                {
-                  category: "AI & Automation",
-                  title: "Jotform AI Agents: Build Custom AI Assistants to Automate Your Business Workflows",
-                  href: "/blog/jotform-ai-agents",
-                  image: "/images/modern_laptop.png",
-                  readTime: "6 min"
-                },
-                {
-                  category: "OLED TVs",
-                  title: "Best OLED TVs in 2026 — tested and ranked",
-                  href: "/tv-audio/tv-best-picks",
-                  image: "/images/oled_tv.png",
-                  readTime: "8 min"
-                },
-                {
-                  category: "Computing",
-                  title: "Best laptops in 2026, tested by our team",
-                  href: "/computing/best-laptops",
-                  image: "/images/modern_laptop.png",
-                  readTime: "10 min"
-                },
-                {
-                  category: "Audio",
-                  title: "Sleek wireless headphones you can buy on a budget",
-                  href: "/tv-audio/earbuds",
-                  image: "/images/premium_headphones.png",
-                  readTime: "6 min"
-                }
-              ].map((item, index) => (
+              {blogs.slice(0, 4).map((item, index) => (
                 <Link key={index} href={item.href} className="flex gap-4 py-4 group block">
-                  <div className="w-20 h-16 rounded-lg overflow-hidden shrink-0 bg-slate-50 border border-slate-100">
+                  <div className="w-20 h-16 rounded-lg overflow-hidden shrink-0 bg-slate-55 border border-slate-100">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
                   </div>
                   <div className="min-w-0">
                     <span className="text-[9px] font-extrabold uppercase text-indigo-600 tracking-wider bg-indigo-50/80 px-1.5 py-0.5 rounded">
-                      {item.category}
+                      {item.tag}
                     </span>
-                    <h3 className="font-bold text-slate-800 text-sm leading-snug group-hover:text-indigo-600 group-hover:underline mt-1.5 transition">
+                    <h3 className="font-bold text-slate-800 text-sm leading-snug group-hover:text-indigo-600 group-hover:underline mt-1.5 transition line-clamp-2">
                       {item.title}
                     </h3>
                   </div>
@@ -291,51 +264,18 @@ export default function Home() {
             Latest Tech Reviews & Buying Guides
           </h2>
           <div className="space-y-6">
-            {[
-              {
-                tag: "AI & AUTOMATION",
-                title: "Jotform AI Agents: Build Custom AI Assistants to Automate Your Business Workflows",
-                excerpt: "Discover how to build conversational AI agents that automate customer data entry, lead qualification, and document generation without code.",
-                author: "Dev Kapoor",
-                date: "Jul 15, 2026",
-                image: "/images/modern_laptop.png",
-                customHref: "/blog/jotform-ai-agents"
-              },
-              {
-                tag: "ANTIVIRUS",
-                title: "The best Android antivirus apps in 2026",
-                excerpt: "The top Android antivirus apps guard against malware and typically bundle in a VPN, password manager, and phishing protection to secure your personal mobile files.",
-                author: "Priya Sharma",
-                date: "Jul 8, 2026",
-                image: "/images/modern_smartphone.png"
-              },
-              {
-                tag: "LAPTOPS",
-                title: "Best laptops in 2026, tested by our team",
-                excerpt: "From ultraportables with all-day battery life to power-packed creator workstations, these are the laptops we'd actually recommend spending your hard-earned money on.",
-                author: "Karan Malhotra",
-                date: "Jul 11, 2026",
-                image: "/images/modern_laptop.png"
-              },
-              {
-                tag: "OLED TVS",
-                title: "Best QLED TVs for bright living rooms in 2026",
-                excerpt: "If your living room gets a lot of natural sunlight, OLED can struggle with glare. These QLED sets battle bright light best without washed-out color contrast.",
-                author: "Neha Verma",
-                date: "Jul 4, 2026",
-                image: "/images/oled_tv.png"
-              }
-            ].map((article, idx) => (
-              <Link href={article.customHref || "/browse"} key={idx} className="flex flex-col sm:flex-row gap-6 p-5 border border-slate-100 rounded-xl hover:shadow-md transition duration-300 bg-white group block">
-                <div className="w-full sm:w-48 h-32 rounded-lg overflow-hidden shrink-0 bg-slate-50 border border-slate-100">
+            {blogs.slice(0, 3).map((article, idx) => (
+              <Link href={article.href} key={idx} className="flex flex-col sm:flex-row gap-6 p-5 border border-slate-100 rounded-xl hover:shadow-md transition duration-300 bg-white group block">
+                <div className="w-full sm:w-48 h-32 rounded-lg overflow-hidden shrink-0 bg-slate-55 border border-slate-100">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-102 transition duration-300" />
                 </div>
                 <div className="flex-1 flex flex-col justify-between">
                   <div>
-                    <span className="inline-block bg-indigo-50 text-indigo-700 text-[10px] font-extrabold tracking-wider px-2.5 py-1 rounded-md">
+                    <span className="inline-block bg-indigo-50 text-indigo-700 text-[10px] font-extrabold tracking-wider px-2.5 py-1 rounded-md uppercase">
                       {article.tag}
                     </span>
-                    <h3 className="font-bold text-slate-800 text-lg leading-snug group-hover:text-indigo-600 transition group-hover:underline mt-2">
+                    <h3 className="font-bold text-slate-800 text-lg leading-snug group-hover:text-indigo-600 transition group-hover:underline mt-2 line-clamp-2">
                       {article.title}
                     </h3>
                     <p className="text-sm text-slate-500 mt-2 line-clamp-2 leading-relaxed">{article.excerpt}</p>

@@ -1,15 +1,19 @@
 // app/blog/page.tsx
 import Link from "next/link";
-import { Mail, Clock, Calendar, ArrowRight, Sparkles, BookOpen } from "lucide-react";
-import { blogPosts } from "../../lib/blog-data";
+import { Mail, Clock, Calendar, ArrowRight, Sparkles, BookOpen, Plus } from "lucide-react";
+import { getBlogs } from "../../lib/db-actions";
 
 export const metadata = {
   title: "Technology Blog, Tutorials & Reviews - TheCodeBrains",
   description: "Read expert reviews, no-code automation tutorials, coding best practices, and TV & laptop reviews by TheCodeBrains team.",
 };
 
-export default function BlogListingPage() {
-  const [featuredPost, ...otherPosts] = blogPosts;
+// Force SSR (Server-Side Rendering) by setting dynamic rendering behaviour
+export const dynamic = "force-dynamic";
+
+export default async function BlogListingPage() {
+  const blogs = await getBlogs();
+  const [featuredPost, ...otherPosts] = blogs;
 
   return (
     <div className="bg-slate-50/50 min-h-screen pb-16">
@@ -23,13 +27,24 @@ export default function BlogListingPage() {
         </nav>
 
         {/* Blog Page Title */}
-        <div className="border-b border-slate-100 pb-6 mb-10">
-          <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-            TheCodeBrains <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">Blog</span>
-          </h1>
-          <p className="text-slate-500 text-sm mt-2 font-medium">
-            Stay ahead of the curve with expert reviews, technology tutorials, and no-code automation tips.
-          </p>
+        <div className="border-b border-slate-100 pb-6 mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+          <div>
+            <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+              TheCodeBrains <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">Blog</span>
+            </h1>
+            <p className="text-slate-500 text-sm mt-2 font-medium">
+              Stay ahead of the curve with expert reviews, technology tutorials, and no-code automation tips.
+            </p>
+          </div>
+          
+          {/* Admin Write Blog CTA */}
+          <Link 
+            href="/blog/create" 
+            className="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider px-4 py-2.5 rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer"
+          >
+            <Plus size={14} />
+            <span>Write a Blog</span>
+          </Link>
         </div>
 
         {/* Layout Grid */}
@@ -38,8 +53,8 @@ export default function BlogListingPage() {
           {/* Main Content Area */}
           <div className="space-y-12">
             
-            {/* Featured Post Card (Prominent display for the Jotform AI Agent article) */}
-            {featuredPost && (
+            {/* Featured Post Card (Prominent display for the latest article) */}
+            {featuredPost ? (
               <div className="bg-white border border-slate-100 rounded-3xl p-6 shadow-xs hover:shadow-md transition-shadow duration-300 group flex flex-col md:flex-row gap-6">
                 <Link 
                   href={featuredPost.href} 
@@ -89,59 +104,67 @@ export default function BlogListingPage() {
                   </div>
                 </div>
               </div>
+            ) : (
+              <div className="text-center py-12 bg-white rounded-3xl border border-slate-100 p-8">
+                <BookOpen size={40} className="mx-auto text-slate-350 mb-3" />
+                <h3 className="font-bold text-slate-700">No blog posts found</h3>
+                <p className="text-slate-400 text-xs mt-1">Check back later or click "Write a Blog" to publish one!</p>
+              </div>
             )}
 
             {/* Other Posts Grid */}
-            <div className="space-y-6">
-              <h3 className="text-base font-extrabold text-slate-900 border-b border-slate-100 pb-3 mb-6 uppercase tracking-wider">
-                More Tech & AI Guides
-              </h3>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {otherPosts.map((post) => (
-                  <div 
-                    key={post.slug} 
-                    className="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
-                  >
-                    <div>
-                      <Link 
-                        href={post.href}
-                        className="aspect-video w-full rounded-xl overflow-hidden bg-slate-100 border border-slate-100 block mb-4"
-                      >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img 
-                          src={post.image} 
-                          alt={post.title} 
-                          className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
-                        />
-                      </Link>
+            {otherPosts.length > 0 && (
+              <div className="space-y-6">
+                <h3 className="text-base font-extrabold text-slate-900 border-b border-slate-100 pb-3 mb-6 uppercase tracking-wider">
+                  More Tech & AI Guides
+                </h3>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {otherPosts.map((post) => (
+                    <div 
+                      key={post.slug} 
+                      className="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
+                    >
+                      <div>
+                        <Link 
+                          href={post.href}
+                          className="aspect-video w-full rounded-xl overflow-hidden bg-slate-100 border border-slate-100 block mb-4"
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img 
+                            src={post.image} 
+                            alt={post.title} 
+                            className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
+                          />
+                        </Link>
 
-                      <span className="bg-slate-100 text-slate-650 text-[9px] font-extrabold tracking-wider px-2 py-0.5 rounded uppercase">
-                        {post.tag}
-                      </span>
+                        <span className="bg-slate-100 text-slate-650 text-[9px] font-extrabold tracking-wider px-2 py-0.5 rounded uppercase">
+                          {post.tag}
+                        </span>
 
-                      <Link href={post.href}>
-                        <h4 className="font-bold text-slate-900 text-base leading-snug group-hover:text-indigo-600 hover:underline transition mt-2.5 line-clamp-2">
-                          {post.title}
-                        </h4>
-                      </Link>
+                        <Link href={post.href}>
+                          <h4 className="font-bold text-slate-900 text-base leading-snug group-hover:text-indigo-600 hover:underline transition mt-2.5 line-clamp-2">
+                            {post.title}
+                          </h4>
+                        </Link>
 
-                      <p className="text-slate-500 text-xs mt-2 line-clamp-2 leading-relaxed">
-                        {post.excerpt}
-                      </p>
+                        <p className="text-slate-500 text-xs mt-2 line-clamp-2 leading-relaxed">
+                          {post.excerpt}
+                        </p>
+                      </div>
+
+                      <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-medium">
+                        <span>{post.date} • {post.readTime}</span>
+                        <Link href={post.href} className="text-indigo-600 hover:underline font-bold flex items-center gap-0.5">
+                          <span>Read</span>
+                          <ArrowRight size={10} />
+                        </Link>
+                      </div>
                     </div>
-
-                    <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-medium">
-                      <span>{post.date} • {post.readTime}</span>
-                      <Link href={post.href} className="text-indigo-600 hover:underline font-bold flex items-center gap-0.5">
-                        <span>Read</span>
-                        <ArrowRight size={10} />
-                      </Link>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
           </div>
 
