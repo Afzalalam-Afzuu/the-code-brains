@@ -76,8 +76,9 @@ export default function PortfolioClient() {
       case "experience":
         output.push(
           "Timeline:",
-          "  • SchoolDigitalised | Full-Stack Developer (April 2026 - Present)",
-          "  • Microcen Pvt Ltd  | Full-Stack Developer Intern (April 2025 - March 2026)"
+          "  • SchoolDigitalised       | Full-Stack Developer (April 2026 - Present)",
+          "  • Microcen Pvt Ltd        | Full-Stack Developer Intern (April 2025 - March 2026)",
+          "  • Niks Technology Limited | Web Developer Intern (July 2021 - Present)"
         );
         break;
       case "contact":
@@ -486,6 +487,40 @@ export default function PortfolioClient() {
                 <li className="flex gap-2">
                   <span className="text-indigo-600 font-bold shrink-0 mt-0.5">↳</span>
                   <span>Optimized complex multi-database queries (MySQL/PostgreSQL/MongoDB), which <strong className="text-slate-800 font-bold">improved overall system response time by 30%</strong> for end-users.</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Experience Item 3: Niks Technology Limited */}
+            <div className="bg-white border border-slate-200/60 rounded-2xl p-6 sm:p-8 shadow-2xs hover:shadow-xs transition duration-300 relative overflow-hidden print:p-4">
+              <div className="absolute top-0 left-0 w-1.5 h-full bg-emerald-600" />
+              
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6">
+                <div className="space-y-1">
+                  <span className="text-[9px] font-extrabold text-emerald-700 bg-emerald-50 border border-emerald-150 px-2 py-0.5 rounded-md uppercase tracking-wider">
+                    Internship
+                  </span>
+                  <h3 className="font-extrabold text-slate-900 text-lg leading-tight pt-1">Web Developer Intern</h3>
+                  <p className="text-xs font-semibold text-slate-500">Niks Technology Limited • Patna, Bihar, India</p>
+                </div>
+                <div className="inline-flex items-center gap-1.5 text-[10px] font-bold text-slate-500 bg-slate-50 border border-slate-100 rounded-lg px-3 py-1.5 w-fit">
+                  <Calendar size={11} />
+                  July 2021 – Present (5 yrs 1 mo)
+                </div>
+              </div>
+              
+              <ul className="space-y-3 text-slate-600 text-xs sm:text-sm leading-relaxed list-inside">
+                <li className="flex gap-2">
+                  <span className="text-emerald-600 font-bold shrink-0 mt-0.5">↳</span>
+                  <span>Gained valuable hands-on experience in web development workflows, including designing responsive layouts and implementing client-side interactivity.</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-emerald-600 font-bold shrink-0 mt-0.5">↳</span>
+                  <span>Collaborated with senior team members on frontend and backend implementations using modern web technologies.</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-emerald-600 font-bold shrink-0 mt-0.5">↳</span>
+                  <span>Successfully contributed to the development and optimization of various web applications, serving as a highly <strong className="text-slate-800 font-bold">interesting learning experience</strong>.</span>
                 </li>
               </ul>
             </div>
