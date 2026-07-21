@@ -118,6 +118,7 @@ export default function Footer() {
             <h4 className="text-xs font-black text-slate-900 uppercase tracking-widest mb-4">Resources</h4>
             <ul className="space-y-2.5">
               {[
+                { label: "Developer Portfolio", href: "/portfolio" },
                 { label: "About TheCodeBrains", href: "/join" },
                 { label: "TheCodeBrains Club", href: "/join" },
                 { label: "Newsletters", href: "/newsletters" },
