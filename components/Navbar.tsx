@@ -65,24 +65,24 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 shadow-md" ref={navRef}>
       {/* Flipkart Signature Blue Top Header */}
-      <div className="bg-[#2874f0] text-white px-4 py-2.5">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      <div className="bg-[#2874f0] text-white px-2.5 sm:px-4 py-2 sm:py-2.5">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
           
           {/* Logo & Flipkart Plus Style Tag */}
-          <Link href="/" className="flex items-center gap-2 shrink-0 group">
-            <div className="bg-white text-[#2874f0] font-black w-9 h-9 rounded-lg flex items-center justify-center text-lg shadow-sm group-hover:scale-105 transition">
+          <Link href="/" className="flex items-center gap-1.5 sm:gap-2 shrink-0 group">
+            <div className="bg-white text-[#2874f0] font-black w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center text-base sm:text-lg shadow-sm group-hover:scale-105 transition shrink-0">
               ⚡
             </div>
-            <div className="flex flex-col leading-none">
+            <div className="flex flex-col leading-none shrink-0">
               <div className="flex items-center gap-1">
-                <span className="text-xl font-black italic tracking-tight text-white">
+                <span className="text-base sm:text-xl font-black italic tracking-tight text-white">
                   TheCodeBrains
                 </span>
-                <span className="bg-[#ffe500] text-slate-900 text-[9px] font-black px-1.5 py-0.5 rounded italic shadow-xs">
+                <span className="bg-[#ffe500] text-slate-900 text-[8px] sm:text-[9px] font-black px-1 sm:px-1.5 py-0.5 rounded italic shadow-xs">
                   PLUS✦
                 </span>
               </div>
-              <span className="text-[9px] text-blue-100 font-bold tracking-widest uppercase mt-0.5">
+              <span className="hidden sm:block text-[9px] text-blue-100 font-bold tracking-widest uppercase mt-0.5">
                 India's Trusted Tech & Deals Portal
               </span>
             </div>
@@ -110,21 +110,20 @@ export default function Navbar() {
           </div>
 
           {/* Right Header Quick Actions */}
-          <div className="flex items-center gap-3 text-xs font-extrabold">
+          <div className="flex items-center gap-1.5 sm:gap-3 text-xs font-extrabold shrink-0">
             <Link
               href="/browse"
-              className="bg-[#ffe500] hover:bg-yellow-300 text-slate-950 px-3.5 py-2 rounded-lg transition flex items-center gap-1.5 shadow-sm uppercase tracking-wider text-[11px]"
+              className="bg-[#ffe500] hover:bg-yellow-300 text-slate-950 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg transition flex items-center gap-1 shadow-sm uppercase tracking-wider text-[10px] sm:text-[11px] shrink-0"
             >
-              <Zap size={14} className="fill-slate-950" />
-              {/* <span>Deals Zone</span> */}
+              <Zap size={13} className="fill-slate-950 shrink-0" />
               <span>Deals</span>
             </Link>
 
             <Link
               href="/join"
-              className="flex items-center gap-1.5 hover:bg-blue-600 text-white px-3 py-2 rounded-lg transition"
+              className="flex items-center gap-1 hover:bg-blue-600 text-white px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg transition text-[11px] sm:text-xs shrink-0 whitespace-nowrap"
             >
-              <Award size={15} />
+              <Award size={14} className="shrink-0" />
               <span>Join Plus</span>
             </Link>
           </div>
