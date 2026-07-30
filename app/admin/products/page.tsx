@@ -1,99 +1,63 @@
-// app/admin/page.tsx
-import { checkAdminAuth } from "../../lib/admin-auth";
+// app/admin/products/page.tsx
+import { checkAdminAuth } from "../../../lib/admin-auth";
 import { redirect } from "next/navigation";
-import { getBlogs, getAffiliateProductsFromDB } from "../../lib/db-actions";
+import { getAffiliateProductsFromDB } from "../../../lib/db-actions";
 import Link from "next/link";
-import { Plus, BookOpen, Tag, ShoppingBag, ExternalLink, Flame } from "lucide-react";
+import { Plus, ShoppingBag, ExternalLink, Flame, Tag } from "lucide-react";
 
 export const metadata = {
-  title: "Admin Dashboard - TheCodeBrains",
-  description: "Manage system articles, affiliate products, and configurations.",
+  title: "View Affiliate Products - TheCodeBrains Admin",
+  description: "Manage system affiliate products and deal listings.",
 };
 
 export const dynamic = "force-dynamic";
 
-export default async function AdminDashboardPage() {
+export default async function ProductsManagerPage() {
   const isLoggedIn = await checkAdminAuth();
   if (!isLoggedIn) {
     redirect("/admin/login");
   }
 
-  const blogs = await getBlogs();
   const products = await getAffiliateProductsFromDB();
 
   return (
     <div className="w-full space-y-6">
-      {/* Welcome Header Banner */}
+      {/* Top Banner Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-8 shadow-xs">
         <div>
-          <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Control Center Overview</h1>
+          <div className="flex items-center gap-2 text-[#2874f0] font-extrabold text-xs uppercase tracking-wider mb-1">
+            <ShoppingBag size={15} /> Products Management
+          </div>
+          <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+            Deals & Products Manager ({products.length})
+          </h1>
           <p className="text-xs text-slate-500 mt-1 font-medium">
-            Welcome back! Manage your blog publications and affiliate products.
+            Manage your live affiliate products stored in Supabase database (<code className="text-[#2874f0]">affiliate_products</code>).
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-3">
-          <Link
-            href="/admin/add-product"
-            className="inline-flex items-center gap-1.5 bg-[#2874f0] hover:bg-blue-700 text-white font-extrabold text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition duration-300 shadow-md shadow-blue-500/20 cursor-pointer"
-          >
-            <Plus size={15} />
-            <span>Add Product</span>
-          </Link>
-          <Link
-            href="/admin/create-blog"
-            className="inline-flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition duration-300 shadow-md cursor-pointer"
-          >
-            <Plus size={15} />
-            <span>Write Blog</span>
-          </Link>
-        </div>
+        {/* TOP RIGHT ACTION BUTTON */}
+        <Link
+          href="/admin/add-product"
+          className="inline-flex items-center gap-2 bg-[#2874f0] hover:bg-blue-700 text-white font-extrabold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition duration-300 shadow-md shadow-blue-500/20 cursor-pointer shrink-0"
+        >
+          <Plus size={16} />
+          <span>Add Affiliate Product</span>
+        </Link>
       </div>
 
-      {/* Metrics Cards Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-        {[
-          { label: "Active Products", value: products.length, icon: ShoppingBag, color: "text-[#2874f0] bg-blue-50 border border-blue-100" },
-          { label: "Deals of the Day", value: products.filter(p => p.featured).length, icon: Flame, color: "text-amber-600 bg-amber-50 border border-amber-100" },
-          { label: "Published Articles", value: blogs.length, icon: BookOpen, color: "text-indigo-600 bg-indigo-50 border border-indigo-100" },
-          { label: "Categories", value: new Set(products.map(p => p.category)).size, icon: Tag, color: "text-emerald-600 bg-emerald-50 border border-emerald-100" }
-        ].map((item, idx) => {
-          const Icon = item.icon;
-          return (
-            <div key={idx} className="bg-white border border-slate-200/80 rounded-2xl p-5 flex flex-col justify-between shadow-xs">
-              <div className="flex items-center justify-between">
-                <p className="text-slate-500 text-[10px] font-extrabold uppercase tracking-wider">{item.label}</p>
-                <div className={`p-2 rounded-xl ${item.color}`}>
-                  <Icon size={18} />
-                </div>
-              </div>
-              <p className="text-2xl sm:text-3xl font-black text-slate-900 mt-3">{item.value}</p>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* AFFILIATE PRODUCTS LIST TABLE SECTION */}
+      {/* PRODUCTS TABLE */}
       <div className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xs">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-4 border-b border-slate-100">
-          <div>
-            <h3 className="text-base font-black text-slate-900 flex items-center gap-2">
-              <ShoppingBag size={18} className="text-[#2874f0]" />
-              Recent Live Products ({products.length})
-            </h3>
-            <p className="text-slate-500 text-xs mt-0.5 font-medium">
-              Live products stored in Supabase database (<code className="text-[#2874f0] font-bold">affiliate_products</code>).
-            </p>
-          </div>
-          <Link
-            href="/admin/add-product"
-            className="bg-[#2874f0] hover:bg-blue-700 text-white font-extrabold text-xs uppercase px-4 py-2 rounded-xl transition flex items-center gap-1 shrink-0"
-          >
-            <Plus size={14} /> Add Product
-          </Link>
+        <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+          <h3 className="text-base font-black text-slate-900 flex items-center gap-2">
+            <Tag size={18} className="text-[#2874f0]" />
+            Live Product Directory ({products.length})
+          </h3>
+          <span className="text-xs text-slate-600 font-semibold bg-slate-50 px-3 py-1 rounded-lg border border-slate-200">
+            Realtime DB Sync
+          </span>
         </div>
 
-        {/* Mobile & Desktop Responsive Products Table */}
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
@@ -107,8 +71,9 @@ export default async function AdminDashboardPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {products.slice(0, 5).map((item) => (
+              {products.map((item) => (
                 <tr key={item.id} className="group hover:bg-slate-50/80 transition-colors">
+                  {/* Thumbnail & Title */}
                   <td className="py-4 pl-3 font-bold text-slate-800 max-w-xs">
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 p-1 shrink-0 overflow-hidden flex items-center justify-center shadow-2xs">
@@ -118,16 +83,22 @@ export default async function AdminDashboardPage() {
                       <span className="line-clamp-2 text-xs font-black text-slate-900">{item.title}</span>
                     </div>
                   </td>
+
+                  {/* Category */}
                   <td className="py-4">
                     <span className="bg-blue-50 border border-blue-100 text-[#2874f0] text-[9px] font-extrabold tracking-wide px-2.5 py-1 rounded-md uppercase">
                       {item.category || "General"}
                     </span>
                   </td>
+
+                  {/* Merchant */}
                   <td className="py-4">
                     <span className="bg-amber-50 border border-amber-200 text-amber-800 text-[9px] font-extrabold tracking-wide px-2.5 py-1 rounded-md uppercase">
                       {item.merchant || "Amazon"}
                     </span>
                   </td>
+
+                  {/* Price */}
                   <td className="py-4 font-black text-emerald-600 text-sm">
                     {item.currency}{item.price.toLocaleString()}
                     {item.oldPrice > item.price && (
@@ -136,6 +107,8 @@ export default async function AdminDashboardPage() {
                       </span>
                     )}
                   </td>
+
+                  {/* Placement */}
                   <td className="py-4">
                     {item.featured ? (
                       <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[9px] font-extrabold px-2.5 py-1 rounded-full uppercase flex items-center gap-1 w-max">
@@ -147,14 +120,16 @@ export default async function AdminDashboardPage() {
                       </span>
                     )}
                   </td>
+
+                  {/* Action */}
                   <td className="py-4 text-right pr-3">
                     <a
                       href={item.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 bg-[#2874f0] hover:bg-blue-700 text-white text-[11px] font-extrabold px-3 py-1.5 rounded-lg transition"
+                      className="inline-flex items-center gap-1 bg-[#2874f0] hover:bg-blue-700 text-white text-[11px] font-extrabold px-3.5 py-1.5 rounded-lg transition shadow-xs"
                     >
-                      <span>View</span>
+                      <span>View Deal</span>
                       <ExternalLink size={12} />
                     </a>
                   </td>

@@ -10,11 +10,11 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     return <>{children}</>;
   }
 
-  // If logged in, render the dashboard panel with sidebar
+  // If logged in, render the dashboard panel with clean light theme matching user site
   return (
-    <div className="bg-slate-950 text-slate-150 min-h-screen flex flex-col lg:flex-row">
+    <div className="bg-[#f1f3f6] text-slate-900 min-h-screen flex flex-col lg:flex-row font-sans">
       <AdminSidebar />
-      <main className="flex-1 bg-slate-900/20 p-6 lg:p-10 overflow-y-auto">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
         {children}
       </main>
     </div>

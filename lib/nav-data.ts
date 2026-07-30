@@ -169,11 +169,11 @@ export const navData: NavItem[] = [
     slug: "browse",
     href: "/browse",
   },
-  {
-    label: "Portfolio",
-    slug: "portfolio",
-    href: "/portfolio",
-  },
+  // {
+  //   label: "Portfolio",
+  //   slug: "portfolio",
+  //   href: "/portfolio",
+  // },
 ];
 
 // Flat list of every href in the nav — used by generateStaticParams so every

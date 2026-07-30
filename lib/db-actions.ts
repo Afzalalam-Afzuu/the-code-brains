@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { supabase } from './supabase';
 import { blogPosts, BlogPost } from './blog-data';
+import { affiliateProducts, AffiliateItem, formatAmazonAffiliateLink } from './affiliate-links';
 
 export interface BlogDetail extends BlogPost {
   content: string;
@@ -35,7 +36,6 @@ export async function getBlogs(): Promise<BlogPost[]> {
       return blogPosts;
     }
 
-    // Map DB fields to interface
     const dbPosts: BlogPost[] = data.map((item: any) => ({
       slug: item.slug,
       title: item.title,
@@ -48,7 +48,6 @@ export async function getBlogs(): Promise<BlogPost[]> {
       href: `/blog/${item.slug}`
     }));
 
-    // Prevent duplicates if static blogs have the same slug
     const dbSlugs = new Set(dbPosts.map(p => p.slug));
     const merged = [
       ...dbPosts,
@@ -86,7 +85,6 @@ export async function getBlogBySlug(slug: string): Promise<BlogDetail | null> {
       .single();
 
     if (error || !data) {
-      // If db search fails, fallback to matching static blog
       if (staticPost) {
         return {
           ...staticPost,
@@ -142,10 +140,8 @@ export async function createBlogAction(prevState: any, formData: FormData) {
     return { error: 'Title, Excerpt, and Content are required fields.' };
   }
 
-  // Generate clean slug from title if not specified
   const slug = (rawSlug || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')).trim();
 
-  // Validate slug is unique & safe
   if (!/^[a-z0-9-]+$/.test(slug)) {
     return { error: 'Slug can only contain lowercase letters, numbers, and dashes.' };
   }
@@ -180,7 +176,6 @@ export async function createBlogAction(prevState: any, formData: FormData) {
       return { error: `Database Error: ${error.message} (Ensure your slug is unique)` };
     }
 
-    // Revalidate blog layout caches
     revalidatePath('/blog');
     revalidatePath(`/blog/${slug}`);
     revalidatePath('/');
@@ -189,8 +184,158 @@ export async function createBlogAction(prevState: any, formData: FormData) {
     return { error: `Server Error: ${err.message || err}` };
   }
 
-  // Redirect on success
   redirect('/blog');
+}
+
+/* =========================================================================
+   AFFILIATE PRODUCTS DATABASE ACTIONS (Supabase Integration)
+   ========================================================================= */
+
+// Fetch all affiliate products (DB + Fallback)
+export async function getAffiliateProductsFromDB(): Promise<AffiliateItem[]> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    return affiliateProducts;
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from('affiliate_products')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error || !data || data.length === 0) {
+      if (error) console.error('[db-actions] Error fetching affiliate products:', error);
+      return affiliateProducts;
+    }
+
+    const dbProducts: AffiliateItem[] = data.map((item: any) => ({
+      id: item.id,
+      title: item.title,
+      price: Number(item.price),
+      oldPrice: Number(item.old_price || 0),
+      currency: item.currency || '₹',
+      link: item.affiliate_link.includes('tag=') ? item.affiliate_link : formatAmazonAffiliateLink(item.affiliate_link),
+      image: item.image_url || '/images/rosekm_humidifier.png',
+      merchant: item.merchant || 'Amazon',
+      category: item.category || 'General',
+      featured: Boolean(item.is_featured || item.is_deal_of_the_day),
+      addedAt: item.created_at
+    }));
+
+    // Merge static products with DB products
+    const dbIds = new Set(dbProducts.map(p => p.id));
+    const merged = [
+      ...dbProducts,
+      ...affiliateProducts.filter(p => !dbIds.has(p.id))
+    ];
+
+    return merged;
+  } catch (err) {
+    console.error('[db-actions] Unexpected error fetching affiliate products:', err);
+    return affiliateProducts;
+  }
+}
+
+// Fetch "Deal of the Day" products for homepage
+export async function getDealOfTheDayProductsFromDB(): Promise<AffiliateItem[]> {
+  const allProducts = await getAffiliateProductsFromDB();
+  const deals = allProducts.filter(p => p.featured);
+  return deals.length > 0 ? deals : allProducts.slice(0, 4);
+}
+
+// Server Action to Create a new Affiliate Product
+export async function createAffiliateProductAction(prevState: any, formData: FormData) {
+  const pin = formData.get('pin') as string;
+  const expectedPin = process.env.ADMIN_PIN || '1234';
+
+  if (pin !== expectedPin) {
+    return { error: 'Invalid Admin PIN. Access denied.' };
+  }
+
+  const title = (formData.get('title') as string || '').trim();
+  const price = parseFloat(formData.get('price') as string || '0');
+  const oldPrice = parseFloat(formData.get('old_price') as string || '0');
+  const currency = (formData.get('currency') as string || '₹').trim();
+  const rawLink = (formData.get('affiliate_link') as string || '').trim();
+  const image_url = (formData.get('image_url') as string || '').trim();
+  const merchant = (formData.get('merchant') as string || 'Amazon').trim();
+  const category = (formData.get('category') as string || 'General').trim();
+  const rating = parseFloat(formData.get('rating') as string || '4.8');
+  const is_deal_of_the_day = formData.get('is_deal_of_the_day') === 'on';
+  const is_featured = formData.get('is_featured') === 'on';
+
+  if (!title || !price || !rawLink || !image_url) {
+    return { error: 'Product Title, Price, Image URL, and Affiliate Link are required.' };
+  }
+
+  // Ensure link has affiliate tag if it's Amazon
+  const affiliate_link = rawLink.includes('amazon') ? formatAmazonAffiliateLink(rawLink) : rawLink;
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    return { error: 'Supabase credentials are not configured in your .env.local file.' };
+  }
+
+  try {
+    const { error } = await supabase
+      .from('affiliate_products')
+      .insert({
+        title,
+        price,
+        old_price: oldPrice,
+        currency,
+        affiliate_link,
+        image_url,
+        merchant,
+        category,
+        rating,
+        is_deal_of_the_day,
+        is_featured
+      });
+
+    if (error) {
+      console.error('[db-actions] Error inserting affiliate product:', error);
+      return { error: `Database Error: ${error.message}` };
+    }
+
+    revalidatePath('/browse');
+    revalidatePath('/');
+    revalidatePath('/admin');
+  } catch (err: any) {
+    console.error('[db-actions] Server error inserting affiliate product:', err);
+    return { error: `Server Error: ${err.message || err}` };
+  }
+
+  redirect('/browse');
+}
+
+// Server Action to Delete an Affiliate Product
+export async function deleteAffiliateProductAction(id: string, pin: string) {
+  const expectedPin = process.env.ADMIN_PIN || '1234';
+  if (pin !== expectedPin) {
+    return { error: 'Invalid Admin PIN.' };
+  }
+
+  try {
+    const { error } = await supabase
+      .from('affiliate_products')
+      .delete()
+      .eq('id', id);
+
+    if (error) return { error: error.message };
+
+    revalidatePath('/browse');
+    revalidatePath('/');
+    revalidatePath('/admin');
+    return { success: true };
+  } catch (err: any) {
+    return { error: err.message || 'Failed to delete product.' };
+  }
 }
 
 // Gemini AI search action
@@ -216,3 +361,72 @@ export async function generateBlogDraftAction(topic: string, model: string = 'ge
     };
   }
 }
+
+export interface JoinPlusInquiry {
+  id: string;
+  name: string;
+  email: string;
+  mobile: string;
+  company?: string;
+  message?: string;
+  created_at: string;
+}
+
+// Server Action to submit Join Plus Inquiry
+export async function submitJoinPlusInquiryAction(prevState: any, formData: FormData) {
+  const name = formData.get('name')?.toString().trim();
+  const email = formData.get('email')?.toString().trim();
+  const mobile = formData.get('mobile')?.toString().trim();
+  const company = formData.get('company')?.toString().trim() || null;
+  const message = formData.get('message')?.toString().trim() || null;
+
+  if (!name || !email || !mobile) {
+    return { error: 'Please fill in all required fields (Name, Email, Mobile).' };
+  }
+
+  try {
+    const { error } = await supabase
+      .from('join_plus_inquiries')
+      .insert([
+        {
+          name,
+          email,
+          mobile,
+          company,
+          message,
+        }
+      ]);
+
+    if (error) {
+      console.error('[db-actions] Error inserting Join Plus inquiry:', error);
+      return { error: `Database Error: ${error.message}` };
+    }
+
+    revalidatePath('/admin/inquiries');
+    return { success: true };
+  } catch (err: any) {
+    console.error('[db-actions] Server error inserting Join Plus inquiry:', err);
+    return { error: `Server Error: ${err.message || err}` };
+  }
+}
+
+// Fetch all Join Plus inquiries for Admin
+export async function getJoinPlusInquiriesFromDB(): Promise<JoinPlusInquiry[]> {
+  try {
+    const { data, error } = await supabase
+      .from('join_plus_inquiries')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error || !data) {
+      console.error('[db-actions] Error fetching join_plus_inquiries:', error);
+      return [];
+    }
+
+    return data as JoinPlusInquiry[];
+  } catch (err) {
+    console.error('[db-actions] Exception fetching join_plus_inquiries:', err);
+    return [];
+  }
+}
+

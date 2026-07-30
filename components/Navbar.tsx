@@ -1,167 +1,258 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { Search, Mail, ChevronDown } from "lucide-react";
+import { Search, Mail, ChevronDown, Sparkles, ShieldCheck, Tag, Zap, Smartphone, Laptop, Tv, Home as HomeIcon, Award, X } from "lucide-react";
 import { navData } from "../lib/nav-data";
 
 export default function Navbar() {
   const [openSlug, setOpenSlug] = useState<string | null>(null);
+  const [isLocked, setIsLocked] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navRef = useRef<HTMLDivElement>(null);
 
-  function openMenu(slug: string) {
+  function handleMouseEnter(slug: string) {
     if (closeTimer.current) clearTimeout(closeTimer.current);
-    setOpenSlug(slug);
+    if (!isLocked) {
+      setOpenSlug(slug);
+    }
   }
 
-  function scheduleClose() {
-    closeTimer.current = setTimeout(() => setOpenSlug(null), 120);
+  function handleMouseLeave() {
+    if (!isLocked) {
+      closeTimer.current = setTimeout(() => {
+        setOpenSlug(null);
+      }, 300);
+    }
   }
+
+  function handleButtonClick(slug: string) {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    if (openSlug === slug && isLocked) {
+      // Toggle off if already locked
+      setOpenSlug(null);
+      setIsLocked(false);
+    } else {
+      // Lock open
+      setOpenSlug(slug);
+      setIsLocked(true);
+    }
+  }
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setOpenSlug(null);
+        setIsLocked(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const categoryIcons: Record<string, any> = {
+    phones: Smartphone,
+    computing: Laptop,
+    "tv-audio": Tv,
+    home: HomeIcon,
+    ai: Sparkles,
+  };
+
+  const activeNavData = navData.find((item) => item.slug === openSlug && item.columns);
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-slate-100 shadow-xs">
-      {/* Top bar */}
-      <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
-        <Link href="/" className="flex items-center gap-3 shrink-0 group">
-          {/* Logo Icon */}
-          <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 shadow-md shadow-indigo-200/50 group-hover:shadow-lg group-hover:shadow-indigo-300/50 group-hover:scale-105 transition-all duration-300">
-            {/* SVG Icon: Sleek Brain / Code hybrid */}
-            <svg className="w-5.5 h-5.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" className="opacity-20" />
-              {/* Left hemisphere / left bracket */}
-              <path d="M9.5 8.5C8 9.5 7.5 11 7.5 12s.5 2.5 2 3.5" />
-              {/* Right hemisphere / right bracket */}
-              <path d="M14.5 8.5c1.5 1 2 2.5 2 3.5s-.5 2.5-2 3.5" />
-              {/* Center brain stem/circuit */}
-              <path d="M12 7v10" />
-              {/* Neural connection dots */}
-              <circle cx="12" cy="7" r="1" fill="currentColor" />
-              <circle cx="7.5" cy="12" r="1" fill="currentColor" />
-              <circle cx="16.5" cy="12" r="1" fill="currentColor" />
-              <circle cx="12" cy="17" r="1" fill="currentColor" />
-            </svg>
-            <div className="absolute inset-0 rounded-xl bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          </div>
+    <header className="sticky top-0 z-50 shadow-md" ref={navRef}>
+      {/* Flipkart Signature Blue Top Header */}
+      <div className="bg-[#2874f0] text-white px-4 py-2.5">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           
-          {/* Logo Text */}
-          <div className="flex flex-col leading-none">
-            <span className="text-xl tracking-tight font-light text-slate-800">
-              The<span className="font-bold text-slate-900">Code</span>
-              <span className="font-black bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent group-hover:from-indigo-500 group-hover:to-violet-500 transition-colors">Brains</span>
-              <span className="text-indigo-600 font-extrabold">.</span>
-            </span>
-            <span className="text-[8px] tracking-[0.2em] text-slate-400 font-extrabold mt-1 uppercase">
-              Upgrade Your Tech
-            </span>
-          </div>
-        </Link>
+          {/* Logo & Flipkart Plus Style Tag */}
+          <Link href="/" className="flex items-center gap-2 shrink-0 group">
+            <div className="bg-white text-[#2874f0] font-black w-9 h-9 rounded-lg flex items-center justify-center text-lg shadow-sm group-hover:scale-105 transition">
+              ⚡
+            </div>
+            <div className="flex flex-col leading-none">
+              <div className="flex items-center gap-1">
+                <span className="text-xl font-black italic tracking-tight text-white">
+                  TheCodeBrains
+                </span>
+                <span className="bg-[#ffe500] text-slate-900 text-[9px] font-black px-1.5 py-0.5 rounded italic shadow-xs">
+                  PLUS✦
+                </span>
+              </div>
+              <span className="text-[9px] text-blue-100 font-bold tracking-widest uppercase mt-0.5">
+                India's Trusted Tech & Deals Portal
+              </span>
+            </div>
+          </Link>
 
-        <div className="hidden md:flex items-center gap-4 text-sm">
-          <button className="rounded-full border border-slate-200 px-3.5 py-1.5 text-slate-600 font-semibold hover:bg-slate-50 hover:text-slate-950 transition text-xs cursor-pointer">
-            US Edition ▾
-          </button>
-          <Link
-            href="/join"
-            className="rounded-xl bg-slate-950 text-white font-bold px-4 py-2 hover:bg-indigo-600 transition shadow-sm text-xs tracking-wider uppercase"
-          >
-            Join TheCodeBrains Club →
-          </Link>
-          <Link
-            href="/newsletters"
-            aria-label="Newsletters"
-            className="p-2 text-slate-400 hover:text-slate-800 transition"
-          >
-            <Mail size={18} />
-          </Link>
-          <Link href="/search" aria-label="Search" className="p-2 text-slate-400 hover:text-slate-800 transition">
-            <Search size={18} />
-          </Link>
+          {/* Flipkart Style Big Search Bar */}
+          <div className="flex-1 max-w-2xl hidden md:block">
+            <form action="/search" method="GET" className="relative flex items-center">
+              <input
+                type="text"
+                name="q"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search for Products, Brands, Coupons & Amazon Deals..."
+                className="w-full bg-white text-slate-800 text-xs font-semibold rounded-lg py-2.5 pl-4 pr-10 outline-none shadow-inner placeholder-slate-400 focus:ring-2 focus:ring-yellow-300 transition"
+              />
+              <button
+                type="submit"
+                aria-label="Search"
+                className="absolute right-1 text-[#2874f0] hover:text-blue-700 p-1.5 font-bold"
+              >
+                <Search size={18} />
+              </button>
+            </form>
+          </div>
+
+          {/* Right Header Quick Actions */}
+          <div className="flex items-center gap-3 text-xs font-extrabold">
+            <Link
+              href="/browse"
+              className="bg-[#ffe500] hover:bg-yellow-300 text-slate-950 px-3.5 py-2 rounded-lg transition flex items-center gap-1.5 shadow-sm uppercase tracking-wider text-[11px]"
+            >
+              <Zap size={14} className="fill-slate-950" />
+              {/* <span>Deals Zone</span> */}
+              <span>Deals</span>
+            </Link>
+
+            <Link
+              href="/join"
+              className="flex items-center gap-1.5 hover:bg-blue-600 text-white px-3 py-2 rounded-lg transition"
+            >
+              <Award size={15} />
+              <span>Join Plus</span>
+            </Link>
+          </div>
         </div>
       </div>
 
-      {/* Category bar */}
-      <nav className="bg-white border-b border-slate-200/80">
+      {/* Flipkart Style White Category Sub-Bar */}
+      <nav className="bg-white border-b border-slate-200 shadow-xs relative">
         <div className="max-w-7xl mx-auto px-4 relative">
-          <ul className="flex items-center gap-1 text-sm font-semibold text-slate-600 overflow-x-auto scrollbar-none py-1">
-            <li>
-              <Link
-                href="/"
-                className="block px-3 py-2.5 whitespace-nowrap rounded-lg hover:bg-slate-50 hover:text-slate-950 transition text-slate-600 font-bold"
-              >
-                Home
-              </Link>
-            </li>
-            {navData.map((item) => {
-              const hasMenu = !!item.columns;
-              return (
-                <li
-                  key={item.slug}
-                  className="group/item"
-                  onMouseEnter={() => hasMenu && openMenu(item.slug)}
-                  onMouseLeave={() => hasMenu && scheduleClose()}
+          
+          {/* Scrollable Category Tab Bar */}
+          <div className="overflow-x-auto scrollbar-none py-1.5">
+            <ul className="flex items-center gap-1 sm:gap-3 text-xs font-extrabold text-slate-700 min-w-max">
+              <li>
+                <Link
+                  href="/"
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg hover:text-[#2874f0] hover:bg-blue-50 transition text-[#2874f0] font-black"
                 >
-                  {hasMenu ? (
-                    <button
-                      onClick={() =>
-                        setOpenSlug((cur) => (cur === item.slug ? null : item.slug))
-                      }
-                      className="flex items-center gap-1.5 px-3 py-2.5 whitespace-nowrap rounded-lg hover:bg-slate-50 hover:text-slate-950 transition text-slate-600 font-bold"
-                      aria-expanded={openSlug === item.slug}
-                    >
-                      {item.label}
-                      <ChevronDown size={14} className="text-slate-400 group-hover/item:text-slate-600 transition-colors" />
-                    </button>
-                  ) : (
-                    <Link
-                      href={item.href ?? "#"}
-                      className="block px-3 py-2.5 whitespace-nowrap rounded-lg hover:bg-slate-50 hover:text-slate-950 transition text-slate-600 font-bold"
-                    >
-                      {item.label}
-                    </Link>
-                  )}
+                  <Tag size={14} />
+                  <span>Top Offers</span>
+                </Link>
+              </li>
+              {navData.map((item) => {
+                const hasMenu = !!item.columns;
+                const IconComponent = categoryIcons[item.slug] || Sparkles;
+                const isOpen = openSlug === item.slug;
 
-                  {/* Mega menu */}
-                  {hasMenu && openSlug === item.slug && (
-                    <div
-                      onMouseEnter={() => openMenu(item.slug)}
-                      onMouseLeave={() => scheduleClose()}
-                      className="absolute left-0 top-full z-50 w-[min(90vw,780px)] bg-white shadow-2xl border border-slate-200/60 rounded-b-2xl mt-0.5"
-                    >
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 p-6">
-                        {item.columns!.map((col) => (
-                          <div key={col.heading}>
-                            <p className="text-slate-900 text-xs font-black uppercase tracking-wider mb-3">
-                              {col.heading}
-                            </p>
-                            <ul className="space-y-2">
-                              {col.links.map((link) => (
-                                <li key={link.href}>
-                                  {link.disabled ? (
-                                    <span className="text-slate-400 cursor-not-allowed text-sm font-medium select-none flex items-center justify-between gap-1 opacity-70">
-                                      <span>{link.label}</span>
-                                      <span className="text-[9px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded-full font-bold scale-90">Soon</span>
-                                    </span>
-                                  ) : (
-                                    <Link
-                                      href={link.href}
-                                      onClick={() => setOpenSlug(null)}
-                                      className="text-slate-500 hover:text-indigo-600 hover:underline text-sm font-medium transition-colors"
-                                    >
-                                      {link.label}
-                                    </Link>
-                                  )}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                return (
+                  <li key={item.slug} className="group/item">
+                    {hasMenu ? (
+                      <button
+                        onClick={() => handleButtonClick(item.slug)}
+                        onMouseEnter={() => handleMouseEnter(item.slug)}
+                        onMouseLeave={handleMouseLeave}
+                        className={`flex items-center gap-1.5 px-3 py-2 whitespace-nowrap rounded-lg transition font-bold ${
+                          isOpen ? "bg-blue-50 text-[#2874f0]" : "hover:text-[#2874f0] hover:bg-blue-50 text-slate-700"
+                        }`}
+                        aria-expanded={isOpen}
+                      >
+                        <IconComponent size={14} className={isOpen ? "text-[#2874f0]" : "text-slate-400 group-hover/item:text-[#2874f0]"} />
+                        <span>{item.label}</span>
+                        <ChevronDown
+                          size={12}
+                          className={`transition-transform duration-200 ${isOpen ? "rotate-180 text-[#2874f0]" : "text-slate-400 group-hover/item:text-[#2874f0]"}`}
+                        />
+                      </button>
+                    ) : (
+                      <Link
+                        href={item.href ?? "#"}
+                        className="flex items-center gap-1.5 px-3 py-2 whitespace-nowrap rounded-lg hover:text-[#2874f0] hover:bg-blue-50 transition text-slate-700 font-bold"
+                      >
+                        <IconComponent size={14} className="text-slate-400" />
+                        <span>{item.label}</span>
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          {/* Mega Menu Dropdown Rendered OUTSIDE overflow-x-auto container */}
+          {activeNavData && (
+            <div
+              onMouseEnter={() => handleMouseEnter(activeNavData.slug)}
+              onMouseLeave={handleMouseLeave}
+              className="absolute left-4 right-4 sm:left-4 sm:w-[min(90vw,780px)] top-full pt-1 z-50 animate-in fade-in duration-150"
+            >
+              <div className="bg-white shadow-2xl border border-slate-200 rounded-xl p-6 relative">
+                <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-black text-[#2874f0] uppercase tracking-wider">
+                      {activeNavData.label} Directory
+                    </span>
+                    {isLocked && (
+                      <span className="bg-blue-50 text-[#2874f0] text-[9px] font-black px-2 py-0.5 rounded border border-blue-200">
+                        Locked Open 🔒
+                      </span>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => {
+                      setOpenSlug(null);
+                      setIsLocked(false);
+                    }}
+                    className="text-slate-400 hover:text-slate-800 p-1.5 rounded-lg hover:bg-slate-100 transition"
+                    aria-label="Close menu"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                  {activeNavData.columns!.map((col) => (
+                    <div key={col.heading}>
+                      <p className="text-[#2874f0] text-[11px] font-black uppercase tracking-wider mb-2.5 pb-1 border-b border-blue-50">
+                        {col.heading}
+                      </p>
+                      <ul className="space-y-2">
+                        {col.links.map((link) => (
+                          <li key={link.href}>
+                            {link.disabled ? (
+                              <span className="text-slate-400 text-xs font-medium opacity-60 flex items-center justify-between">
+                                <span>{link.label}</span>
+                                <span className="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded font-bold">Soon</span>
+                              </span>
+                            ) : (
+                              <Link
+                                href={link.href}
+                                onClick={() => {
+                                  setOpenSlug(null);
+                                  setIsLocked(false);
+                                }}
+                                className="text-slate-700 hover:text-[#2874f0] hover:font-bold text-xs font-semibold transition block py-0.5"
+                              >
+                                {link.label}
+                              </Link>
+                            )}
+                          </li>
                         ))}
-                      </div>
+                      </ul>
                     </div>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
         </div>
       </nav>
     </header>
