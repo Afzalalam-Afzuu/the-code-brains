@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import LayoutShell from "../components/LayoutShell";
+import { getNavDataFromDB } from "../lib/db-actions";
 
 export const metadata: Metadata = {
   title: "TheCodeBrains — Upgrade Your Tech",
   description: "Independent tech reviews and buying advice.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const navItems = await getNavDataFromDB();
+
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <head>
@@ -23,7 +26,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-[#f1f3f6] font-sans">
-        <LayoutShell>{children}</LayoutShell>
+        <LayoutShell navItems={navItems}>{children}</LayoutShell>
       </body>
     </html>
   );

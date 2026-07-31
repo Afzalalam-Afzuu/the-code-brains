@@ -3,11 +3,14 @@
 import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { NavItem } from "../lib/nav-data";
 
 export default function LayoutShell({
   children,
+  navItems,
 }: {
   children: React.ReactNode;
+  navItems?: NavItem[];
 }) {
   const pathname = usePathname();
   const isPortfolio =
@@ -15,7 +18,7 @@ export default function LayoutShell({
 
   return (
     <>
-      {!isPortfolio && <Navbar />}
+      {!isPortfolio && <Navbar navItems={navItems} />}
       <main className="flex-1">{children}</main>
       {!isPortfolio && <Footer />}
     </>

@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation';
 import { supabase } from './supabase';
 import { blogPosts, BlogPost } from './blog-data';
 import { affiliateProducts, AffiliateItem, formatAmazonAffiliateLink } from './affiliate-links';
+import { navData, NavItem } from './nav-data';
 
 export interface BlogDetail extends BlogPost {
   content: string;
@@ -222,6 +223,9 @@ export async function getAffiliateProductsFromDB(): Promise<AffiliateItem[]> {
       merchant: item.merchant || 'Amazon',
       category: item.category || 'General',
       featured: Boolean(item.is_featured || item.is_deal_of_the_day),
+      rating: Number(item.rating || 4.8),
+      couponCode: item.coupon_code || undefined,
+      stores: item.stores || undefined,
       addedAt: item.created_at
     }));
 
@@ -429,4 +433,151 @@ export async function getJoinPlusInquiriesFromDB(): Promise<JoinPlusInquiry[]> {
     return [];
   }
 }
+
+export interface AffiliateClickLog {
+  id: string;
+  product_id: string;
+  user_agent?: string;
+  referrer?: string;
+  created_at: string;
+}
+
+// Fetch recent affiliate click tracking logs for Admin Dashboard
+export async function getAffiliateClicksFromDB(): Promise<AffiliateClickLog[]> {
+  try {
+    const { data, error } = await supabase
+      .from('affiliate_clicks')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(50);
+
+    if (error || !data) {
+      console.error('[db-actions] Error fetching affiliate_clicks:', error);
+      return [];
+    }
+
+    return data as AffiliateClickLog[];
+  } catch (err) {
+    console.error('[db-actions] Exception fetching affiliate_clicks:', err);
+    return [];
+  }
+}
+
+/* =========================================================================
+   DYNAMIC NAVIGATION MENU ACTIONS (Supabase Integration)
+   ========================================================================= */
+
+// Fetch dynamic navigation menu items from Supabase (fallback to static navData)
+export async function getNavDataFromDB(): Promise<NavItem[]> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    return navData;
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from('navigation_menu')
+      .select('*')
+      .order('sort_order', { ascending: true });
+
+    if (error || !data || data.length === 0) {
+      if (error) console.log('[db-actions] Navigation menu DB fallback note:', error.message);
+      return navData;
+    }
+
+    // Reconstruct NavItem[] structure from database rows
+    const navMap = new Map<string, NavItem>();
+
+    data.forEach((row: any) => {
+      const slug = row.category_slug;
+      if (!navMap.has(slug)) {
+        navMap.set(slug, {
+          label: row.category_label,
+          slug: slug,
+          href: row.category_href || undefined,
+          columns: row.category_href ? undefined : []
+        });
+      }
+
+      const navItem = navMap.get(slug)!;
+
+      if (!row.category_href && row.heading && row.link_label) {
+        if (!navItem.columns) navItem.columns = [];
+
+        let col = navItem.columns.find(c => c.heading === row.heading);
+        if (!col) {
+          col = { heading: row.heading, links: [] };
+          navItem.columns.push(col);
+        }
+
+        col.links.push({
+          label: row.link_label,
+          href: row.link_href,
+          disabled: Boolean(row.is_disabled)
+        });
+      }
+    });
+
+    // Merge static nav items that are not in DB (like Blog, Wordle, Browse)
+    const dbSlugs = new Set(navMap.keys());
+    const result = Array.from(navMap.values());
+
+    navData.forEach((staticItem) => {
+      if (!dbSlugs.has(staticItem.slug)) {
+        result.push(staticItem);
+      }
+    });
+
+    return result;
+  } catch (err) {
+    console.error('[db-actions] Error fetching nav data from DB:', err);
+    return navData;
+  }
+}
+
+// Server action to add a new nav item to DB
+export async function addNavItemAction(prevState: { error?: string; success?: boolean }, formData: FormData): Promise<{ error?: string; success?: boolean }> {
+  const pin = formData.get('pin') as string;
+  const expectedPin = process.env.ADMIN_PIN || '1234';
+
+  if (pin !== expectedPin) {
+    return { error: 'Invalid Admin PIN. Access denied.' };
+  }
+
+  const category_label = (formData.get('category_label') as string || '').trim();
+  const category_slug = (formData.get('category_slug') as string || '').trim().toLowerCase();
+  const heading = (formData.get('heading') as string || 'General').trim();
+  const link_label = (formData.get('link_label') as string || '').trim();
+  const link_href = (formData.get('link_href') as string || '').trim();
+
+  if (!category_label || !category_slug || !link_label || !link_href) {
+    return { error: 'Category Label, Category Slug, Link Label, and Link Href are required.' };
+  }
+
+  try {
+    const { error } = await supabase
+      .from('navigation_menu')
+      .insert({
+        category_slug,
+        category_label,
+        heading,
+        link_label,
+        link_href,
+        sort_order: 10
+      });
+
+    if (error) {
+      return { error: `Database Error: ${error.message}` };
+    }
+
+    revalidatePath('/');
+    return { success: true };
+  } catch (err: any) {
+    return { error: err.message || 'Failed to add navigation item.' };
+  }
+}
+
+
 

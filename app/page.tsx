@@ -118,6 +118,7 @@ export default async function Home() {
           {featuredProducts.slice(0, 4).map((product) => (
             <ProductCard
               key={product.id}
+              id={product.id}
               title={product.title}
               price={product.price}
               oldPrice={product.oldPrice}
@@ -125,6 +126,9 @@ export default async function Home() {
               link={product.link}
               image={product.image}
               merchant={product.merchant}
+              rating={product.rating}
+              couponCode={product.couponCode}
+              stores={product.stores}
             />
           ))}
         </div>

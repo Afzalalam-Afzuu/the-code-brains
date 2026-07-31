@@ -1,5 +1,12 @@
 // lib/affiliate-links.ts
 
+export interface AffiliateStoreOption {
+  merchant: 'Amazon' | 'Flipkart' | 'Udemy' | 'Best Buy' | string;
+  price: number;
+  link: string;
+  badge?: string;
+}
+
 export interface AffiliateItem {
   id: string;
   title: string;
@@ -8,21 +15,26 @@ export interface AffiliateItem {
   currency?: string;
   link: string;
   image: string;
-  merchant?: 'Amazon' | 'Flipkart' | 'Best Buy' | string;
+  merchant?: 'Amazon' | 'Flipkart' | 'Udemy' | 'Best Buy' | string;
   category?: string;
   featured?: boolean;
   addedAt?: string;
+  rating?: number;
+  couponCode?: string;
+  stores?: AffiliateStoreOption[];
+  clickCount?: number;
 }
 
-// Default Amazon Associate / Tag for your site
+// Default Affiliate Tags
 export const DEFAULT_AMAZON_TAG = 'thecodebrains-21';
+export const DEFAULT_FLIPKART_TAG = 'thecodebrains';
+export const DEFAULT_UDEMY_CODE = 'thecodebrains';
 
 /**
- * Helper utility to ensure any Amazon URL has your affiliate tag attached.
- * Example: formatAmazonAffiliateLink("https://www.amazon.in/dp/B0F31ZQD1H")
- * Result: "https://www.amazon.in/dp/B0F31ZQD1H?tag=thecodebrains-21"
+ * Format any Amazon link with affiliate tag
  */
 export function formatAmazonAffiliateLink(rawUrl: string, tag: string = DEFAULT_AMAZON_TAG): string {
+  if (!rawUrl) return '';
   try {
     const urlObj = new URL(rawUrl);
     urlObj.searchParams.set('tag', tag);
@@ -35,9 +47,76 @@ export function formatAmazonAffiliateLink(rawUrl: string, tag: string = DEFAULT_
 }
 
 /**
- * =========================================================================
- * AFFILIATE LINKS MASTER LIST (Yaha aap apne sare links add kar sakte hai)
- * =========================================================================
+ * Format any Flipkart link with affiliate tag
+ */
+export function formatFlipkartAffiliateLink(rawUrl: string, tag: string = DEFAULT_FLIPKART_TAG): string {
+  if (!rawUrl) return '';
+  try {
+    const urlObj = new URL(rawUrl);
+    urlObj.searchParams.set('affid', tag);
+    return urlObj.toString();
+  } catch {
+    if (rawUrl.includes('affid=')) return rawUrl;
+    const separator = rawUrl.includes('?') ? '&' : '?';
+    return `${rawUrl}${separator}affid=${tag}`;
+  }
+}
+
+/**
+ * Format any Udemy link with referral code
+ */
+export function formatUdemyAffiliateLink(rawUrl: string, code: string = DEFAULT_UDEMY_CODE): string {
+  if (!rawUrl) return '';
+  try {
+    const urlObj = new URL(rawUrl);
+    urlObj.searchParams.set('referralCode', code);
+    return urlObj.toString();
+  } catch {
+    if (rawUrl.includes('referralCode=')) return rawUrl;
+    const separator = rawUrl.includes('?') ? '&' : '?';
+    return `${rawUrl}${separator}referralCode=${code}`;
+  }
+}
+
+/**
+ * Auto detects provider and formats raw link automatically
+ */
+export function autoFormatAffiliateLink(rawUrl: string, merchant?: string): string {
+  if (!rawUrl) return '';
+  const lowerUrl = rawUrl.toLowerCase();
+  const lowerMerchant = (merchant || '').toLowerCase();
+
+  if (lowerUrl.includes('amazon') || lowerMerchant.includes('amazon')) {
+    return formatAmazonAffiliateLink(rawUrl);
+  }
+  if (lowerUrl.includes('flipkart') || lowerMerchant.includes('flipkart')) {
+    return formatFlipkartAffiliateLink(rawUrl);
+  }
+  if (lowerUrl.includes('udemy') || lowerMerchant.includes('udemy')) {
+    return formatUdemyAffiliateLink(rawUrl);
+  }
+
+  return rawUrl;
+}
+
+/**
+ * Format content links (Markdown/HTML) to enforce rel="noopener noreferrer nofollow sponsored" and attach affiliate tags
+ */
+export function formatContentAffiliateLinks(content: string): string {
+  if (!content) return '';
+
+  // Regex to catch raw Amazon/Flipkart/Udemy links in Markdown format [label](url)
+  return content.replace(
+    /\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/gi,
+    (match, label, rawUrl) => {
+      const formattedUrl = autoFormatAffiliateLink(rawUrl);
+      return `<a href="${formattedUrl}" target="_blank" rel="noopener noreferrer nofollow sponsored" class="text-[#2874f0] underline hover:text-blue-700 font-semibold">${label}</a>`;
+    }
+  );
+}
+
+/**
+ * Master static product list with multi-store & coupon support
  */
 export const affiliateProducts: AffiliateItem[] = [
   {
@@ -51,7 +130,13 @@ export const affiliateProducts: AffiliateItem[] = [
     merchant: 'Amazon',
     category: 'Smart Home',
     featured: true,
-    addedAt: '2026-07-30'
+    rating: 4.8,
+    addedAt: '2026-07-30',
+    couponCode: 'HUMID100',
+    stores: [
+      { merchant: 'Amazon', price: 2198, link: 'https://www.amazon.in/dp/B0F31ZQD1H?tag=thecodebrains-21', badge: 'Best Deal' },
+      { merchant: 'Flipkart', price: 2399, link: 'https://www.flipkart.com/search?q=rosekm+humidifier&affid=thecodebrains' }
+    ]
   },
   {
     id: 'galaxy-s26-ultra',
@@ -64,7 +149,12 @@ export const affiliateProducts: AffiliateItem[] = [
     merchant: 'Amazon',
     category: 'Phones',
     featured: true,
-    addedAt: '2026-07-30'
+    rating: 4.9,
+    addedAt: '2026-07-30',
+    stores: [
+      { merchant: 'Amazon', price: 124999, link: 'https://www.amazon.in/s?k=Samsung+Galaxy+S24+Ultra&tag=thecodebrains-21', badge: 'Top Seller' },
+      { merchant: 'Flipkart', price: 126999, link: 'https://www.flipkart.com/search?q=Samsung+S24+Ultra&affid=thecodebrains' }
+    ]
   },
   {
     id: 'dell-xps-13',
@@ -77,6 +167,7 @@ export const affiliateProducts: AffiliateItem[] = [
     merchant: 'Amazon',
     category: 'Laptops',
     featured: true,
+    rating: 4.7,
     addedAt: '2026-07-30'
   },
   {
@@ -90,7 +181,9 @@ export const affiliateProducts: AffiliateItem[] = [
     merchant: 'Amazon',
     category: 'Audio',
     featured: true,
-    addedAt: '2026-07-30'
+    rating: 4.8,
+    addedAt: '2026-07-30',
+    couponCode: 'SONY2000'
   }
 ];
 

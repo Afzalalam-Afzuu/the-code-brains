@@ -3,9 +3,15 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Search, Mail, ChevronDown, Sparkles, ShieldCheck, Tag, Zap, Smartphone, Laptop, Tv, Home as HomeIcon, Award, X } from "lucide-react";
-import { navData } from "../lib/nav-data";
+import { navData, NavItem } from "../lib/nav-data";
 
-export default function Navbar() {
+interface NavbarProps {
+  navItems?: NavItem[];
+}
+
+export default function Navbar({ navItems }: NavbarProps) {
+  const currentNavData = navItems && navItems.length > 0 ? navItems : navData;
+
   const [openSlug, setOpenSlug] = useState<string | null>(null);
   const [isLocked, setIsLocked] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -60,7 +66,7 @@ export default function Navbar() {
     ai: Sparkles,
   };
 
-  const activeNavData = navData.find((item) => item.slug === openSlug && item.columns);
+  const activeNavData = currentNavData.find((item) => item.slug === openSlug && item.columns);
 
   return (
     <header className="sticky top-0 z-50 shadow-md" ref={navRef}>
@@ -146,7 +152,7 @@ export default function Navbar() {
                   <span>Top Offers</span>
                 </Link>
               </li>
-              {navData.map((item) => {
+              {currentNavData.map((item) => {
                 const hasMenu = !!item.columns;
                 const IconComponent = categoryIcons[item.slug] || Sparkles;
                 const isOpen = openSlug === item.slug;
@@ -198,37 +204,48 @@ export default function Navbar() {
                     <span className="text-xs font-black text-[#2874f0] uppercase tracking-wider">
                       {activeNavData.label} Directory
                     </span>
-                    {isLocked && (
-                      <span className="bg-blue-50 text-[#2874f0] text-[9px] font-black px-2 py-0.5 rounded border border-blue-200">
-                        Locked Open 🔒
-                      </span>
-                    )}
+                    <span className="bg-[#ffe500] text-slate-900 text-[9px] font-black px-2 py-0.5 rounded uppercase">
+                      Live Verified
+                    </span>
                   </div>
+
                   <button
                     onClick={() => {
                       setOpenSlug(null);
                       setIsLocked(false);
                     }}
-                    className="text-slate-400 hover:text-slate-800 p-1.5 rounded-lg hover:bg-slate-100 transition"
                     aria-label="Close menu"
+                    className="text-slate-400 hover:text-slate-700 p-1 rounded-lg hover:bg-slate-100 transition cursor-pointer"
                   >
                     <X size={16} />
                   </button>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
-                  {activeNavData.columns!.map((col) => (
-                    <div key={col.heading}>
-                      <p className="text-[#2874f0] text-[11px] font-black uppercase tracking-wider mb-2.5 pb-1 border-b border-blue-50">
-                        {col.heading}
-                      </p>
-                      <ul className="space-y-2">
-                        {col.links.map((link) => (
-                          <li key={link.href}>
+                <div
+                  className={`grid gap-6 ${
+                    activeNavData.columns?.length === 1
+                      ? "grid-cols-1"
+                      : activeNavData.columns?.length === 2
+                      ? "grid-cols-2"
+                      : activeNavData.columns?.length === 3
+                      ? "grid-cols-3"
+                      : "grid-cols-2 sm:grid-cols-4"
+                  }`}
+                >
+                  {activeNavData.columns?.map((col, idx) => (
+                    <div key={idx} className="space-y-2">
+                      <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider pb-1.5 border-b border-slate-100 flex items-center justify-between">
+                        <span>{col.heading}</span>
+                      </h4>
+                      <ul className="space-y-1">
+                        {col.links.map((link, lIdx) => (
+                          <li key={lIdx}>
                             {link.disabled ? (
-                              <span className="text-slate-400 text-xs font-medium opacity-60 flex items-center justify-between">
-                                <span>{link.label}</span>
-                                <span className="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded font-bold">Soon</span>
+                              <span className="text-slate-300 text-xs font-medium cursor-not-allowed flex items-center justify-between py-1">
+                                {link.label}
+                                <span className="text-[8px] bg-slate-100 text-slate-400 px-1.5 py-0.5 rounded font-black uppercase">
+                                  Soon
+                                </span>
                               </span>
                             ) : (
                               <Link
@@ -237,9 +254,12 @@ export default function Navbar() {
                                   setOpenSlug(null);
                                   setIsLocked(false);
                                 }}
-                                className="text-slate-700 hover:text-[#2874f0] hover:font-bold text-xs font-semibold transition block py-0.5"
+                                className="text-slate-600 hover:text-[#2874f0] text-xs font-semibold hover:font-bold py-1 block transition flex items-center justify-between group/link"
                               >
-                                {link.label}
+                                <span>{link.label}</span>
+                                <span className="text-[#2874f0] opacity-0 group-hover/link:opacity-100 transition-opacity font-bold">
+                                  →
+                                </span>
                               </Link>
                             )}
                           </li>
@@ -251,7 +271,6 @@ export default function Navbar() {
               </div>
             </div>
           )}
-
         </div>
       </nav>
     </header>
