@@ -1,23 +1,17 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import { headers } from "next/headers";
+import LayoutShell from "../components/LayoutShell";
 
 export const metadata: Metadata = {
   title: "TheCodeBrains — Upgrade Your Tech",
   description: "Independent tech reviews and buying advice.",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const headerList = await headers();
-  const pathname = headerList.get("x-pathname") || "";
-  const isPortfolio = pathname === "/portfolio" || pathname === "/portfolia";
-
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <head>
@@ -29,9 +23,7 @@ export default async function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-[#f1f3f6] font-sans">
-        {!isPortfolio && <Navbar />}
-        <main className="flex-1">{children}</main>
-        {!isPortfolio && <Footer />}
+        <LayoutShell>{children}</LayoutShell>
       </body>
     </html>
   );
