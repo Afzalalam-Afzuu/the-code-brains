@@ -165,15 +165,20 @@ export const navData: NavItem[] = [
     href: "/wordle-games",
   },
   {
+    label: "Compare",
+    slug: "compare",
+    href: "/compare",
+  },
+  {
+    label: "Coupons",
+    slug: "coupons",
+    href: "/coupons",
+  },
+  {
     label: "Browse",
     slug: "browse",
     href: "/browse",
   },
-  // {
-  //   label: "Portfolio",
-  //   slug: "portfolio",
-  //   href: "/portfolio",
-  // },
 ];
 
 // Flat list of every href in the nav — used by generateStaticParams so every
