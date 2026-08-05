@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Wrench, Calendar, QrCode, Image as ImageIcon, ArrowRight, ShieldCheck, Home } from "lucide-react";
+import { Wrench, Calendar, QrCode, Image as ImageIcon, Code2, Database, ArrowRight, ShieldCheck, Home } from "lucide-react";
 
 export default function ToolsNavbar() {
   const pathname = usePathname();
@@ -11,6 +11,8 @@ export default function ToolsNavbar() {
     { name: "Age Calculator", href: "/tools/age-calculator", icon: Calendar },
     { name: "QR Code Generator", href: "/tools/qr-generator", icon: QrCode },
     { name: "Image Compressor", href: "/tools/image-compressor", icon: ImageIcon },
+    { name: "JSON Formatter", href: "/tools/json-formatter", icon: Code2 },
+    { name: "Dummy JSON", href: "/tools/dummy-json", icon: Database },
   ];
 
   return (

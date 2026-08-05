@@ -179,13 +179,6 @@ export default async function Home() {
             >
               Compare Specs ⚖️
             </Link>
-            <Link
-              href="/tools"
-              className="bg-[#2874f0] hover:bg-blue-600 text-white font-black text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-lg transition text-center flex items-center justify-center gap-1.5"
-            >
-              <Wrench size={14} />
-              <span>Free Web Tools ⚡</span>
-            </Link>
           </div>
         </div>
       </div>

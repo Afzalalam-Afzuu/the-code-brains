@@ -58,6 +58,8 @@ export default function Footer() {
               <li><Link href="/tools/age-calculator" className="hover:text-amber-400 transition">Age Calculator</Link></li>
               <li><Link href="/tools/qr-generator" className="hover:text-amber-400 transition">QR Code Generator</Link></li>
               <li><Link href="/tools/image-compressor" className="hover:text-amber-400 transition">Image Compressor</Link></li>
+              <li><Link href="/tools/json-formatter" className="hover:text-amber-400 transition">JSON Formatter</Link></li>
+              <li><Link href="/tools/dummy-json" className="hover:text-amber-400 transition">Dummy JSON</Link></li>
             </ul>
           </div>
 

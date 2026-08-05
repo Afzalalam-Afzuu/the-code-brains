@@ -41,6 +41,14 @@ export default function ToolsFooter() {
             Image Compressor
           </Link>
           <span>•</span>
+          <Link href="/tools/json-formatter" className="hover:text-white transition">
+            JSON Formatter
+          </Link>
+          <span>•</span>
+          <Link href="/tools/dummy-json" className="hover:text-white transition">
+            Dummy JSON
+          </Link>
+          <span>•</span>
           <Link href="/" className="hover:text-white transition">
             Main Site
           </Link>

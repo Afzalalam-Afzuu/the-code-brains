@@ -1,11 +1,11 @@
 import Link from "next/link";
 import ToolsNavbar from "@/components/tools/ToolsNavbar";
 import ToolsFooter from "@/components/tools/ToolsFooter";
-import { Calendar, QrCode, Image as ImageIcon, Zap, ShieldCheck, Sparkles, ArrowRight } from "lucide-react";
+import { Calendar, QrCode, Image as ImageIcon, Code2, Database, Zap, ShieldCheck, Sparkles, ArrowRight } from "lucide-react";
 
 export const metadata = {
-  title: "Free Online Web Tools — Age Calculator, QR Generator, Image Compressor",
-  description: "100% free, fast, and private online client-side tools. Calculate your exact age, generate custom high-res QR codes, and compress image files without data uploads.",
+  title: "Free Online Web Tools — Age Calculator, QR Generator, JSON Formatter, Image Compressor",
+  description: "100% free, fast, and private online client-side tools. Calculate your exact age, generate custom high-res QR codes, format JSON, compress images, and generate mock datasets without data uploads.",
 };
 
 export default function ToolsHubPage() {
@@ -36,6 +36,24 @@ export default function ToolsHubPage() {
       gradient: "from-emerald-500 to-teal-600",
       href: "/tools/image-compressor",
       badge: "100% Private",
+    },
+    {
+      id: "json-formatter",
+      title: "JSON Formatter & Validator",
+      description: "Format, prettify, minify, and validate JSON strings in real-time. Highlights syntax errors, custom spacing, and 1-click download.",
+      icon: Code2,
+      gradient: "from-cyan-500 to-blue-600",
+      href: "/tools/json-formatter",
+      badge: "Developer Tool",
+    },
+    {
+      id: "dummy-json",
+      title: "Dummy JSON Generator",
+      description: "Generate realistic mock JSON datasets for users, products, and blogs for API testing and frontend prototyping.",
+      icon: Database,
+      gradient: "from-purple-500 to-indigo-600",
+      href: "/tools/dummy-json",
+      badge: "Mock Data Studio",
     },
   ];
 
