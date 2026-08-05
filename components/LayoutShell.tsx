@@ -14,15 +14,17 @@ export default function LayoutShell({
   navItems?: NavItem[];
 }) {
   const pathname = usePathname();
-  const isPortfolio =
-    pathname?.startsWith("/portfolio") || pathname?.startsWith("/portfolia");
+  const isCustomLayoutPage =
+    pathname?.startsWith("/portfolio") ||
+    pathname?.startsWith("/portfolia") ||
+    pathname?.startsWith("/tools");
 
   return (
     <>
-      {!isPortfolio && <Navbar navItems={navItems} />}
+      {!isCustomLayoutPage && <Navbar navItems={navItems} />}
       <main className="flex-1">{children}</main>
-      {!isPortfolio && <AIChatAssistant />}
-      {!isPortfolio && <Footer />}
+      {!isCustomLayoutPage && <AIChatAssistant />}
+      {!isCustomLayoutPage && <Footer />}
     </>
   );
 }

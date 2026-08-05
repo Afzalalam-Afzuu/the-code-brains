@@ -175,6 +175,11 @@ export const navData: NavItem[] = [
     href: "/coupons",
   },
   {
+    label: "Web Tools",
+    slug: "tools",
+    href: "/tools",
+  },
+  {
     label: "Browse",
     slug: "browse",
     href: "/browse",
