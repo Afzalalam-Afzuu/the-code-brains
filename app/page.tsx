@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Script from "next/script";
 import ProductCard from "../components/ProductCard";
-import { TrendingUp, Sparkles, ShieldCheck, Mail, Clock, ArrowRight, Zap, Flame, ShieldAlert, Award, Tag, Smartphone, Laptop, Tv, Headphones, HomeIcon, Ticket, BarChart3, CheckCircle, ExternalLink, HelpCircle } from "lucide-react";
+import { TrendingUp, Sparkles, ShieldCheck, Mail, Clock, ArrowRight, Zap, Flame, ShieldAlert, Award, Tag, Smartphone, Laptop, Tv, Headphones, HomeIcon, Ticket, BarChart3, CheckCircle, ExternalLink, HelpCircle, Wrench, Calendar, QrCode, Image as ImageIcon } from "lucide-react";
 import { getBlogs, getDealOfTheDayProductsFromDB } from "../lib/db-actions";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://thecodebrains.com";
@@ -179,6 +179,13 @@ export default async function Home() {
             >
               Compare Specs ⚖️
             </Link>
+            <Link
+              href="/tools"
+              className="bg-[#2874f0] hover:bg-blue-600 text-white font-black text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-lg transition text-center flex items-center justify-center gap-1.5"
+            >
+              <Wrench size={14} />
+              <span>Free Web Tools ⚡</span>
+            </Link>
           </div>
         </div>
       </div>
@@ -241,6 +248,72 @@ export default async function Home() {
               stores={product.stores}
             />
           ))}
+        </div>
+      </section>
+
+      {/* FREE ONLINE WEB TOOLS SPOTLIGHT SECTION */}
+      <section className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden space-y-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+          <div className="space-y-2 max-w-xl">
+            <span className="bg-amber-400 text-slate-950 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider inline-flex items-center gap-1">
+              <Sparkles size={12} /> 100% Free Client-Side Tools
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
+              Free Web Tools: Age Calculator, QR Studio & Image Compressor
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-300 font-medium">
+              Use our fast, browser-based web utilities with zero registration and 100% data privacy.
+            </p>
+          </div>
+
+          <Link
+            href="/tools"
+            className="bg-[#2874f0] hover:bg-blue-600 text-white text-xs font-extrabold px-6 py-3.5 rounded-2xl shadow-xl transition flex items-center justify-center gap-2 uppercase tracking-wider w-fit shrink-0"
+          >
+            <span>Explore Web Tools Hub</span>
+            <ArrowRight size={14} />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-800">
+          <Link
+            href="/tools/age-calculator"
+            className="bg-slate-900/80 border border-slate-800 hover:border-amber-400/50 p-4 rounded-2xl transition group"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-amber-400 font-black text-xs uppercase flex items-center gap-1">
+                <Calendar size={14} /> Age Calculator
+              </span>
+              <ArrowRight size={14} className="text-slate-500 group-hover:text-amber-400 group-hover:translate-x-1 transition" />
+            </div>
+            <p className="text-[11px] text-slate-400 font-medium">Calculate exact age, seconds lived, zodiac sign & bday countdown.</p>
+          </Link>
+
+          <Link
+            href="/tools/qr-generator"
+            className="bg-slate-900/80 border border-slate-800 hover:border-blue-400/50 p-4 rounded-2xl transition group"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-blue-400 font-black text-xs uppercase flex items-center gap-1">
+                <QrCode size={14} /> QR Code Generator
+              </span>
+              <ArrowRight size={14} className="text-slate-500 group-hover:text-blue-400 group-hover:translate-x-1 transition" />
+            </div>
+            <p className="text-[11px] text-slate-400 font-medium">Create custom colored QR codes for websites, Wi-Fi & WhatsApp.</p>
+          </Link>
+
+          <Link
+            href="/tools/image-compressor"
+            className="bg-slate-900/80 border border-slate-800 hover:border-emerald-400/50 p-4 rounded-2xl transition group"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-emerald-400 font-black text-xs uppercase flex items-center gap-1">
+                <ImageIcon size={14} /> Image Compressor
+              </span>
+              <ArrowRight size={14} className="text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-1 transition" />
+            </div>
+            <p className="text-[11px] text-slate-400 font-medium">Compress JPG, PNG & WEBP images directly inside your browser.</p>
+          </Link>
         </div>
       </section>
 

@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-12">
         
         {/* Footer Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-10 text-xs">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-10 text-xs">
           
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-3">
@@ -47,6 +47,17 @@ export default function Footer() {
               <li><Link href="/browse" className="hover:text-[#2874f0] transition">Flipkart Offers</Link></li>
               <li><Link href="/phones/best-picks" className="hover:text-[#2874f0] transition">Mobile Reviews</Link></li>
               <li><Link href="/computing/best-laptops" className="hover:text-[#2874f0] transition">Laptop Guides</Link></li>
+            </ul>
+          </div>
+
+          {/* Free Web Tools */}
+          <div>
+            <h4 className="text-[11px] font-black text-amber-400 uppercase tracking-widest mb-3">FREE WEB TOOLS</h4>
+            <ul className="space-y-2 text-slate-300 font-semibold">
+              <li><Link href="/tools" className="hover:text-amber-400 transition">All Tools Hub</Link></li>
+              <li><Link href="/tools/age-calculator" className="hover:text-amber-400 transition">Age Calculator</Link></li>
+              <li><Link href="/tools/qr-generator" className="hover:text-amber-400 transition">QR Code Generator</Link></li>
+              <li><Link href="/tools/image-compressor" className="hover:text-amber-400 transition">Image Compressor</Link></li>
             </ul>
           </div>
 
