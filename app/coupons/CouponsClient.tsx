@@ -203,7 +203,7 @@ export default function CouponsClient({ products }: CouponsClientProps) {
                     rel="noopener noreferrer nofollow sponsored"
                     className="w-full bg-[#2874f0] hover:bg-blue-600 text-white text-xs font-extrabold py-2 rounded-xl transition flex items-center justify-center gap-1 uppercase tracking-wider"
                   >
-                    <span>Claim Deal ({p.currency || "₹"}{p.price.toLocaleString()})</span>
+                    <span suppressHydrationWarning>Claim Deal ({p.currency || "₹"}{p.price.toLocaleString('en-IN')})</span>
                     <ExternalLink size={11} />
                   </a>
                 </div>

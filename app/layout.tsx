@@ -42,27 +42,31 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     url: siteUrl,
-    title: "TheCodeBrains — India's Trusted Tech Reviews & Deals Portal",
+    title: "🔥 TheCodeBrains — India's #1 Tech Reviews, Price Comparison & Deals Portal",
     description:
-      "Find the best tech deals, honest gadget reviews, price comparisons between Amazon & Flipkart, and verified discount coupons.",
+      "⚡ Never overpay for gadgets! Compare live prices on Amazon & Flipkart, read 100% independent buying guides, and unlock verified discount promo codes.",
     siteName: "TheCodeBrains",
     images: [
       {
-        url: `${siteUrl}/og-image.png`,
+        url: `${siteUrl}/images/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "TheCodeBrains Tech & Deals Portal",
+        alt: "TheCodeBrains — India's #1 Tech Reviews & Deals Portal",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "TheCodeBrains — Upgrade Your Tech",
-    description: "Independent tech reviews, multi-store price comparisons & verified coupons.",
-    images: [`${siteUrl}/og-image.png`],
+    title: "🔥 TheCodeBrains — India's #1 Tech Reviews & Price Comparison",
+    description: "Never overpay! Compare live prices on Amazon & Flipkart, read independent guides & unlock verified promo codes.",
+    images: [`${siteUrl}/images/og-image.png`],
   },
   alternates: {
     canonical: siteUrl,
+    types: {
+      "application/rss+xml": `${siteUrl}/feed.xml`,
+    },
   },
   other: {
     "impact-site-verification": "adcf51df-90d0-4fb9-9173-4cbd3f255d84",
@@ -106,6 +110,12 @@ export default async function RootLayout({
           "https://facebook.com/thecodebrains",
         ],
       },
+      {
+        "@type": "SiteNavigationElement",
+        "@id": `${siteUrl}/#navigation`,
+        "name": "Main Navigation",
+        "url": siteUrl,
+      },
     ],
   };
 
@@ -114,8 +124,8 @@ export default async function RootLayout({
       <head>
         {/* impact verify website code */}
         <meta name="impact-site-verification" content="adcf51df-90d0-4fb9-9173-4cbd3f255d84" />
-        {/* @ts-ignore */}
-        <meta name="impact-site-verification" value="adcf51df-90d0-4fb9-9173-4cbd3f255d84" />
+        <meta name="theme-color" content="#2874f0" />
+        <link rel="alternate" type="application/rss+xml" title="TheCodeBrains RSS Feed" href="/feed.xml" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

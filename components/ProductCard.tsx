@@ -1,5 +1,8 @@
+"use client";
+
 // components/ProductCard.tsx
-import { Star, ShieldCheck, Truck, Zap, CheckCircle2, ShoppingCart, ExternalLink } from "lucide-react";
+import { useState } from "react";
+import { Star, ShieldCheck, Truck, Zap, CheckCircle2, ShoppingCart, ExternalLink, Share2, Copy, Check, MessageCircle, X } from "lucide-react";
 import AffiliateButton from "./AffiliateButton";
 import { autoFormatAffiliateLink, AffiliateStoreOption } from "@/lib/affiliate-links";
 
@@ -30,10 +33,56 @@ export default function ProductCard({
   couponCode,
   stores,
 }: ProductProps) {
+  const [showShareMenu, setShowShareMenu] = useState(false);
+  const [copied, setCopied] = useState(false);
+
   const discountPercent =
     oldPrice > price ? Math.round(((oldPrice - price) / oldPrice) * 100) : 0;
 
   const formattedLink = id ? `/go/${id}` : autoFormatAffiliateLink(link, merchant);
+
+  const getShareText = () => {
+    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://thecodebrains.com';
+    return `🔥 *Check out this deal on TheCodeBrains!*\n\n📱 *${title}*\n💰 *Price*: ${currency}${price.toLocaleString('en-IN')}${discountPercent > 0 ? ` (${discountPercent}% OFF)` : ''}\n\n👉 *View Live Deal*: ${siteUrl}${formattedLink}`;
+  };
+
+  const handleWhatsAppShare = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(getShareText())}`, '_blank');
+    setShowShareMenu(false);
+  };
+
+  const handleCopyLink = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(getShareText());
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+      setShowShareMenu(false);
+    }, 2000);
+  };
+
+  const handleNativeShare = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      try {
+        const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://thecodebrains.com';
+        await navigator.share({
+          title: title,
+          text: `Check out this deal on ${title} (${currency}${price.toLocaleString('en-IN')})`,
+          url: `${siteUrl}${formattedLink}`,
+        });
+        setShowShareMenu(false);
+      } catch (err) {
+        // Fallback if cancelled
+      }
+    } else {
+      handleCopyLink(e);
+    }
+  };
 
   return (
     <div className="bg-white border border-slate-200/90 hover:border-[#2874f0] rounded-2xl p-4 flex flex-col justify-between group relative shadow-xs hover:shadow-xl transition-all duration-300 h-full">
@@ -52,9 +101,67 @@ export default function ProductCard({
               {discountPercent}% OFF
             </span>
           )}
-          <span className="absolute top-2.5 right-2.5 bg-slate-900 text-white text-[9px] font-extrabold px-2 py-0.5 rounded uppercase tracking-wider shadow-xs">
-            {merchant}
-          </span>
+          <div className="absolute top-2.5 right-2.5 flex items-center gap-1 z-20">
+            <div className="relative">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setShowShareMenu(!showShareMenu);
+                }}
+                title="Share Deal Options"
+                className="bg-indigo-600 hover:bg-indigo-700 text-white p-1.5 rounded-md shadow-sm transition duration-200 flex items-center gap-1 cursor-pointer"
+              >
+                <Share2 size={13} />
+              </button>
+
+              {/* Share Popover Menu */}
+              {showShareMenu && (
+                <div
+                  className="absolute right-0 top-8 w-44 bg-slate-900 text-white rounded-xl shadow-2xl p-2 border border-slate-700 z-50 flex flex-col gap-1.5 text-xs font-semibold"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <div className="flex items-center justify-between px-2 py-1 text-[10px] text-slate-400 font-extrabold uppercase border-b border-slate-800">
+                    <span>Share Options</span>
+                    <button
+                      onClick={() => setShowShareMenu(false)}
+                      className="hover:text-white"
+                    >
+                      <X size={12} />
+                    </button>
+                  </div>
+
+                  <button
+                    onClick={handleWhatsAppShare}
+                    className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold transition text-left cursor-pointer"
+                  >
+                    <MessageCircle size={14} />
+                    <span>Share on WhatsApp</span>
+                  </button>
+
+                  <button
+                    onClick={handleCopyLink}
+                    className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition text-left cursor-pointer"
+                  >
+                    {copied ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
+                    <span>{copied ? "Copied to Clipboard!" : "Copy Deal Link"}</span>
+                  </button>
+
+                  <button
+                    onClick={handleNativeShare}
+                    className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition text-left cursor-pointer"
+                  >
+                    <Share2 size={14} />
+                    <span>More Share Options</span>
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <span className="bg-slate-900 text-white text-[9px] font-extrabold px-2 py-0.5 rounded uppercase tracking-wider shadow-xs">
+              {merchant}
+            </span>
+          </div>
         </div>
 
         {/* Rating & Verified Tag */}
@@ -84,12 +191,12 @@ export default function ProductCard({
         {/* Pricing Block */}
         <div>
           <div className="flex items-baseline gap-2">
-            <span className="text-xl font-black text-slate-900 tracking-tight">
-              {currency}{price.toLocaleString()}
+            <span className="text-xl font-black text-slate-900 tracking-tight" suppressHydrationWarning>
+              {currency}{price.toLocaleString('en-IN')}
             </span>
             {oldPrice > price && (
-              <span className="text-slate-400 line-through text-xs font-semibold">
-                {currency}{oldPrice.toLocaleString()}
+              <span className="text-slate-400 line-through text-xs font-semibold" suppressHydrationWarning>
+                {currency}{oldPrice.toLocaleString('en-IN')}
               </span>
             )}
             {discountPercent > 0 && (
@@ -133,7 +240,7 @@ export default function ProductCard({
                       <span className="w-1.5 h-1.5 rounded-full bg-[#2874f0]" />
                       {s.merchant}
                     </span>
-                    <span className="font-black">{currency}{s.price.toLocaleString()} {s.badge ? `(${s.badge})` : ''} →</span>
+                    <span className="font-black" suppressHydrationWarning>{currency}{s.price.toLocaleString('en-IN')} {s.badge ? `(${s.badge})` : ''} →</span>
                   </a>
                 ))}
               </div>

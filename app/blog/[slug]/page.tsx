@@ -4,10 +4,13 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, Calendar, Clock, CheckCircle2, Share2, Bookmark, ExternalLink } from "lucide-react";
 import { getBlogBySlug, getBlogs } from "../../../lib/db-actions";
 import { parseMarkdown } from "../../../lib/markdown";
+import BlogShareBar from "../../../components/BlogShareBar";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://thecodebrains.com";
 
 // Force SSR (Server-Side Rendering) by setting dynamic rendering behaviour
 export const dynamic = "force-dynamic";
@@ -22,9 +25,45 @@ export async function generateMetadata({ params }: PageProps) {
     };
   }
 
+  const title = `${blog.title} — TheCodeBrains`;
+  const description = blog.excerpt;
+  const canonicalUrl = `${siteUrl}/blog/${slug}`;
+
+  const rawImage = blog.image || `${siteUrl}/images/og-image.png`;
+  const ogImage = rawImage.startsWith("http")
+    ? rawImage
+    : `${siteUrl}${rawImage.startsWith("/") ? "" : "/"}${rawImage}`;
+
   return {
-    title: `${blog.title} - TheCodeBrains`,
-    description: blog.excerpt,
+    title,
+    description,
+    keywords: [blog.tag, blog.title, "TheCodeBrains blog", "Tech Guide India", "Reviews"],
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      type: "article",
+      title: `🔥 ${blog.title}`,
+      description: `⚡ ${blog.excerpt}`,
+      url: canonicalUrl,
+      siteName: "TheCodeBrains",
+      publishedTime: blog.date,
+      authors: [blog.author || "TheCodeBrains Team"],
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: blog.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `🔥 ${blog.title}`,
+      description: `⚡ ${blog.excerpt}`,
+      images: [ogImage],
+    },
   };
 }
 
@@ -42,8 +81,38 @@ export default async function DynamicBlogPostPage({ params }: PageProps) {
 
   const formattedHtmlContent = parseMarkdown(blog.content);
 
+  // JSON-LD Article Schema
+  const jsonLdSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": blog.title,
+    "description": blog.excerpt,
+    "image": blog.image ? [blog.image] : [`${siteUrl}/og-image.png`],
+    "datePublished": blog.date,
+    "author": {
+      "@type": "Person",
+      "name": blog.author || "TheCodeBrains Team",
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "TheCodeBrains",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${siteUrl}/logo.png`,
+      },
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/blog/${slug}`,
+    },
+  };
+
   return (
     <div className="bg-slate-50/50 min-h-screen pb-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
+      />
       {/* Article Header Banner */}
       <div className="bg-slate-900 text-white py-12 sm:py-16 relative overflow-hidden">
         {/* Background Decorative Gradients */}
@@ -77,28 +146,28 @@ export default async function DynamicBlogPostPage({ params }: PageProps) {
           </p>
 
           {/* Meta Info */}
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-slate-400 border-t border-slate-800 pt-6">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center font-bold text-indigo-300">
-                {blog.author.split(' ').map(n => n[0]).join('')}
+          <div className="flex flex-wrap items-center justify-between gap-4 text-xs text-slate-400 border-t border-slate-800 pt-6">
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center font-bold text-indigo-300">
+                  {blog.author.split(' ').map(n => n[0]).join('')}
+                </div>
+                <span className="font-bold text-slate-200">{blog.author}</span>
               </div>
-              <span className="font-bold text-slate-200">{blog.author}</span>
+              <span className="hidden sm:inline">•</span>
+              <div className="flex items-center gap-1.5">
+                <Calendar size={14} />
+                <span>{blog.date}</span>
+              </div>
+              <span className="hidden sm:inline">•</span>
+              <div className="flex items-center gap-1.5">
+                <Clock size={14} />
+                <span>{blog.readTime}</span>
+              </div>
             </div>
-            <span className="hidden sm:inline">•</span>
-            <div className="flex items-center gap-1.5">
-              <Calendar size={14} />
-              <span>{blog.date}</span>
-            </div>
-            <span className="hidden sm:inline">•</span>
-            <div className="flex items-center gap-1.5">
-              <Clock size={14} />
-              <span>{blog.readTime}</span>
-            </div>
-            <span className="hidden sm:inline">•</span>
-            <div className="flex items-center gap-1.5 text-indigo-400 font-bold">
-              <CheckCircle2 size={14} />
-              <span>Verified Tech Guide</span>
-            </div>
+
+            {/* Header Share Bar */}
+            <BlogShareBar title={blog.title} slug={slug} excerpt={blog.excerpt} />
           </div>
         </div>
       </div>
@@ -127,8 +196,13 @@ export default async function DynamicBlogPostPage({ params }: PageProps) {
             dangerouslySetInnerHTML={{ __html: formattedHtmlContent }}
           />
 
+          {/* Bottom Sharing Bar */}
+          <div className="mt-8 pt-6 border-t border-slate-100 bg-slate-50 p-4 rounded-2xl">
+            <BlogShareBar title={blog.title} slug={slug} excerpt={blog.excerpt} className="justify-center sm:justify-start" />
+          </div>
+
           {/* Bottom Disclosure */}
-          <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 mt-10">
+          <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 mt-6">
             <p className="text-slate-400 text-[10px] italic max-w-sm text-center sm:text-left">
               Disclosure: This guide is a reader-supported review. Clicking links may earn us an affiliate commission from our merchant partners at no extra cost to you.
             </p>
@@ -151,14 +225,7 @@ export default async function DynamicBlogPostPage({ params }: PageProps) {
           {/* Share article */}
           <div className="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs text-center">
             <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-3">Share Guide</h4>
-            <div className="flex items-center justify-center gap-3">
-              <button className="p-2 bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition text-slate-500 cursor-pointer" aria-label="Share">
-                <Share2 size={16} />
-              </button>
-              <button className="p-2 bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition text-slate-500 cursor-pointer" aria-label="Bookmark">
-                <Bookmark size={16} />
-              </button>
-            </div>
+            <BlogShareBar title={blog.title} slug={slug} excerpt={blog.excerpt} className="flex-col items-stretch gap-2" />
           </div>
 
           {/* Recommended Reads */}

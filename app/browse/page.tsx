@@ -2,9 +2,20 @@ import ProductCard from "../../components/ProductCard";
 import { getAffiliateProductsFromDB } from "../../lib/db-actions";
 import { Tag, ShoppingBag, ShieldCheck, Sparkles } from "lucide-react";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://thecodebrains.com";
+
 export const metadata = {
   title: "Verified Tech Deals Directory & Amazon Affiliate Picks | TheCodeBrains",
   description: "Browse curated Amazon and partner affiliate tech deals, discounts, and live verified prices.",
+  alternates: {
+    canonical: `${siteUrl}/browse`,
+  },
+  openGraph: {
+    title: "Verified Tech Deals Directory — TheCodeBrains",
+    description: "Browse curated Amazon and partner affiliate tech deals, discounts, and live verified prices.",
+    url: `${siteUrl}/browse`,
+    type: "website",
+  },
 };
 
 export const revalidate = 0; // Fresh DB data on every request
@@ -12,8 +23,25 @@ export const revalidate = 0; // Fresh DB data on every request
 export default async function BrowsePage() {
   const products = await getAffiliateProductsFromDB();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Verified Tech Deals & Products",
+    "description": "Curated tech deals, discounts, and live verified prices.",
+    "itemListElement": products.map((p, idx) => ({
+      "@type": "ListItem",
+      "position": idx + 1,
+      "name": p.title,
+      "url": p.link || `${siteUrl}/browse`,
+    })),
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Header Banner */}
       <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-10 mb-8 border border-slate-800 shadow-xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-600/20 rounded-full blur-3xl" />

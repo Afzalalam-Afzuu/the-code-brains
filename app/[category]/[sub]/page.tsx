@@ -4,6 +4,8 @@ import { navData } from "../../../lib/nav-data";
 import { getCategoryPage } from "../../../lib/articles-data";
 import ArticleCard from "../../../components/ArticleCard";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://thecodebrains.com";
+
 // Fully static generation: every mega-menu link gets pre-built at build time.
 export function generateStaticParams() {
   const params: { category: string; sub: string }[] = [];
@@ -24,6 +26,57 @@ export function generateStaticParams() {
   return params;
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ category: string; sub: string }>;
+}) {
+  const { category, sub } = await params;
+  const href = `/${category}/${sub}`;
+  const page = getCategoryPage(href);
+
+  const title = `${page.title} — Reviews & Buying Advice | TheCodeBrains`;
+  const description = `Discover top-rated ${page.title.toLowerCase()} recommendations, in-depth reviews, verified Amazon & Flipkart prices, and expert advice.`;
+  const canonicalUrl = `${siteUrl}${href}`;
+
+  return {
+    title,
+    description,
+    keywords: [
+      page.title,
+      `${category} buying guide`,
+      `${sub} reviews India`,
+      "TheCodeBrains reviews",
+      "Best tech deals",
+    ],
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: `🔥 ${page.title} — Tested Reviews & Price Drop Picks`,
+      description: `⚡ Find top-rated ${page.title.toLowerCase()} recommendations, in-depth lab testing, live Amazon & Flipkart prices, and verified discount coupons.`,
+      url: canonicalUrl,
+      type: "website",
+      siteName: "TheCodeBrains",
+      images: [
+        {
+          url: `${siteUrl}/images/og-image.png`,
+          width: 1200,
+          height: 630,
+          alt: page.title,
+          type: "image/png",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `🔥 ${page.title} — Tested Reviews & Price Drop Picks`,
+      description: `⚡ Top-rated ${page.title.toLowerCase()} recommendations & live store prices.`,
+      images: [`${siteUrl}/images/og-image.png`],
+    },
+  };
+}
+
 export default async function CategoryPage({
   params,
 }: {
@@ -41,8 +94,39 @@ export default async function CategoryPage({
 
   const page = getCategoryPage(href);
 
+  // JSON-LD Structured Data Schema for Breadcrumb and ItemList
+  const jsonLdSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": page.breadcrumb.map((crumb, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "name": crumb,
+          "item": index === 0 ? siteUrl : `${siteUrl}${href}`,
+        })),
+      },
+      {
+        "@type": "ItemList",
+        "name": page.title,
+        "description": `Top recommendations for ${page.title}`,
+        "itemListElement": page.articles.map((article, idx) => ({
+          "@type": "ListItem",
+          "position": idx + 1,
+          "name": article.title,
+          "description": article.excerpt,
+        })),
+      },
+    ],
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
+      />
       <div>
         <nav className="text-[11px] font-bold text-slate-400 mb-3 space-x-1 tracking-wider uppercase">
           {page.breadcrumb.map((crumb, i) => (
@@ -115,3 +199,4 @@ export default async function CategoryPage({
     </div>
   );
 }
+

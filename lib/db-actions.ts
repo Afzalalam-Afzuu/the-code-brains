@@ -4,7 +4,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { supabase } from './supabase';
-import { blogPosts, BlogPost } from './blog-data';
+import { blogPosts, BlogPost, staticBlogContent } from './blog-data';
 import { affiliateProducts, AffiliateItem, formatAmazonAffiliateLink } from './affiliate-links';
 import { navData, NavItem } from './nav-data';
 
@@ -65,6 +65,7 @@ export async function getBlogs(): Promise<BlogPost[]> {
 // Fetch a single blog by slug
 export async function getBlogBySlug(slug: string): Promise<BlogDetail | null> {
   const staticPost = blogPosts.find(p => p.slug === slug);
+  const fallbackContent = staticBlogContent[slug] || `This is static fallback content for **${staticPost?.title || slug}**.`;
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
@@ -72,7 +73,7 @@ export async function getBlogBySlug(slug: string): Promise<BlogDetail | null> {
     if (staticPost) {
       return {
         ...staticPost,
-        content: `This is static fallback content for **${staticPost.title}**.`
+        content: fallbackContent
       };
     }
     return null;
@@ -89,7 +90,7 @@ export async function getBlogBySlug(slug: string): Promise<BlogDetail | null> {
       if (staticPost) {
         return {
           ...staticPost,
-          content: `This is static fallback content for **${staticPost.title}**.`
+          content: fallbackContent
         };
       }
       return null;
