@@ -3,11 +3,86 @@
 import React, { useState, useRef, useEffect } from "react";
 import ToolsNavbar from "@/components/tools/ToolsNavbar";
 import ToolsFooter from "@/components/tools/ToolsFooter";
-import { Bot, Send, User, Sparkles, RefreshCw, Copy, Check, Code2 } from "lucide-react";
+import { Bot, Send, User, Copy, Check } from "lucide-react";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
+}
+
+// Clean Markdown Formatter Component to remove raw **, ### and ## characters
+function RenderMarkdown({ text, isUser }: { text: string; isUser: boolean }) {
+  if (isUser) {
+    return <p className="whitespace-pre-wrap">{text}</p>;
+  }
+
+  const lines = text.split("\n");
+  return (
+    <div className="space-y-1.5 leading-relaxed">
+      {lines.map((line, i) => {
+        const trimmed = line.trim();
+
+        if (!trimmed) return <div key={i} className="h-1" />;
+
+        // Handle Headers (### or ##)
+        if (trimmed.startsWith("### ") || trimmed.startsWith("## ") || trimmed.startsWith("# ")) {
+          const headerText = trimmed.replace(/^#+\s*/, "").replace(/\*\*/g, "");
+          return (
+            <h4 key={i} className="text-xs sm:text-sm font-black text-slate-950 pt-1 pb-0.5 tracking-tight">
+              {headerText}
+            </h4>
+          );
+        }
+
+        // Handle Bullet Points (- or *)
+        if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
+          const bulletText = trimmed.substring(2);
+          return (
+            <div key={i} className="flex items-start gap-2 pl-1 my-0.5">
+              <span className="text-[#2874f0] font-black text-sm leading-none">•</span>
+              <span className="flex-1 text-slate-800 font-bold">{renderFormattedInline(bulletText)}</span>
+            </div>
+          );
+        }
+
+        return (
+          <p key={i} className="text-slate-800 font-bold">
+            {renderFormattedInline(trimmed)}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
+function renderFormattedInline(text: string) {
+  // Regex to match **bold**, `code`, and [links](url)
+  const parts = text.split(/(\*\*.*?\*\*|`.*?`|\[.*?\]\(.*?\))/g);
+  return parts.map((part, idx) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong key={idx} className="font-black text-slate-950">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    if (part.startsWith("`") && part.endsWith("`")) {
+      return (
+        <code key={idx} className="bg-slate-200 text-[#2874f0] px-1.5 py-0.5 rounded text-[11px] font-mono font-bold">
+          {part.slice(1, -1)}
+        </code>
+      );
+    }
+    const linkMatch = part.match(/^\[(.*?)\]\((.*?)\)$/);
+    if (linkMatch) {
+      return (
+        <a key={idx} href={linkMatch[2]} className="text-[#2874f0] underline font-black hover:text-blue-700">
+          {linkMatch[1]}
+        </a>
+      );
+    }
+    return part;
+  });
 }
 
 export default function AiChatPage() {
@@ -139,7 +214,7 @@ export default function AiChatPage() {
                       : "bg-slate-50 text-slate-950 rounded-bl-none border-2 border-slate-200"
                   }`}
                 >
-                  <p className="whitespace-pre-wrap">{msg.content}</p>
+                  <RenderMarkdown text={msg.content} isUser={msg.role === "user"} />
 
                   {msg.role === "assistant" && (
                     <div className="flex justify-end pt-1">
