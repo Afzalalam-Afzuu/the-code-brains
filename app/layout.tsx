@@ -79,6 +79,7 @@ export const metadata: Metadata = {
   other: {
     "impact-site-verification": "adcf51df-90d0-4fb9-9173-4cbd3f255d84",
     "google-site-verification": "k6g02O-cMXMyEGK6JH4s5v-9RwuDjR5344cbRYXJb00",
+    "google-adsense-account": "ca-pub-3691889459537976",
   },
 };
 
@@ -131,6 +132,8 @@ export default async function RootLayout({
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <head>
+        {/* Google AdSense Account Code */}
+        <meta name="google-adsense-account" content="ca-pub-3691889459537976" />
         {/* Google Site Verification Code */}
         <meta name="google-site-verification" content="k6g02O-cMXMyEGK6JH4s5v-9RwuDjR5344cbRYXJb00" />
         {/* impact verify website code */}
