@@ -306,7 +306,7 @@ export const blogPosts: BlogPost[] = [
     tag: "AI & AUTOMATION",
     author: "Dev Kapoor",
     date: "Jul 15, 2026",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop",
+    image: "https://cdn.jotfor.ms/assets/img/landing/ai-agents-opengraph.png?q=80&w=800&auto=format&fit=crop",
     readTime: "6 Min Read",
     href: "/blog/jotform-ai-agents"
   }
