@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { Mail, Clock, Calendar, ArrowRight, Sparkles, BookOpen, Plus } from "lucide-react";
 import { getBlogs } from "../../lib/db-actions";
+import SafeBlogImage from "../../components/SafeBlogImage";
 
 export const metadata = {
   title: "Technology Blog, Tutorials & Reviews - TheCodeBrains",
@@ -39,11 +40,11 @@ export default async function BlogListingPage() {
           
           {/* Admin Write Blog CTA */}
           <Link 
-            href="/blog/create" 
-            className="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider px-4 py-2.5 rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer"
+            href="/admin/create-blog"
+            className="inline-flex items-center gap-1.5 bg-indigo-600 text-white hover:bg-indigo-700 transition font-bold text-xs uppercase tracking-wider px-4 py-2.5 rounded-xl shadow-xs"
           >
             <Plus size={14} />
-            <span>Write a Blog</span>
+            <span>Write Article</span>
           </Link>
         </div>
 
@@ -58,20 +59,15 @@ export default async function BlogListingPage() {
               <div className="bg-white border border-slate-100 rounded-3xl p-6 shadow-xs hover:shadow-md transition-shadow duration-300 group flex flex-col md:flex-row gap-6">
                 <Link 
                   href={featuredPost.href} 
-                  className="w-full md:w-1/2 aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-indigo-900 via-slate-900 to-slate-950 border border-slate-100 shrink-0 block relative flex items-center justify-center"
+                  className="w-full md:w-1/2 aspect-video rounded-2xl overflow-hidden bg-slate-900 border border-slate-100 shrink-0 block relative"
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img 
+                  <SafeBlogImage 
                     src={featuredPost.image} 
                     alt={featuredPost.title} 
-                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500 relative z-10"
-                    onError={(e) => {
-                      (e.target as HTMLElement).style.display = 'none';
-                    }}
+                    tag={featuredPost.tag}
+                    title={featuredPost.title}
+                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 flex items-center justify-center p-4 text-center text-white font-black text-lg bg-gradient-to-br from-indigo-600 to-slate-900">
-                    <span>{featuredPost.tag}</span>
-                  </div>
                   <span className="absolute top-4 left-4 bg-indigo-600 text-white text-[9px] font-extrabold tracking-wider px-3 py-1 rounded-md uppercase shadow-md flex items-center gap-1 z-20">
                     <Sparkles size={10} />
                     <span>LATEST GUIDE</span>
@@ -134,20 +130,15 @@ export default async function BlogListingPage() {
                       <div>
                         <Link 
                           href={post.href}
-                          className="aspect-video w-full rounded-xl overflow-hidden bg-gradient-to-br from-indigo-900 to-slate-900 border border-slate-100 block mb-4 relative flex items-center justify-center"
+                          className="aspect-video w-full rounded-xl overflow-hidden bg-slate-900 border border-slate-100 block mb-4 relative"
                         >
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img 
+                          <SafeBlogImage 
                             src={post.image} 
                             alt={post.title} 
-                            className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500 relative z-10"
-                            onError={(e) => {
-                              (e.target as HTMLElement).style.display = 'none';
-                            }}
+                            tag={post.tag}
+                            title={post.title}
+                            className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
                           />
-                          <div className="absolute inset-0 flex items-center justify-center p-3 text-center text-white font-black text-sm bg-gradient-to-br from-indigo-600 to-slate-900">
-                            <span>{post.tag}</span>
-                          </div>
                         </Link>
 
                         <span className="bg-slate-100 text-slate-650 text-[9px] font-extrabold tracking-wider px-2 py-0.5 rounded uppercase">

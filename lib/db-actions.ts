@@ -37,17 +37,24 @@ export async function getBlogs(): Promise<BlogPost[]> {
       return blogPosts;
     }
 
-    const dbPosts: BlogPost[] = data.map((item: any) => ({
-      slug: item.slug,
-      title: item.title,
-      excerpt: item.excerpt,
-      tag: item.tag || 'AI & Automation',
-      author: item.author || 'Dev Kapoor',
-      date: item.date,
-      image: item.image || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=480&h=270&fit=crop',
-      readTime: item.read_time || '5 Min Read',
-      href: `/blog/${item.slug}`
-    }));
+    const validDbPosts = data.filter((item: any) => item.title && item.title.trim() !== 'aaaaaaaaaaaa' && item.slug);
+
+    const dbPosts: BlogPost[] = validDbPosts.map((item: any) => {
+      const staticMatch = blogPosts.find(p => p.slug === item.slug);
+      return {
+        slug: item.slug,
+        title: item.title,
+        excerpt: item.excerpt,
+        tag: item.tag || staticMatch?.tag || 'AI & AUTOMATION',
+        author: item.author || staticMatch?.author || 'Afzal Alam',
+        date: item.date || staticMatch?.date || 'Aug 6, 2026',
+        image: (item.image && item.image.trim() !== '' && !item.image.includes('photo-1618005182384')) 
+          ? item.image 
+          : (staticMatch?.image || 'https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=800&auto=format&fit=crop'),
+        readTime: item.read_time || staticMatch?.readTime || '5 Min Read',
+        href: `/blog/${item.slug}`
+      };
+    });
 
     const dbSlugs = new Set(dbPosts.map(p => p.slug));
     const merged = [
@@ -100,11 +107,13 @@ export async function getBlogBySlug(slug: string): Promise<BlogDetail | null> {
       slug: data.slug,
       title: data.title,
       excerpt: data.excerpt,
-      tag: data.tag || 'AI & Automation',
-      author: data.author || 'Dev Kapoor',
-      date: data.date,
-      image: data.image || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=480&h=270&fit=crop',
-      readTime: data.read_time || '5 Min Read',
+      tag: data.tag || staticPost?.tag || 'AI & AUTOMATION',
+      author: data.author || staticPost?.author || 'Afzal Alam',
+      date: data.date || staticPost?.date || 'Aug 6, 2026',
+      image: (data.image && data.image.trim() !== '' && !data.image.includes('photo-1618005182384'))
+        ? data.image
+        : (staticPost?.image || 'https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=800&auto=format&fit=crop'),
+      readTime: data.read_time || staticPost?.readTime || '5 Min Read',
       href: `/blog/${data.slug}`,
       content: data.content
     };

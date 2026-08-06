@@ -20,7 +20,7 @@ export const blogPosts: BlogPost[] = [
     tag: "AI & AUTOMATION",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop",
     readTime: "6 Min Read",
     href: "/blog/guide-ai-chat"
   },
@@ -130,7 +130,7 @@ export const blogPosts: BlogPost[] = [
     tag: "UTILITIES",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1595079672139-cee4c06ac9e8?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop",
     readTime: "6 Min Read",
     href: "/blog/guide-qr-generator"
   },
@@ -141,7 +141,7 @@ export const blogPosts: BlogPost[] = [
     tag: "UTILITIES",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1542744094-3a3172720177?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop",
     readTime: "6 Min Read",
     href: "/blog/guide-image-compressor"
   },
@@ -174,7 +174,7 @@ export const blogPosts: BlogPost[] = [
     tag: "MULTI CONVERTER",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=800&auto=format&fit=crop",
     readTime: "5 Min Read",
     href: "/blog/guide-unit-converter"
   },
