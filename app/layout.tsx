@@ -132,6 +132,12 @@ export default async function RootLayout({
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <head>
+        {/* Google AdSense Auto Ads Script */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3691889459537976"
+          crossOrigin="anonymous"
+        ></script>
         {/* Google AdSense Account Code */}
         <meta name="google-adsense-account" content="ca-pub-3691889459537976" />
         {/* Google Site Verification Code */}
