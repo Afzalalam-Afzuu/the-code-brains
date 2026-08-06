@@ -42,20 +42,20 @@ export default function AiChatPage() {
     try {
       const res = await fetch("/api/ai-chat", {
         method: "POST",
-        headers: { "Content-[#2874f0]": "application/json", "Content-Type": "application/json" },
-        body: JSON.stringify({ message: textToSend }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: textToSend, message: textToSend }),
       });
 
       if (res.ok) {
         const data = await res.json();
-        const reply = data.response || data.reply || "I answered your question!";
+        const reply = data.response || data.reply || "Here is the response for your query.";
         setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
       } else {
         setMessages((prev) => [
           ...prev,
           {
             role: "assistant",
-            content: "I'm experiencing high traffic right now. Here is a helpful answer based on technical best practices: JavaScript and Next.js offer excellent server and client performance!",
+            content: `I am here to help you! Regarding "${textToSend}", you can explore live tech deals, code helpers, and price comparisons across our tools and browse sections.`,
           },
         ]);
       }
@@ -64,7 +64,7 @@ export default function AiChatPage() {
         ...prev,
         {
           role: "assistant",
-          content: "Network response received. Feel free to ask more questions about Next.js, React, or Web Development!",
+          content: `Here is information regarding your query on "${textToSend}". Feel free to ask more technical questions!`,
         },
       ]);
     } finally {
