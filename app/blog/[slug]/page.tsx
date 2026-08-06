@@ -6,6 +6,7 @@ import { getBlogBySlug, getBlogs } from "../../../lib/db-actions";
 import { parseMarkdown } from "../../../lib/markdown";
 import BlogShareBar from "../../../components/BlogShareBar";
 import SafeBlogImage from "../../../components/SafeBlogImage";
+import AdBanner from "../../../components/AdBanner";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -198,6 +199,9 @@ export default async function DynamicBlogPostPage({ params }: PageProps) {
             dangerouslySetInnerHTML={{ __html: formattedHtmlContent }}
           />
 
+          {/* Dedicated Ad Placement in Article */}
+          <AdBanner className="my-8" />
+
           {/* Bottom Sharing Bar */}
           <div className="mt-8 pt-6 border-t border-slate-100 bg-slate-50 p-4 rounded-2xl">
             <BlogShareBar title={blog.title} slug={slug} excerpt={blog.excerpt} className="justify-center sm:justify-start" />
@@ -214,6 +218,9 @@ export default async function DynamicBlogPostPage({ params }: PageProps) {
 
         {/* Sidebar Info & Sharing */}
         <aside className="space-y-6">
+          {/* Sidebar Dedicated Ad Placement */}
+          <AdBanner className="my-2" format="rectangle" />
+
           {/* Author Card */}
           <div className="bg-white border border-slate-100 rounded-2xl p-5 shadow-xs text-center">
             <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-3">Written By</h4>

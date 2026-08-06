@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Mail, Clock, Calendar, ArrowRight, Sparkles, BookOpen, Plus } from "lucide-react";
 import { getBlogs } from "../../lib/db-actions";
 import SafeBlogImage from "../../components/SafeBlogImage";
+import AdBanner from "../../components/AdBanner";
 
 export const metadata = {
   title: "Technology Blog, Tutorials & Reviews - TheCodeBrains",
@@ -113,6 +114,9 @@ export default async function BlogListingPage() {
                 <p className="text-slate-400 text-xs mt-1">Check back later or click "Write a Blog" to publish one!</p>
               </div>
             )}
+
+            {/* Dedicated Ad Placement */}
+            <AdBanner className="my-6" />
 
             {/* Other Posts Grid */}
             {otherPosts.length > 0 && (

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ToolsNavbar from "@/components/tools/ToolsNavbar";
 import ToolsFooter from "@/components/tools/ToolsFooter";
+import AdBanner from "@/components/AdBanner";
 import {
   Calendar,
   QrCode,
@@ -211,6 +212,11 @@ export default function ToolsHubPage() {
           <p className="text-sm sm:text-base text-slate-800 font-extrabold max-w-2xl mx-auto">
             Useful browser utilities engineered for speed and total privacy. Zero signups, zero server uploads, 100% free forever.
           </p>
+        </div>
+
+        {/* Dedicated High-Visibility Ad Banner */}
+        <div className="max-w-4xl mx-auto">
+          <AdBanner className="my-4" />
         </div>
 
         {/* Tools Cards Grid */}
