@@ -94,47 +94,47 @@ export default function AgeCalculatorPage() {
   }, [dob, targetDate, todayStr]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-slate-100/90 text-slate-950 flex flex-col font-sans">
       <ToolsNavbar />
 
       <main className="max-w-4xl mx-auto px-4 py-8 sm:py-12 flex-1 w-full space-y-8">
         {/* Header */}
         <div className="text-center space-y-2">
-          <span className="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider inline-flex items-center gap-1">
-            <Calendar size={12} /> Age & Milestone Calculator
+          <span className="bg-blue-100 text-[#2874f0] border-2 border-blue-300 text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center gap-1.5 shadow-2xs">
+            <Calendar size={13} /> Age & Milestone Calculator
           </span>
-          <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
+          <h1 className="text-2xl sm:text-4xl font-black text-slate-950 tracking-tight">
             Calculate Your Exact Age & Life Stats
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto font-medium">
+          <p className="text-xs sm:text-sm text-slate-800 font-extrabold max-w-xl mx-auto">
             Enter your Date of Birth to discover your precise age in years, months, days, total seconds lived, upcoming birthday countdown, and zodiac sign.
           </p>
         </div>
 
         {/* Input Card */}
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-6">
+        <div className="bg-white border-2 border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-black text-slate-950 uppercase tracking-wider mb-2">
                 Date of Birth
               </label>
               <input
                 type="date"
                 value={dob}
                 onChange={(e) => setDob(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm font-bold text-white outline-none focus:border-[#2874f0] transition cursor-pointer"
+                className="w-full bg-slate-50 border-2 border-slate-300 rounded-xl px-4 py-3 text-sm font-black text-slate-950 outline-none focus:bg-white focus:border-[#2874f0] focus:ring-2 focus:ring-blue-200 transition cursor-pointer"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-black text-slate-950 uppercase tracking-wider mb-2">
                 Calculate Age At Date
               </label>
               <input
                 type="date"
                 value={targetDate}
                 onChange={(e) => setTargetDate(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm font-bold text-white outline-none focus:border-[#2874f0] transition cursor-pointer"
+                className="w-full bg-slate-50 border-2 border-slate-300 rounded-xl px-4 py-3 text-sm font-black text-slate-950 outline-none focus:bg-white focus:border-[#2874f0] focus:ring-2 focus:ring-blue-200 transition cursor-pointer"
               />
             </div>
           </div>
@@ -144,69 +144,69 @@ export default function AgeCalculatorPage() {
         {calculatedAge ? (
           <div className="space-y-6">
             {/* Primary Highlight Banner */}
-            <div className="bg-gradient-to-r from-indigo-900/80 via-purple-900/80 to-slate-900 border border-indigo-500/30 rounded-3xl p-6 text-center space-y-3 shadow-2xl relative overflow-hidden">
+            <div className="bg-[#2874f0] text-white rounded-2xl p-6 text-center space-y-2 shadow-md border-2 border-blue-600 relative overflow-hidden">
               <div className="relative z-10 space-y-1">
-                <span className="text-xs font-extrabold text-indigo-300 uppercase tracking-widest">
+                <span className="text-xs font-black text-blue-100 uppercase tracking-widest">
                   Your Precise Age Is
                 </span>
                 <div className="text-3xl sm:text-5xl font-black text-white tracking-tight flex items-center justify-center gap-3">
-                  <span>{calculatedAge.years} <span className="text-lg font-bold text-slate-400">Years</span></span>
-                  <span>{calculatedAge.months} <span className="text-lg font-bold text-slate-400">Months</span></span>
-                  <span>{calculatedAge.days} <span className="text-lg font-bold text-slate-400">Days</span></span>
+                  <span>{calculatedAge.years} <span className="text-lg font-extrabold text-blue-100">Years</span></span>
+                  <span>{calculatedAge.months} <span className="text-lg font-extrabold text-blue-100">Months</span></span>
+                  <span>{calculatedAge.days} <span className="text-lg font-extrabold text-blue-100">Days</span></span>
                 </div>
               </div>
             </div>
 
             {/* Metric Grids */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 text-center space-y-1">
-                <span className="text-[10px] font-black uppercase text-slate-400">Total Months</span>
-                <p className="text-xl font-black text-amber-400">{calculatedAge.totalMonths.toLocaleString()}</p>
+              <div className="bg-white border-2 border-slate-200 rounded-xl p-4 text-center space-y-1 shadow-sm">
+                <span className="text-[10px] font-black uppercase text-slate-800">Total Months</span>
+                <p className="text-2xl font-black text-slate-950">{calculatedAge.totalMonths.toLocaleString()}</p>
               </div>
-              <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 text-center space-y-1">
-                <span className="text-[10px] font-black uppercase text-slate-400">Total Weeks</span>
-                <p className="text-xl font-black text-indigo-400">{calculatedAge.totalWeeks.toLocaleString()}</p>
+              <div className="bg-white border-2 border-slate-200 rounded-xl p-4 text-center space-y-1 shadow-sm">
+                <span className="text-[10px] font-black uppercase text-slate-800">Total Weeks</span>
+                <p className="text-2xl font-black text-slate-950">{calculatedAge.totalWeeks.toLocaleString()}</p>
               </div>
-              <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 text-center space-y-1">
-                <span className="text-[10px] font-black uppercase text-slate-400">Total Days</span>
-                <p className="text-xl font-black text-emerald-400">{calculatedAge.totalDays.toLocaleString()}</p>
+              <div className="bg-white border-2 border-slate-200 rounded-xl p-4 text-center space-y-1 shadow-sm">
+                <span className="text-[10px] font-black uppercase text-slate-800">Total Days</span>
+                <p className="text-2xl font-black text-slate-950">{calculatedAge.totalDays.toLocaleString()}</p>
               </div>
-              <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 text-center space-y-1">
-                <span className="text-[10px] font-black uppercase text-slate-400">Total Hours</span>
-                <p className="text-xl font-black text-rose-400">{calculatedAge.totalHours.toLocaleString()}</p>
+              <div className="bg-white border-2 border-slate-200 rounded-xl p-4 text-center space-y-1 shadow-sm">
+                <span className="text-[10px] font-black uppercase text-slate-800">Total Hours</span>
+                <p className="text-2xl font-black text-slate-950">{calculatedAge.totalHours.toLocaleString()}</p>
               </div>
             </div>
 
             {/* Upcoming Birthday & Zodiac Card */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-2">
-                <div className="flex items-center gap-2 text-rose-400 font-extrabold text-xs">
+              <div className="bg-white border-2 border-slate-200 rounded-xl p-5 space-y-2 shadow-sm">
+                <div className="flex items-center gap-2 text-rose-600 font-black text-xs uppercase tracking-wider">
                   <Heart size={16} /> Next Birthday Countdown
                 </div>
-                <div className="text-2xl font-black text-white">
-                  {calculatedAge.daysUntilNextBday} <span className="text-sm font-bold text-slate-400">Days Remaining</span>
+                <div className="text-2xl font-black text-slate-950">
+                  {calculatedAge.daysUntilNextBday} <span className="text-sm font-extrabold text-slate-700">Days Remaining</span>
                 </div>
-                <p className="text-xs text-slate-400 font-medium">
-                  Your next birthday falls on a <span className="text-amber-400 font-bold">{calculatedAge.nextBdayDayOfWeek}</span>.
+                <p className="text-xs text-slate-800 font-extrabold">
+                  Your next birthday falls on a <span className="text-[#2874f0] font-black">{calculatedAge.nextBdayDayOfWeek}</span>.
                 </p>
               </div>
 
-              <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-2">
-                <div className="flex items-center gap-2 text-indigo-400 font-extrabold text-xs">
+              <div className="bg-white border-2 border-slate-200 rounded-xl p-5 space-y-2 shadow-sm">
+                <div className="flex items-center gap-2 text-[#2874f0] font-black text-xs uppercase tracking-wider">
                   <Star size={16} /> Zodiac Astrological Sign
                 </div>
-                <div className="text-2xl font-black text-white flex items-center gap-2">
-                  <span className="text-amber-400 text-3xl">{calculatedAge.zodiac.symbol}</span>
+                <div className="text-2xl font-black text-slate-950 flex items-center gap-2">
+                  <span className="text-amber-500 text-3xl">{calculatedAge.zodiac.symbol}</span>
                   <span>{calculatedAge.zodiac.name}</span>
                 </div>
-                <p className="text-xs text-slate-400 font-medium">
-                  Element: <span className="text-emerald-400 font-bold">{calculatedAge.zodiac.element}</span>
+                <p className="text-xs text-slate-800 font-extrabold">
+                  Element: <span className="text-emerald-700 font-black">{calculatedAge.zodiac.element}</span>
                 </p>
               </div>
             </div>
           </div>
         ) : (
-          <div className="bg-slate-900/50 border border-dashed border-slate-800 rounded-3xl p-8 text-center text-slate-500 font-semibold text-xs">
+          <div className="bg-white border-2 border-dashed border-slate-300 rounded-2xl p-8 text-center text-slate-700 font-bold text-xs shadow-sm">
             Please enter a valid Date of Birth above to compute your age metrics.
           </div>
         )}

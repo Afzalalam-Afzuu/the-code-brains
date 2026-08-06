@@ -7,7 +7,7 @@ import { getBlogs, getDealOfTheDayProductsFromDB } from "../lib/db-actions";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://thecodebrains.com";
 
 export const metadata = {
-  title: "🔥 TheCodeBrains — India's #1 Tech Reviews, Deals & Price Comparison",
+  title: "TheCodeBrains — India's #1 Tech Reviews, Deals & Price Comparison",
   description: "Never overpay for gadgets! Compare live prices across Amazon & Flipkart, read 100% independent buying guides, and get 200+ verified discount codes.",
   alternates: {
     canonical: siteUrl,
@@ -151,7 +151,7 @@ export default async function Home() {
       {/* FLIPKART BIG HERO DEALS BANNER */}
       <div className="rounded-2xl bg-gradient-to-r from-[#2874f0] via-indigo-600 to-[#1259cb] text-white p-6 sm:p-10 shadow-lg relative overflow-hidden">
         <div className="absolute -right-10 -bottom-10 w-80 h-80 bg-yellow-400/20 rounded-full blur-3xl pointer-events-none" />
-        
+
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-3 text-center md:text-left">
             <div className="inline-flex items-center gap-2 bg-[#ffe500] text-slate-950 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
@@ -245,68 +245,66 @@ export default async function Home() {
       </section>
 
       {/* FREE ONLINE WEB TOOLS SPOTLIGHT SECTION */}
-      <section className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden space-y-6">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
-          <div className="space-y-2 max-w-xl">
+      <section className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden space-y-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
+          <div className="space-y-1.5 max-w-xl">
             <span className="bg-amber-400 text-slate-950 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider inline-flex items-center gap-1">
-              <Sparkles size={12} /> 100% Free Client-Side Tools
+              <Sparkles size={12} /> 15+ Free Online Web Tools
             </span>
             <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
-              Free Web Tools: Age Calculator, QR Studio & Image Compressor
+              Free Developer & Utility Tools Hub
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 font-medium">
-              Use our fast, browser-based web utilities with zero registration and 100% data privacy.
+              100% free, browser-based utilities engineered for speed and total privacy. Zero signups.
             </p>
           </div>
 
           <Link
             href="/tools"
-            className="bg-[#2874f0] hover:bg-blue-600 text-white text-xs font-extrabold px-6 py-3.5 rounded-2xl shadow-xl transition flex items-center justify-center gap-2 uppercase tracking-wider w-fit shrink-0"
+            className="bg-[#2874f0] hover:bg-blue-600 text-white text-xs font-black px-6 py-3.5 rounded-2xl shadow-xl transition flex items-center justify-center gap-2 uppercase tracking-wider w-fit shrink-0 border border-blue-400/30"
           >
-            <span>Explore Web Tools Hub</span>
+            <span>Explore All 15+ Tools Hub</span>
             <ArrowRight size={14} />
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-800">
-          <Link
-            href="/tools/age-calculator"
-            className="bg-slate-900/80 border border-slate-800 hover:border-amber-400/50 p-4 rounded-2xl transition group"
-          >
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-amber-400 font-black text-xs uppercase flex items-center gap-1">
-                <Calendar size={14} /> Age Calculator
-              </span>
-              <ArrowRight size={14} className="text-slate-500 group-hover:text-amber-400 group-hover:translate-x-1 transition" />
-            </div>
-            <p className="text-[11px] text-slate-400 font-medium">Calculate exact age, seconds lived, zodiac sign & bday countdown.</p>
-          </Link>
-
-          <Link
-            href="/tools/qr-generator"
-            className="bg-slate-900/80 border border-slate-800 hover:border-blue-400/50 p-4 rounded-2xl transition group"
-          >
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-blue-400 font-black text-xs uppercase flex items-center gap-1">
-                <QrCode size={14} /> QR Code Generator
-              </span>
-              <ArrowRight size={14} className="text-slate-500 group-hover:text-blue-400 group-hover:translate-x-1 transition" />
-            </div>
-            <p className="text-[11px] text-slate-400 font-medium">Create custom colored QR codes for websites, Wi-Fi & WhatsApp.</p>
-          </Link>
-
-          <Link
-            href="/tools/image-compressor"
-            className="bg-slate-900/80 border border-slate-800 hover:border-emerald-400/50 p-4 rounded-2xl transition group"
-          >
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-emerald-400 font-black text-xs uppercase flex items-center gap-1">
-                <ImageIcon size={14} /> Image Compressor
-              </span>
-              <ArrowRight size={14} className="text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-1 transition" />
-            </div>
-            <p className="text-[11px] text-slate-400 font-medium">Compress JPG, PNG & WEBP images directly inside your browser.</p>
-          </Link>
+        {/* Small Icons Grid for All 15 Tools */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 pt-4 border-t border-slate-800">
+          {[
+            { name: "AI Chat Bot", icon: "🤖", href: "/tools/ai-chat", badge: "AI" },
+            { name: "Age Calculator", icon: "🗓️", href: "/tools/age-calculator" },
+            { name: "QR Generator", icon: "📱", href: "/tools/qr-generator" },
+            { name: "Image Compressor", icon: "🖼️", href: "/tools/image-compressor" },
+            { name: "Password Generator", icon: "🔑", href: "/tools/password-generator" },
+            { name: "Word & Text Tools", icon: "📝", href: "/tools/text-tools" },
+            { name: "Unit Converter", icon: "📐", href: "/tools/unit-converter" },
+            { name: "Color Palette", icon: "🎨", href: "/tools/color-palette" },
+            { name: "Loan EMI Calc", icon: "💰", href: "/tools/emi-calculator" },
+            { name: "BMI Health Calc", icon: "⚖️", href: "/tools/bmi-calculator" },
+            { name: "JSON Formatter", icon: "💻", href: "/tools/json-formatter" },
+            { name: "Base64 Converter", icon: "🔐", href: "/tools/base64-converter" },
+            { name: "IP & Device Info", icon: "🌐", href: "/tools/ip-checker" },
+            { name: "PDF Inspector", icon: "📄", href: "/tools/pdf-tools" },
+            { name: "Dummy JSON Data", icon: "🗄️", href: "/tools/dummy-json" },
+          ].map((item, idx) => (
+            <Link
+              key={idx}
+              href={item.href}
+              className="bg-slate-900/90 border border-slate-800 hover:border-amber-400/80 hover:bg-slate-800/90 p-3 rounded-xl transition duration-200 group flex items-center gap-2.5 shadow-xs"
+            >
+              <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-lg shrink-0 group-hover:scale-110 group-hover:bg-[#2874f0] transition">
+                {item.icon}
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs font-black text-slate-100 group-hover:text-amber-400 transition truncate">
+                  {item.name}
+                </p>
+                <span className="text-[10px] text-slate-400 font-bold flex items-center gap-1 group-hover:text-white transition">
+                  Open <ArrowRight size={10} className="group-hover:translate-x-0.5 transition" />
+                </span>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 

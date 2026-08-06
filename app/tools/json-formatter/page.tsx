@@ -84,47 +84,47 @@ export default function JsonFormatterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-slate-100/90 text-slate-950 flex flex-col font-sans">
       <ToolsNavbar />
 
       <main className="max-w-6xl mx-auto px-4 py-8 sm:py-12 flex-1 w-full space-y-8">
         {/* Header */}
         <div className="text-center space-y-2">
-          <span className="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider inline-flex items-center gap-1">
-            <Code2 size={12} /> JSON Formatter & Validator
+          <span className="bg-blue-100 text-[#2874f0] border-2 border-blue-300 text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center gap-1.5 shadow-2xs">
+            <Code2 size={13} /> JSON Formatter & Validator
           </span>
-          <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
+          <h1 className="text-2xl sm:text-4xl font-black text-slate-950 tracking-tight">
             JSON Formatter, Minifier & Validator
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto font-medium">
+          <p className="text-xs sm:text-sm text-slate-800 font-extrabold max-w-xl mx-auto">
             Format messy JSON string data with custom indentations, validate syntax in real-time, minify for APIs, and download `.json` files.
           </p>
         </div>
 
         {/* Action Controls */}
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-xl space-y-4">
-          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div className="bg-white border-2 border-slate-200 rounded-2xl p-4 sm:p-6 shadow-sm space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b-2 border-slate-100 pb-4">
             <div className="flex flex-wrap items-center gap-2">
               <button
                 onClick={handleFormat}
-                className="bg-[#2874f0] hover:bg-blue-600 text-white font-extrabold text-xs px-4 py-2 rounded-xl transition flex items-center gap-1.5 cursor-pointer shadow-md"
+                className="bg-[#2874f0] hover:bg-blue-600 text-white font-black text-xs px-4 py-2.5 rounded-xl transition flex items-center gap-1.5 cursor-pointer shadow-2xs uppercase tracking-wider"
               >
-                <Code2 size={14} />
+                <Code2 size={15} />
                 <span>Format JSON</span>
               </button>
 
               <button
                 onClick={handleMinify}
-                className="bg-slate-800 hover:bg-slate-700 text-slate-200 font-extrabold text-xs px-4 py-2 rounded-xl border border-slate-700 transition flex items-center gap-1.5 cursor-pointer"
+                className="bg-slate-100 hover:bg-slate-200 text-slate-900 font-black text-xs px-4 py-2.5 rounded-xl border-2 border-slate-300 transition flex items-center gap-1.5 cursor-pointer"
               >
-                <Minimize2 size={14} />
+                <Minimize2 size={15} />
                 <span>Minify JSON</span>
               </button>
 
               <select
                 value={indent}
                 onChange={(e) => setIndent(Number(e.target.value))}
-                className="bg-slate-950 text-slate-300 border border-slate-700 text-xs font-bold px-3 py-2 rounded-xl outline-none cursor-pointer"
+                className="bg-slate-50 text-slate-950 border-2 border-slate-300 text-xs font-black px-3 py-2 rounded-xl outline-none cursor-pointer focus:bg-white focus:border-[#2874f0]"
               >
                 <option value={2}>2 Spaces Indent</option>
                 <option value={4}>4 Spaces Indent</option>
@@ -134,15 +134,15 @@ export default function JsonFormatterPage() {
             <div className="flex items-center gap-2">
               <button
                 onClick={handleCopy}
-                className="bg-slate-800 hover:bg-slate-700 text-white text-xs font-extrabold px-3 py-2 rounded-xl border border-slate-700 transition flex items-center gap-1.5 cursor-pointer"
+                className="bg-slate-100 hover:bg-slate-200 text-slate-900 text-xs font-black px-3.5 py-2 rounded-xl border-2 border-slate-300 transition flex items-center gap-1.5 cursor-pointer"
               >
-                {copied ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
+                {copied ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
                 <span>{copied ? "Copied!" : "Copy JSON"}</span>
               </button>
 
               <button
                 onClick={handleDownload}
-                className="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold px-3 py-2 rounded-xl transition flex items-center gap-1.5 cursor-pointer"
+                className="bg-slate-950 hover:bg-slate-900 text-white text-xs font-black px-4 py-2 rounded-xl transition flex items-center gap-1.5 cursor-pointer shadow-2xs uppercase tracking-wider"
               >
                 <Download size={14} />
                 <span>Download .JSON</span>
@@ -152,8 +152,8 @@ export default function JsonFormatterPage() {
 
           {/* Error Banner */}
           {error && (
-            <div className="bg-rose-950/80 border border-rose-500/40 rounded-2xl p-3 text-rose-300 text-xs font-bold flex items-center gap-2">
-              <AlertTriangle size={16} className="text-rose-400 shrink-0" />
+            <div className="bg-rose-100 border-2 border-rose-300 rounded-xl p-3.5 text-rose-950 text-xs font-black flex items-center gap-2 shadow-2xs">
+              <AlertTriangle size={18} className="text-rose-700 shrink-0" />
               <span>Invalid JSON: {error}</span>
             </div>
           )}
@@ -162,7 +162,7 @@ export default function JsonFormatterPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Raw Input */}
             <div className="space-y-1.5">
-              <label className="block text-[11px] font-extrabold text-slate-400 uppercase tracking-widest">
+              <label className="block text-xs font-black text-slate-950 uppercase tracking-widest">
                 Input Raw JSON String:
               </label>
               <textarea
@@ -170,13 +170,13 @@ export default function JsonFormatterPage() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Paste unformatted JSON string here..."
-                className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 font-mono text-xs text-slate-200 outline-none focus:border-cyan-500 transition leading-relaxed resize-none"
+                className="w-full bg-slate-50 border-2 border-slate-300 rounded-xl p-4 font-mono text-xs text-slate-950 font-extrabold outline-none focus:bg-white focus:border-[#2874f0] focus:ring-2 focus:ring-blue-200 transition leading-relaxed resize-none"
               />
             </div>
 
             {/* Formatted Output */}
             <div className="space-y-1.5">
-              <label className="block text-[11px] font-extrabold text-cyan-400 uppercase tracking-widest">
+              <label className="block text-xs font-black text-[#2874f0] uppercase tracking-widest">
                 Formatted Output:
               </label>
               <textarea
@@ -184,7 +184,7 @@ export default function JsonFormatterPage() {
                 readOnly
                 value={output || (error ? "" : input)}
                 placeholder="Formatted JSON result will appear here..."
-                className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 font-mono text-xs text-cyan-300 outline-none leading-relaxed resize-none"
+                className="w-full bg-slate-50 border-2 border-slate-300 rounded-xl p-4 font-mono text-xs text-slate-950 font-extrabold outline-none leading-relaxed resize-none"
               />
             </div>
           </div>

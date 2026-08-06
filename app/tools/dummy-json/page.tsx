@@ -75,38 +75,38 @@ export default function DummyJsonGeneratorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-slate-100/90 text-slate-950 flex flex-col font-sans">
       <ToolsNavbar />
 
       <main className="max-w-5xl mx-auto px-4 py-8 sm:py-12 flex-1 w-full space-y-8">
         {/* Header */}
         <div className="text-center space-y-2">
-          <span className="bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider inline-flex items-center gap-1">
-            <Database size={12} /> Mock Data Studio
+          <span className="bg-blue-100 text-[#2874f0] border-2 border-blue-300 text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center gap-1.5 shadow-2xs">
+            <Database size={13} /> Mock Data Studio
           </span>
-          <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
+          <h1 className="text-2xl sm:text-4xl font-black text-slate-950 tracking-tight">
             Dummy JSON Generator
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto font-medium">
+          <p className="text-xs sm:text-sm text-slate-800 font-extrabold max-w-xl mx-auto">
             Generate realistic mock JSON datasets for frontend prototyping, API testing, and database seeders in 1-click.
           </p>
         </div>
 
         {/* Controls Card */}
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-6">
+        <div className="bg-white border-2 border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Schema Type */}
             <div>
-              <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-black text-slate-950 uppercase tracking-wider mb-2">
                 Select Dataset Schema:
               </label>
               <div className="grid grid-cols-3 gap-2">
                 <button
                   onClick={() => setDatasetType("users")}
-                  className={`p-3 rounded-2xl border text-xs font-extrabold transition flex flex-col items-center gap-1.5 cursor-pointer ${
+                  className={`p-3 rounded-xl border-2 text-xs font-black transition flex flex-col items-center gap-1.5 cursor-pointer ${
                     datasetType === "users"
-                      ? "bg-[#2874f0] border-[#2874f0] text-white"
-                      : "bg-slate-950 border-slate-800 text-slate-400 hover:text-white"
+                      ? "bg-[#2874f0] border-blue-600 text-white shadow-2xs"
+                      : "bg-slate-50 border-slate-300 text-slate-900 hover:bg-slate-100"
                   }`}
                 >
                   <Users size={18} />
@@ -115,10 +115,10 @@ export default function DummyJsonGeneratorPage() {
 
                 <button
                   onClick={() => setDatasetType("products")}
-                  className={`p-3 rounded-2xl border text-xs font-extrabold transition flex flex-col items-center gap-1.5 cursor-pointer ${
+                  className={`p-3 rounded-xl border-2 text-xs font-black transition flex flex-col items-center gap-1.5 cursor-pointer ${
                     datasetType === "products"
-                      ? "bg-[#2874f0] border-[#2874f0] text-white"
-                      : "bg-slate-950 border-slate-800 text-slate-400 hover:text-white"
+                      ? "bg-[#2874f0] border-blue-600 text-white shadow-2xs"
+                      : "bg-slate-50 border-slate-300 text-slate-900 hover:bg-slate-100"
                   }`}
                 >
                   <ShoppingBag size={18} />
@@ -127,10 +127,10 @@ export default function DummyJsonGeneratorPage() {
 
                 <button
                   onClick={() => setDatasetType("blogs")}
-                  className={`p-3 rounded-2xl border text-xs font-extrabold transition flex flex-col items-center gap-1.5 cursor-pointer ${
+                  className={`p-3 rounded-xl border-2 text-xs font-black transition flex flex-col items-center gap-1.5 cursor-pointer ${
                     datasetType === "blogs"
-                      ? "bg-[#2874f0] border-[#2874f0] text-white"
-                      : "bg-slate-950 border-slate-800 text-slate-400 hover:text-white"
+                      ? "bg-[#2874f0] border-blue-600 text-white shadow-2xs"
+                      : "bg-slate-50 border-slate-300 text-slate-900 hover:bg-slate-100"
                   }`}
                 >
                   <BookOpen size={18} />
@@ -141,7 +141,7 @@ export default function DummyJsonGeneratorPage() {
 
             {/* Item Count */}
             <div>
-              <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-black text-slate-950 uppercase tracking-wider mb-2">
                 Generated Items Count:
               </label>
               <div className="flex items-center gap-2">
@@ -149,10 +149,10 @@ export default function DummyJsonGeneratorPage() {
                   <button
                     key={num}
                     onClick={() => setCount(num)}
-                    className={`flex-1 py-3 rounded-2xl border text-xs font-extrabold transition cursor-pointer ${
+                    className={`flex-1 py-3 rounded-xl border-2 text-xs font-black transition cursor-pointer ${
                       count === num
-                        ? "bg-purple-600 border-purple-500 text-white"
-                        : "bg-slate-950 border-slate-800 text-slate-400 hover:text-white"
+                        ? "bg-[#2874f0] border-blue-600 text-white shadow-2xs"
+                        : "bg-slate-50 border-slate-300 text-slate-900 hover:bg-slate-100"
                     }`}
                   >
                     {num} Items
@@ -163,23 +163,23 @@ export default function DummyJsonGeneratorPage() {
           </div>
 
           {/* Action Bar */}
-          <div className="flex items-center justify-between pt-4 border-t border-slate-800">
-            <span className="text-xs font-extrabold text-slate-400">
-              Output: <span className="text-purple-400">{count} Records</span>
+          <div className="flex items-center justify-between pt-4 border-t-2 border-slate-100">
+            <span className="text-xs font-black text-slate-800">
+              Output: <span className="text-[#2874f0] font-black">{count} Records</span>
             </span>
 
             <div className="flex items-center gap-2">
               <button
                 onClick={handleCopy}
-                className="bg-slate-800 hover:bg-slate-700 text-white text-xs font-extrabold px-4 py-2.5 rounded-xl border border-slate-700 transition flex items-center gap-1.5 cursor-pointer"
+                className="bg-slate-100 hover:bg-slate-200 text-slate-900 text-xs font-black px-4 py-2.5 rounded-xl border-2 border-slate-300 transition flex items-center gap-1.5 cursor-pointer"
               >
-                {copied ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
+                {copied ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
                 <span>{copied ? "Copied!" : "Copy Dummy JSON"}</span>
               </button>
 
               <button
                 onClick={handleDownload}
-                className="bg-purple-600 hover:bg-purple-500 text-white text-xs font-extrabold px-4 py-2.5 rounded-xl transition flex items-center gap-1.5 cursor-pointer shadow-lg"
+                className="bg-slate-950 hover:bg-slate-900 text-white text-xs font-black px-4 py-2.5 rounded-xl transition flex items-center gap-1.5 cursor-pointer shadow-2xs uppercase tracking-wider"
               >
                 <Download size={14} />
                 <span>Download .JSON</span>
@@ -192,7 +192,7 @@ export default function DummyJsonGeneratorPage() {
             rows={14}
             readOnly
             value={jsonString}
-            className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 font-mono text-xs text-purple-300 outline-none leading-relaxed resize-none"
+            className="w-full bg-slate-50 border-2 border-slate-300 rounded-xl p-4 font-mono text-xs text-slate-950 font-extrabold outline-none leading-relaxed resize-none"
           />
         </div>
       </main>

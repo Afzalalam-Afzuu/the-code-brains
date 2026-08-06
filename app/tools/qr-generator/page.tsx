@@ -54,19 +54,19 @@ export default function QrGeneratorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-slate-100/90 text-slate-950 flex flex-col font-sans">
       <ToolsNavbar />
 
       <main className="max-w-4xl mx-auto px-4 py-8 sm:py-12 flex-1 w-full space-y-8">
         {/* Header */}
         <div className="text-center space-y-2">
-          <span className="bg-[#2874f0]/20 text-blue-300 border border-[#2874f0]/30 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider inline-flex items-center gap-1">
-            <QrCode size={12} /> HD QR Code Studio
+          <span className="bg-blue-100 text-[#2874f0] border-2 border-blue-300 text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center gap-1.5 shadow-2xs">
+            <QrCode size={13} /> HD QR Code Studio
           </span>
-          <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
+          <h1 className="text-2xl sm:text-4xl font-black text-slate-950 tracking-tight">
             Create & Download Custom QR Codes
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto font-medium">
+          <p className="text-xs sm:text-sm text-slate-800 font-extrabold max-w-xl mx-auto">
             Generate high-resolution QR codes for websites, Wi-Fi networks, WhatsApp links, and text. Customize colors and download in PNG format instantly.
           </p>
         </div>
@@ -74,37 +74,37 @@ export default function QrGeneratorPage() {
         {/* Workspace Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Controls Panel */}
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-6">
+          <div className="bg-white border-2 border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
             {/* Quick Presets */}
             <div className="space-y-2">
-              <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider">
+              <label className="block text-xs font-black text-slate-950 uppercase tracking-wider">
                 Quick Presets
               </label>
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => handlePreset("url")}
-                  className="bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 px-3 py-1.5 rounded-xl border border-slate-700 flex items-center gap-1.5 cursor-pointer"
+                  className="bg-slate-100 hover:bg-slate-200 text-slate-900 text-xs font-black px-3 py-1.5 rounded-xl border-2 border-slate-300 flex items-center gap-1.5 transition cursor-pointer"
                 >
-                  <LinkIcon size={12} /> Website URL
+                  <LinkIcon size={13} /> Website URL
                 </button>
                 <button
                   onClick={() => handlePreset("wifi")}
-                  className="bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 px-3 py-1.5 rounded-xl border border-slate-700 flex items-center gap-1.5 cursor-pointer"
+                  className="bg-slate-100 hover:bg-slate-200 text-slate-900 text-xs font-black px-3 py-1.5 rounded-xl border-2 border-slate-300 flex items-center gap-1.5 transition cursor-pointer"
                 >
-                  <Wifi size={12} /> Wi-Fi Network
+                  <Wifi size={13} /> Wi-Fi Network
                 </button>
                 <button
                   onClick={() => handlePreset("whatsapp")}
-                  className="bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 px-3 py-1.5 rounded-xl border border-slate-700 flex items-center gap-1.5 cursor-pointer"
+                  className="bg-slate-100 hover:bg-slate-200 text-slate-900 text-xs font-black px-3 py-1.5 rounded-xl border-2 border-slate-300 flex items-center gap-1.5 transition cursor-pointer"
                 >
-                  <Phone size={12} /> WhatsApp Link
+                  <Phone size={13} /> WhatsApp Link
                 </button>
               </div>
             </div>
 
             {/* Input Text */}
             <div>
-              <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-black text-slate-950 uppercase tracking-wider mb-2">
                 QR Code Content (URL or Text)
               </label>
               <textarea
@@ -112,57 +112,57 @@ export default function QrGeneratorPage() {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 placeholder="Type your URL, text message, or contact details..."
-                className="w-full bg-slate-950 border border-slate-700 rounded-2xl p-3 text-xs sm:text-sm font-semibold text-white outline-none focus:border-[#2874f0] transition"
+                className="w-full bg-slate-50 border-2 border-slate-300 rounded-xl p-3.5 text-xs sm:text-sm font-bold text-slate-950 outline-none focus:bg-white focus:border-[#2874f0] focus:ring-2 focus:ring-blue-200 transition"
               />
             </div>
 
             {/* Color Customization */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-black text-slate-950 uppercase tracking-wider mb-1.5">
                   Foreground Color
                 </label>
-                <div className="flex items-center gap-2 bg-slate-950 border border-slate-700 rounded-xl p-1.5">
+                <div className="flex items-center gap-2 bg-slate-50 border-2 border-slate-300 rounded-xl p-2">
                   <input
                     type="color"
                     value={darkColor}
                     onChange={(e) => setDarkColor(e.target.value)}
                     className="w-8 h-8 rounded-lg cursor-pointer bg-transparent border-0"
                   />
-                  <span className="text-xs font-mono font-bold text-slate-300">{darkColor}</span>
+                  <span className="text-xs font-mono font-black text-slate-950">{darkColor}</span>
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-black text-slate-950 uppercase tracking-wider mb-1.5">
                   Background Color
                 </label>
-                <div className="flex items-center gap-2 bg-slate-950 border border-slate-700 rounded-xl p-1.5">
+                <div className="flex items-center gap-2 bg-slate-50 border-2 border-slate-300 rounded-xl p-2">
                   <input
                     type="color"
                     value={lightColor}
                     onChange={(e) => setLightColor(e.target.value)}
                     className="w-8 h-8 rounded-lg cursor-pointer bg-transparent border-0"
                   />
-                  <span className="text-xs font-mono font-bold text-slate-300">{lightColor}</span>
+                  <span className="text-xs font-mono font-black text-slate-950">{lightColor}</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Preview & Download Panel */}
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl flex flex-col items-center justify-between space-y-6">
-            <span className="text-xs font-extrabold text-slate-400 uppercase tracking-widest">
+          <div className="bg-white border-2 border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col items-center justify-between space-y-6">
+            <span className="text-xs font-black text-slate-800 uppercase tracking-widest">
               Live Preview
             </span>
 
             {/* QR Code Container */}
-            <div className="p-6 bg-slate-950 rounded-2xl border border-slate-800 shadow-inner flex items-center justify-center min-h-[260px] w-full max-w-[280px]">
+            <div className="p-6 bg-slate-100 rounded-2xl border-2 border-slate-300 shadow-inner flex items-center justify-center min-h-[260px] w-full max-w-[280px]">
               {qrDataUrl ? (
                 /* eslint-disable-next-line @next/next/no-img-element */
-                <img src={qrDataUrl} alt="Generated QR Code" className="w-56 h-56 rounded-xl object-contain" />
+                <img src={qrDataUrl} alt="Generated QR Code" className="w-56 h-56 rounded-xl object-contain shadow-xs" />
               ) : (
-                <p className="text-xs text-slate-500 font-semibold">Enter text above to render QR code.</p>
+                <p className="text-xs text-slate-600 font-extrabold">Enter text above to render QR code.</p>
               )}
             </div>
 
@@ -171,7 +171,7 @@ export default function QrGeneratorPage() {
               <button
                 onClick={handleDownload}
                 disabled={!qrDataUrl}
-                className="w-full bg-[#2874f0] hover:bg-blue-600 disabled:opacity-50 text-white font-extrabold text-xs py-3 rounded-2xl transition flex items-center justify-center gap-2 shadow-lg cursor-pointer uppercase tracking-wider"
+                className="w-full bg-[#2874f0] hover:bg-blue-600 disabled:opacity-50 text-white font-black text-xs py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-sm cursor-pointer uppercase tracking-wider"
               >
                 <Download size={16} />
                 <span>Download High-Res PNG</span>

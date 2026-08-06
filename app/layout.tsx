@@ -68,6 +68,14 @@ export const metadata: Metadata = {
       "application/rss+xml": `${siteUrl}/feed.xml`,
     },
   },
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.png", type: "image/png" },
+    ],
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
   other: {
     "impact-site-verification": "adcf51df-90d0-4fb9-9173-4cbd3f255d84",
   },
@@ -104,7 +112,7 @@ export default async function RootLayout({
         "@id": `${siteUrl}/#organization`,
         "name": "TheCodeBrains",
         "url": siteUrl,
-        "logo": `${siteUrl}/logo.png`,
+        "logo": `${siteUrl}/favicon.svg`,
         "sameAs": [
           "https://twitter.com/thecodebrains",
           "https://facebook.com/thecodebrains",
@@ -125,6 +133,9 @@ export default async function RootLayout({
         {/* impact verify website code */}
         <meta name="impact-site-verification" content="adcf51df-90d0-4fb9-9173-4cbd3f255d84" />
         <meta name="theme-color" content="#2874f0" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="shortcut icon" href="/favicon.svg" />
+        <link rel="apple-touch-icon" href="/favicon.svg" />
         <link rel="alternate" type="application/rss+xml" title="TheCodeBrains RSS Feed" href="/feed.xml" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />

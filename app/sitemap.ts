@@ -6,7 +6,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://thecodebrains.com';
   const lastModified = new Date();
 
-  // Primary static routes
+  // Primary static routes & Web Tools Sitelink Candidates
   const staticRoutes = [
     '',
     '/browse',
@@ -18,6 +18,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/join',
     '/search',
     '/wordle-games',
+    '/tools',
+    '/tools/ai-chat',
+    '/tools/age-calculator',
+    '/tools/qr-generator',
+    '/tools/image-compressor',
+    '/tools/password-generator',
+    '/tools/text-tools',
+    '/tools/unit-converter',
+    '/tools/color-palette',
+    '/tools/emi-calculator',
+    '/tools/bmi-calculator',
+    '/tools/json-formatter',
+    '/tools/base64-converter',
+    '/tools/ip-checker',
+    '/tools/pdf-tools',
+    '/tools/merge-pdf',
+    '/tools/split-pdf',
+    '/tools/compress-pdf',
+    '/tools/jpg-to-pdf',
+    '/tools/pdf-to-word',
+    '/tools/dummy-json',
   ];
 
   const staticPages = staticRoutes.map((route) => ({
