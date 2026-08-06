@@ -180,13 +180,20 @@ export default async function DynamicBlogPostPage({ params }: PageProps) {
           
           {/* Featured Image */}
           {blog.image && (
-            <div className="aspect-video w-full rounded-2xl overflow-hidden bg-slate-55 border border-slate-100 mb-8">
+            <div className="aspect-video w-full rounded-2xl overflow-hidden bg-gradient-to-br from-indigo-900 via-slate-900 to-slate-950 border border-slate-100 mb-8 relative flex items-center justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src={blog.image} 
                 alt={blog.title} 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover relative z-10"
+                onError={(e) => {
+                  (e.target as HTMLElement).style.display = 'none';
+                }}
               />
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-indigo-600 to-slate-900 text-white font-black text-xl">
+                <span className="text-xs uppercase tracking-widest text-indigo-300 bg-indigo-950/60 px-3 py-1 rounded-full mb-2 border border-indigo-500/30">{blog.tag}</span>
+                <span className="text-sm font-bold text-slate-100 max-w-md line-clamp-2">{blog.title}</span>
+              </div>
             </div>
           )}
 

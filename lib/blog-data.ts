@@ -20,7 +20,7 @@ export const blogPosts: BlogPost[] = [
     tag: "AI & AUTOMATION",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=800&auto=format&fit=crop",
     readTime: "6 Min Read",
     href: "/blog/guide-ai-chat"
   },
@@ -31,7 +31,7 @@ export const blogPosts: BlogPost[] = [
     tag: "AI & DEVELOPER",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop",
     readTime: "7 Min Read",
     href: "/blog/guide-ai-regex-generator"
   },
@@ -42,7 +42,7 @@ export const blogPosts: BlogPost[] = [
     tag: "AI & DEVELOPER",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=800&auto=format&fit=crop",
     readTime: "6 Min Read",
     href: "/blog/guide-ai-sql-generator"
   },
@@ -53,7 +53,7 @@ export const blogPosts: BlogPost[] = [
     tag: "AI CONTENT",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1596526131083-e8c633c948d2?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1596526131083-e8c633c948d2?q=80&w=800&auto=format&fit=crop",
     readTime: "5 Min Read",
     href: "/blog/guide-ai-email-writer"
   },
@@ -64,7 +64,7 @@ export const blogPosts: BlogPost[] = [
     tag: "AI CAREER",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=800&auto=format&fit=crop",
     readTime: "6 Min Read",
     href: "/blog/guide-ai-cover-letter-generator"
   },
@@ -75,7 +75,7 @@ export const blogPosts: BlogPost[] = [
     tag: "AI SOCIAL",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=800&auto=format&fit=crop",
     readTime: "5 Min Read",
     href: "/blog/guide-ai-bio-generator"
   },
@@ -86,7 +86,7 @@ export const blogPosts: BlogPost[] = [
     tag: "DEVELOPER TOOL",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop",
     readTime: "6 Min Read",
     href: "/blog/guide-json-formatter"
   },
@@ -97,7 +97,7 @@ export const blogPosts: BlogPost[] = [
     tag: "DEVELOPER TOOL",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop",
     readTime: "5 Min Read",
     href: "/blog/guide-base64-converter"
   },
@@ -108,7 +108,7 @@ export const blogPosts: BlogPost[] = [
     tag: "DEVELOPER TOOL",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=800&auto=format&fit=crop",
     readTime: "5 Min Read",
     href: "/blog/guide-dummy-json"
   },
@@ -119,7 +119,7 @@ export const blogPosts: BlogPost[] = [
     tag: "UTILITIES",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?q=80&w=800&auto=format&fit=crop",
     readTime: "5 Min Read",
     href: "/blog/guide-age-calculator"
   },
@@ -130,7 +130,7 @@ export const blogPosts: BlogPost[] = [
     tag: "UTILITIES",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1595079672139-cee4c06ac9e8?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1595079672139-cee4c06ac9e8?q=80&w=800&auto=format&fit=crop",
     readTime: "6 Min Read",
     href: "/blog/guide-qr-generator"
   },
@@ -141,7 +141,7 @@ export const blogPosts: BlogPost[] = [
     tag: "UTILITIES",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1542744094-3a3172720177?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1542744094-3a3172720177?q=80&w=800&auto=format&fit=crop",
     readTime: "6 Min Read",
     href: "/blog/guide-image-compressor"
   },
@@ -152,7 +152,7 @@ export const blogPosts: BlogPost[] = [
     tag: "SECURITY STUDIO",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800&auto=format&fit=crop",
     readTime: "5 Min Read",
     href: "/blog/guide-password-generator"
   },
@@ -163,7 +163,7 @@ export const blogPosts: BlogPost[] = [
     tag: "TEXT STUDIO",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=800&auto=format&fit=crop",
     readTime: "5 Min Read",
     href: "/blog/guide-text-tools"
   },
@@ -174,7 +174,7 @@ export const blogPosts: BlogPost[] = [
     tag: "MULTI CONVERTER",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?q=80&w=800&auto=format&fit=crop",
     readTime: "5 Min Read",
     href: "/blog/guide-unit-converter"
   },
@@ -185,7 +185,7 @@ export const blogPosts: BlogPost[] = [
     tag: "DESIGN UTILITY",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=800&auto=format&fit=crop",
     readTime: "6 Min Read",
     href: "/blog/guide-color-palette"
   },
@@ -196,7 +196,7 @@ export const blogPosts: BlogPost[] = [
     tag: "FINANCE STUDIO",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=800&auto=format&fit=crop",
     readTime: "6 Min Read",
     href: "/blog/guide-emi-calculator"
   },
@@ -207,7 +207,7 @@ export const blogPosts: BlogPost[] = [
     tag: "HEALTH UTILITY",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop",
     readTime: "5 Min Read",
     href: "/blog/guide-bmi-calculator"
   },
@@ -218,7 +218,7 @@ export const blogPosts: BlogPost[] = [
     tag: "NETWORK INSPECTOR",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=800&auto=format&fit=crop",
     readTime: "5 Min Read",
     href: "/blog/guide-ip-checker"
   },
@@ -229,7 +229,7 @@ export const blogPosts: BlogPost[] = [
     tag: "PDF STUDIO",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1568667256549-094345857637?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1568667256549-094345857637?q=80&w=800&auto=format&fit=crop",
     readTime: "6 Min Read",
     href: "/blog/guide-pdf-tools"
   },
@@ -240,7 +240,7 @@ export const blogPosts: BlogPost[] = [
     tag: "PDF STUDIO",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=800&auto=format&fit=crop",
     readTime: "5 Min Read",
     href: "/blog/guide-merge-pdf"
   },
@@ -251,7 +251,7 @@ export const blogPosts: BlogPost[] = [
     tag: "PDF STUDIO",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?q=80&w=800&auto=format&fit=crop",
     readTime: "5 Min Read",
     href: "/blog/guide-split-pdf"
   },
@@ -262,7 +262,7 @@ export const blogPosts: BlogPost[] = [
     tag: "PDF STUDIO",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=800&auto=format&fit=crop",
     readTime: "5 Min Read",
     href: "/blog/guide-compress-pdf"
   },
@@ -273,7 +273,7 @@ export const blogPosts: BlogPost[] = [
     tag: "PDF STUDIO",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?q=80&w=800&auto=format&fit=crop",
     readTime: "5 Min Read",
     href: "/blog/guide-jpg-to-pdf"
   },
@@ -284,7 +284,7 @@ export const blogPosts: BlogPost[] = [
     tag: "PDF STUDIO",
     author: "Afzal Alam",
     date: "Aug 6, 2026",
-    image: "https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=800&auto=format&fit=crop",
     readTime: "5 Min Read",
     href: "/blog/guide-pdf-to-word"
   },
@@ -295,7 +295,7 @@ export const blogPosts: BlogPost[] = [
     tag: "MOBILE TECH",
     author: "Afzal Alam",
     date: "Aug 5, 2026",
-    image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?q=80&w=800&fit=crop",
+    image: "/images/modern_smartphone.png",
     readTime: "8 Min Read",
     href: "/blog/best-smartphones-under-25000"
   },
@@ -306,7 +306,7 @@ export const blogPosts: BlogPost[] = [
     tag: "AI & AUTOMATION",
     author: "Dev Kapoor",
     date: "Jul 15, 2026",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=480&h=270&fit=crop",
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop",
     readTime: "6 Min Read",
     href: "/blog/jotform-ai-agents"
   }

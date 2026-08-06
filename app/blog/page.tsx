@@ -58,15 +58,21 @@ export default async function BlogListingPage() {
               <div className="bg-white border border-slate-100 rounded-3xl p-6 shadow-xs hover:shadow-md transition-shadow duration-300 group flex flex-col md:flex-row gap-6">
                 <Link 
                   href={featuredPost.href} 
-                  className="w-full md:w-1/2 aspect-video rounded-2xl overflow-hidden bg-slate-100 border border-slate-100 shrink-0 block relative"
+                  className="w-full md:w-1/2 aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-indigo-900 via-slate-900 to-slate-950 border border-slate-100 shrink-0 block relative flex items-center justify-center"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img 
                     src={featuredPost.image} 
                     alt={featuredPost.title} 
-                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500 relative z-10"
+                    onError={(e) => {
+                      (e.target as HTMLElement).style.display = 'none';
+                    }}
                   />
-                  <span className="absolute top-4 left-4 bg-indigo-600 text-white text-[9px] font-extrabold tracking-wider px-3 py-1 rounded-md uppercase shadow-md flex items-center gap-1">
+                  <div className="absolute inset-0 flex items-center justify-center p-4 text-center text-white font-black text-lg bg-gradient-to-br from-indigo-600 to-slate-900">
+                    <span>{featuredPost.tag}</span>
+                  </div>
+                  <span className="absolute top-4 left-4 bg-indigo-600 text-white text-[9px] font-extrabold tracking-wider px-3 py-1 rounded-md uppercase shadow-md flex items-center gap-1 z-20">
                     <Sparkles size={10} />
                     <span>LATEST GUIDE</span>
                   </span>
@@ -128,14 +134,20 @@ export default async function BlogListingPage() {
                       <div>
                         <Link 
                           href={post.href}
-                          className="aspect-video w-full rounded-xl overflow-hidden bg-slate-100 border border-slate-100 block mb-4"
+                          className="aspect-video w-full rounded-xl overflow-hidden bg-gradient-to-br from-indigo-900 to-slate-900 border border-slate-100 block mb-4 relative flex items-center justify-center"
                         >
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img 
                             src={post.image} 
                             alt={post.title} 
-                            className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
+                            className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500 relative z-10"
+                            onError={(e) => {
+                              (e.target as HTMLElement).style.display = 'none';
+                            }}
                           />
+                          <div className="absolute inset-0 flex items-center justify-center p-3 text-center text-white font-black text-sm bg-gradient-to-br from-indigo-600 to-slate-900">
+                            <span>{post.tag}</span>
+                          </div>
                         </Link>
 
                         <span className="bg-slate-100 text-slate-650 text-[9px] font-extrabold tracking-wider px-2 py-0.5 rounded uppercase">
