@@ -86,11 +86,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/favicon.png", type: "image/png" },
     ],
-    shortcut: "/favicon.svg",
-    apple: "/favicon.svg",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
   },
   other: {
     "impact-site-verification": "adcf51df-90d0-4fb9-9173-4cbd3f255d84",
@@ -161,9 +160,9 @@ export default async function RootLayout({
         {/* impact verify website code */}
         <meta name="impact-site-verification" content="adcf51df-90d0-4fb9-9173-4cbd3f255d84" />
         <meta name="theme-color" content="#2874f0" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="shortcut icon" href="/favicon.svg" />
-        <link rel="apple-touch-icon" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="shortcut icon" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
         <link rel="alternate" type="application/rss+xml" title="TheCodeBrains RSS Feed" href="/feed.xml" />
 
         {/* Google Search JSON-LD Structured Data */}
