@@ -1,6 +1,6 @@
 import React from "react";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://thecodebrains.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thecodebrains.com";
 
 export const metadata = {
   title: "Free Custom QR Code Generator — Create High-Res QR Codes for URLs & WiFi",
@@ -13,7 +13,22 @@ export const metadata = {
     title: "📱 Custom QR Code Generator — TheCodeBrains",
     description: "Generate high-resolution QR codes with custom colors and instant PNG download. 100% private.",
     url: `${siteUrl}/tools/qr-generator`,
+    siteName: "TheCodeBrains",
     type: "website",
+    images: [
+      {
+        url: `${siteUrl}/images/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Free Custom QR Code Generator — TheCodeBrains",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "📱 Custom QR Code Generator — TheCodeBrains",
+    description: "Generate high-resolution QR codes with custom colors and instant PNG download. 100% private.",
+    images: [`${siteUrl}/images/og-image.png`],
   },
 };
 
