@@ -1,7 +1,23 @@
 import type { Metadata } from "next";
+import Script from "next/script";
+import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import LayoutShell from "../components/LayoutShell";
 import { getNavDataFromDB } from "../lib/db-actions";
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+  variable: "--font-plus-jakarta",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thecodebrains.com";
 
@@ -130,14 +146,14 @@ export default async function RootLayout({
   };
 
   return (
-    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
+    <html lang="en" className={`${plusJakartaSans.variable} ${inter.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
-        {/* Google AdSense Auto Ads Script */}
-        <script
-          async
+        {/* Google AdSense Auto Ads Script optimized with lazyOnload strategy */}
+        <Script
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3691889459537976"
+          strategy="lazyOnload"
           crossOrigin="anonymous"
-        ></script>
+        />
         {/* Google AdSense Account Code */}
         <meta name="google-adsense-account" content="ca-pub-3691889459537976" />
         {/* Google Site Verification Code */}
@@ -149,13 +165,6 @@ export default async function RootLayout({
         <link rel="shortcut icon" href="/favicon.svg" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
         <link rel="alternate" type="application/rss+xml" title="TheCodeBrains RSS Feed" href="/feed.xml" />
-
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
 
         {/* Google Search JSON-LD Structured Data */}
         <script
