@@ -105,6 +105,17 @@ export default function ToolsFooter() {
             <Link href="/tools/ip-checker" className="hover:text-[#2874f0] underline transition">
               IP Info
             </Link>
+            <Link href="/privacy-policy" className="hover:text-[#2874f0] underline transition font-bold text-[#2874f0]">
+              Privacy Policy
+            </Link>
+            <span>•</span>
+            <Link href="/terms-of-use" className="hover:text-[#2874f0] underline transition font-bold text-[#2874f0]">
+              Terms of Use
+            </Link>
+            <span>•</span>
+            <Link href="/affiliate-disclosure" className="hover:text-[#2874f0] underline transition font-bold text-[#2874f0]">
+              Affiliate Disclosure
+            </Link>
             <span>•</span>
             <Link href="/" className="hover:text-[#2874f0] underline transition">
               Main Site
