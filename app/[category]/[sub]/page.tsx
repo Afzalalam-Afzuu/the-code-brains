@@ -4,7 +4,7 @@ import { navData } from "../../../lib/nav-data";
 import { getCategoryPage } from "../../../lib/articles-data";
 import ArticleCard from "../../../components/ArticleCard";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://thecodebrains.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thecodebrains.com";
 
 // Fully static generation: every mega-menu link gets pre-built at build time.
 export function generateStaticParams() {

@@ -3,7 +3,7 @@ import "./globals.css";
 import LayoutShell from "../components/LayoutShell";
 import { getNavDataFromDB } from "../lib/db-actions";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://thecodebrains.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thecodebrains.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

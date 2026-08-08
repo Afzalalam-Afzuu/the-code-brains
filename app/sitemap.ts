@@ -3,7 +3,7 @@ import { allNavHrefs } from '@/lib/nav-data';
 import { getBlogs } from '@/lib/db-actions';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://thecodebrains.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.thecodebrains.com';
   const lastModified = new Date();
 
   // Primary static routes & Web Tools Sitelink Candidates

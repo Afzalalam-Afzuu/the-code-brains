@@ -4,7 +4,7 @@ import ProductCard from "../components/ProductCard";
 import { TrendingUp, Sparkles, ShieldCheck, Mail, Clock, ArrowRight, Zap, Flame, ShieldAlert, Award, Tag, Smartphone, Laptop, Tv, Headphones, HomeIcon, Ticket, BarChart3, CheckCircle, ExternalLink, HelpCircle, Wrench, Calendar, QrCode, Image as ImageIcon } from "lucide-react";
 import { getBlogs, getDealOfTheDayProductsFromDB } from "../lib/db-actions";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://thecodebrains.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thecodebrains.com";
 
 export const metadata = {
   title: "TheCodeBrains — India's #1 Tech Reviews, Deals & Price Comparison",

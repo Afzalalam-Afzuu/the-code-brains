@@ -2,7 +2,7 @@ import ProductCard from "../../components/ProductCard";
 import { getAffiliateProductsFromDB } from "../../lib/db-actions";
 import { Tag, ShoppingBag, ShieldCheck, Sparkles } from "lucide-react";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://thecodebrains.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thecodebrains.com";
 
 export const metadata = {
   title: "Verified Tech Deals Directory & Amazon Affiliate Picks | TheCodeBrains",

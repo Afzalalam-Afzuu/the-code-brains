@@ -1,7 +1,7 @@
 import { getBlogs } from "@/lib/db-actions";
 
 export async function GET() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://thecodebrains.com";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thecodebrains.com";
   let blogs: any[] = [];
 
   try {
