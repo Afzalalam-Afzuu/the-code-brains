@@ -829,6 +829,104 @@ export default function SpaceObservatoryResearchPage() {
                 </button>
               </div>
             </div>
+
+            {/* Extended NASA & Aerospace Open Data Services Hub */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm font-sans">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                <div>
+                  <h3 className="text-base font-black text-slate-900 flex items-center gap-2">
+                    <Database size={18} className="text-indigo-600" /> Integrated NASA & Aerospace Open Data Services Hub
+                  </h3>
+                  <p className="text-xs text-slate-500 font-medium">
+                    Direct visual access and live endpoint links to all integrated multi-agency space APIs.
+                  </p>
+                </div>
+                <span className="text-[10px] font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 px-3 py-1 rounded-full uppercase">
+                  14 Live Endpoints Active
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 font-mono">
+                {[
+                  {
+                    name: "Open Science Data Repository (OSDR)",
+                    desc: "Biological payloads, spaceflight experiments, and direct file download URLs.",
+                    action: "osdr_files",
+                    directUrl: "/api/nasa?action=osdr_files&studyId=87",
+                    badge: "OSDR Data Server",
+                  },
+                  {
+                    name: "TechTransfer Patents & Software",
+                    desc: "NASA patents, open-source engineering software, and spinoff inventions.",
+                    action: "techtransfer",
+                    directUrl: "/api/nasa?action=techtransfer&type=software&query=engine",
+                    badge: "TechTransfer API",
+                  },
+                  {
+                    name: "NORAD TLE Satellite Orbits",
+                    desc: "Two-Line Element orbital trajectory records for Earth-orbiting satellites.",
+                    action: "tle",
+                    directUrl: "/api/nasa?action=tle&query=HUBBLE",
+                    badge: "TLE Orbital API",
+                  },
+                  {
+                    name: "InSight Mars Weather Telemetry",
+                    desc: "Atmospheric weather, temperature, and pressure logs from Mars InSight lander.",
+                    action: "mars_weather",
+                    directUrl: "/api/nasa?action=mars_weather",
+                    badge: "Mars InSight",
+                  },
+                  {
+                    name: "Satellite Situation Center (SSC)",
+                    desc: "Geocentric spacecraft position data within empirical geophysical regions.",
+                    action: "ssc",
+                    directUrl: "/api/nasa?action=ssc",
+                    badge: "GSFC SSC Web",
+                  },
+                  {
+                    name: "Moon & Mars Trek WMTS Maps",
+                    desc: "Web Map Tile Service for high-res lunar & martian surface imagery tiles.",
+                    action: "trek",
+                    directUrl: "/api/nasa?action=trek&target=Moon",
+                    badge: "JPL Trek Tiles",
+                  },
+                ].map((item, idx) => (
+                  <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between space-y-3 hover:border-indigo-300 transition">
+                    <div className="space-y-1 font-sans">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[9px] font-bold uppercase tracking-wider text-indigo-700 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded">
+                          {item.badge}
+                        </span>
+                        <span className="w-2 h-2 rounded-full bg-emerald-500" title="API Live" />
+                      </div>
+                      <h4 className="text-xs font-bold text-slate-900 pt-1">{item.name}</h4>
+                      <p className="text-[11px] text-slate-500 font-medium leading-normal">{item.desc}</p>
+                    </div>
+
+                    <div className="flex items-center justify-between gap-2 pt-2 border-t border-slate-200/80 font-mono text-[10px]">
+                      <a
+                        href={item.directUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-slate-600 hover:text-slate-900 font-bold flex items-center gap-1 hover:underline"
+                      >
+                        JSON Endpoint <ExternalLink size={10} />
+                      </a>
+                      <button
+                        onClick={() => {
+                          setActiveTab("json_workbench");
+                          setSelectedEndpoint(item.action);
+                          fetchRawEndpointJson(item.action);
+                        }}
+                        className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-2.5 py-1 rounded transition cursor-pointer flex items-center gap-1"
+                      >
+                        Inspect Payload <Code2 size={10} />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         )}
 
@@ -877,6 +975,13 @@ export default function SpaceObservatoryResearchPage() {
                 { id: "eonet", name: "EONET Earth Events" },
                 { id: "fireballs", name: "JPL Fireballs" },
                 { id: "techport", name: "Space TechPort" },
+                { id: "osdr", name: "OSDR Science Studies" },
+                { id: "osdr_files", name: "OSDR Study Files & Downloads" },
+                { id: "techtransfer", name: "TechTransfer Patents & Software" },
+                { id: "tle", name: "NORAD TLE Satellites" },
+                { id: "mars_weather", name: "InSight Mars Weather" },
+                { id: "ssc", name: "Satellite Situation Center" },
+                { id: "trek", name: "Moon & Mars Trek WMTS" },
               ].map((ep) => (
                 <button
                   key={ep.id}
