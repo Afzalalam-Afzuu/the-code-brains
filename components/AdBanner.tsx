@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 interface AdBannerProps {
   slot?: string;
@@ -17,9 +18,14 @@ export default function AdBanner({
   className = "my-6",
   label = "ADVERTISEMENT",
 }: AdBannerProps) {
+  const pathname = usePathname();
   const adRef = useRef<boolean>(false);
 
+  const isNoAdsPage =
+    pathname?.startsWith("/nasa") || pathname?.startsWith("/space-observatory");
+
   useEffect(() => {
+    if (isNoAdsPage) return;
     if (adRef.current) return;
     adRef.current = true;
 
@@ -29,7 +35,11 @@ export default function AdBanner({
     } catch (err) {
       console.log("AdSense push notice:", err);
     }
-  }, []);
+  }, [isNoAdsPage]);
+
+  if (isNoAdsPage) {
+    return null;
+  }
 
   return (
     <div className={`w-full flex flex-col items-center justify-center text-center overflow-hidden ${className}`}>

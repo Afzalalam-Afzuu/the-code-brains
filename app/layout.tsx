@@ -3,6 +3,7 @@ import Script from "next/script";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import LayoutShell from "../components/LayoutShell";
+import AdSenseScript from "../components/AdSenseScript";
 import { getNavDataFromDB } from "../lib/db-actions";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -147,12 +148,8 @@ export default async function RootLayout({
   return (
     <html lang="en" className={`${plusJakartaSans.variable} ${inter.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
-        {/* Google AdSense Auto Ads Script optimized with lazyOnload strategy */}
-        <Script
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3691889459537976"
-          strategy="lazyOnload"
-          crossOrigin="anonymous"
-        />
+        {/* Google AdSense Auto Ads Script conditionally disabled on /nasa & /space-observatory */}
+        <AdSenseScript />
         {/* Google AdSense Account Code */}
         <meta name="google-adsense-account" content="ca-pub-3691889459537976" />
         {/* Google Site Verification Code */}

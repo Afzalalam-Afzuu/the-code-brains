@@ -39,7 +39,8 @@ export default function ToolsRootLayout({ children }: { children: React.ReactNod
     "description": "Collection of free, client-side web utilities, calculators, developer formats, and AI assistants.",
     "url": `${siteUrl}/tools`,
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "AI Chat Assistant", "url": `${siteUrl}/tools/ai-chat` },
+      { "@type": "ListItem", "position": 1, "name": "NASA Real-Time Space Observatory", "url": `${siteUrl}/tools/nasa-explorer` },
+      { "@type": "ListItem", "position": 2, "name": "AI Chat Assistant", "url": `${siteUrl}/tools/ai-chat` },
       { "@type": "ListItem", "position": 2, "name": "Age & Milestone Calculator", "url": `${siteUrl}/tools/age-calculator` },
       { "@type": "ListItem", "position": 3, "name": "Custom QR Code Generator", "url": `${siteUrl}/tools/qr-generator` },
       { "@type": "ListItem", "position": 4, "name": "Browser Image Compressor", "url": `${siteUrl}/tools/image-compressor` },

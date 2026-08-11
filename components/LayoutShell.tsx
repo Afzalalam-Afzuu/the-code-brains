@@ -17,6 +17,8 @@ export default function LayoutShell({
   const isCustomLayoutPage =
     pathname?.startsWith("/portfolio") ||
     pathname?.startsWith("/portfolia") ||
+    pathname?.startsWith("/nasa") ||
+    pathname?.startsWith("/space-observatory") ||
     pathname?.startsWith("/tools");
 
   return (

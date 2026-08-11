@@ -22,15 +22,24 @@ import {
   ShieldCheck,
   Sparkles,
   ArrowRight,
+  Orbit,
 } from "lucide-react";
 
 export const metadata = {
-  title: "Free Online Web Tools — AI Chat, PDF Tools, Password Generator, QR & Age Calculators",
-  description: "100% free, fast, and private online web tools. AI Chat, Password Generator, Unit Converter, Color Palette, Base64, EMI Calculator, BMI Calculator, PDF Tools, and IP Checker.",
+  title: "Free Online Web Tools — NASA Observatory, AI Chat, PDF Tools, Password Generator, QR & Age Calculators",
+  description: "100% free, fast, and private online web tools. NASA Space Observatory, AI Chat, Password Generator, Unit Converter, Color Palette, Base64, EMI Calculator, BMI Calculator, PDF Tools, and IP Checker.",
 };
 
 export default function ToolsHubPage() {
   const tools = [
+    {
+      id: "space-observatory",
+      title: "Global Space Observatory & Research Lab",
+      description: "Real-time ISS orbital tracking, near-Earth asteroid radar, solar flares matrix, DSCOVR Earth satellite photos, and raw JSON data workbench.",
+      icon: Orbit,
+      href: "/space-observatory",
+      badge: "🚀 Space Portal",
+    },
     {
       id: "ai-chat",
       title: "AI Chat Assistant",
@@ -212,6 +221,37 @@ export default function ToolsHubPage() {
           <p className="text-sm sm:text-base text-slate-800 font-extrabold max-w-2xl mx-auto">
             Useful browser utilities engineered for speed and total privacy. Zero signups, zero server uploads, 100% free forever.
           </p>
+        </div>
+
+        {/* Featured Global Space Observatory Banner */}
+        <div className="max-w-6xl mx-auto">
+          <Link
+            href="/space-observatory"
+            className="bg-gradient-to-r from-indigo-900 via-slate-900 to-blue-950 text-white rounded-2xl p-6 sm:p-8 border-2 border-indigo-500/40 shadow-xl hover:shadow-2xl transition duration-300 flex flex-col md:flex-row items-center justify-between gap-6 group relative overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="space-y-3 max-w-2xl z-10 text-center md:text-left">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-2">
+                <span className="bg-indigo-500/20 text-indigo-300 border border-indigo-400/40 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5">
+                  <Orbit size={14} className="animate-spin text-indigo-400" /> Featured Science Portal
+                </span>
+                <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 text-xs font-bold px-3 py-1 rounded-full uppercase">
+                  ISS Real-Time Tracking
+                </span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
+                Global Space Observatory & Data Research Lab
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed">
+                Access real-time International Space Station orbit tracking, near-Earth asteroid radar, solar flares matrix, DSCOVR satellite Earth imagery, exoplanet archives, and live JSON data workbench.
+              </p>
+            </div>
+            <div className="shrink-0 z-10">
+              <span className="bg-indigo-600 group-hover:bg-indigo-500 text-white font-black text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-lg inline-flex items-center gap-2 transition duration-200">
+                Launch Space Observatory <ArrowRight size={16} />
+              </span>
+            </div>
+          </Link>
         </div>
 
         {/* Dedicated High-Visibility Ad Banner */}
