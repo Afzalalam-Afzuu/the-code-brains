@@ -25,9 +25,35 @@ import {
   Orbit,
 } from "lucide-react";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thecodebrains.com";
+
 export const metadata = {
-  title: "Free Online Web Tools — NASA Observatory, AI Chat, PDF Tools, Password Generator, QR & Age Calculators",
-  description: "100% free, fast, and private online web tools. NASA Space Observatory, AI Chat, Password Generator, Unit Converter, Color Palette, Base64, EMI Calculator, BMI Calculator, PDF Tools, and IP Checker.",
+  title: "Free Online Web Tools Suite — AI Generators, PDF Tools & Calculators | TheCodeBrains",
+  description: "100% free, fast, and private online web tools. AI Chat Assistant, Password Generator, QR Generator, Unit Converter, Color Palette, Base64, EMI & BMI Calculators, PDF Utilities, and Space Observatory.",
+  alternates: {
+    canonical: `${siteUrl}/tools`,
+  },
+  openGraph: {
+    title: "Free Online Web Tools & Utilities Suite — TheCodeBrains",
+    description: "Access 20+ free browser-based developer, utility, and AI productivity tools. Zero installation required.",
+    url: `${siteUrl}/tools`,
+    siteName: "TheCodeBrains Tools Hub",
+    images: [
+      {
+        url: `${siteUrl}/images/modern_laptop.png`,
+        width: 1200,
+        height: 630,
+        alt: "TheCodeBrains Web Tools Hub",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Online Web Tools Suite — TheCodeBrains",
+    description: "20+ fast, free, private online web tools, AI chat assistants, and utilities.",
+    images: [`${siteUrl}/images/modern_laptop.png`],
+  },
 };
 
 export default function ToolsHubPage() {
