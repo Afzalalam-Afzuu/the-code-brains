@@ -159,7 +159,7 @@ export default async function Home() {
               Big Tech Savings Sale • Live Verified Deals
             </div>
             <h1 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
-              India's #2 Tech Reviews & Multi-Store Price Comparison
+              India's #1 Tech Reviews & Multi-Store Price Comparison
             </h1>
             <p className="text-blue-100 text-xs sm:text-sm font-semibold max-w-2xl leading-relaxed">
               Compare live prices on Amazon, Flipkart & Brand Stores with 100% independent editor testing, lab benchmarks, and exclusive discount coupons.

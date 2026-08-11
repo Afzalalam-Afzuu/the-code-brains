@@ -62,6 +62,10 @@ export default function ToolsFooter() {
 
           {/* Navigation Quick Links */}
           <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-black text-slate-800">
+            <Link href="/space-observatory" className="hover:text-[#2874f0] underline transition font-bold text-indigo-600">
+              🚀 Space Observatory
+            </Link>
+            <span>•</span>
             <Link href="/tools/ai-chat" className="hover:text-[#2874f0] underline transition">
               AI Chat
             </Link>
