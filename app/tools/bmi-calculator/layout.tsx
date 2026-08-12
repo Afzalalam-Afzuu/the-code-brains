@@ -1,6 +1,6 @@
 import React from "react";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://thecodebrains.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thecodebrains.com";
 
 export const metadata = {
   title: "Free Body Mass Index (BMI) Calculator — Check Health & Ideal Weight Range",

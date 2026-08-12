@@ -1,7 +1,7 @@
 import { getAffiliateProductsFromDB } from "@/lib/db-actions";
 import CompareClient from "./CompareClient";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://thecodebrains.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thecodebrains.com";
 
 export const metadata = {
   title: "Compare Products & Multi-Store Prices — TheCodeBrains",

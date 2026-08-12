@@ -1,6 +1,6 @@
 import React from "react";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://thecodebrains.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thecodebrains.com";
 
 export const metadata = {
   title: "Free Browser Image Compressor — Reduce JPG, PNG & WEBP File Size Online",

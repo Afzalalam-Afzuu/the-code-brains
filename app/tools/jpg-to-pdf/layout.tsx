@@ -1,6 +1,6 @@
 import React from "react";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://thecodebrains.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thecodebrains.com";
 
 export const metadata = {
   title: "Convert JPG to PDF Online — Free Image to PDF Converter",

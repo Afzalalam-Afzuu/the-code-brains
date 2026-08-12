@@ -7,7 +7,7 @@ import ToolsFooter from "@/components/tools/ToolsFooter";
 import { QrCode, Download, Copy, Check, Sparkles, RefreshCw, Layers, Link as LinkIcon, Wifi, Phone } from "lucide-react";
 
 export default function QrGeneratorPage() {
-  const [text, setText] = useState<string>("https://thecodebrains.com");
+  const [text, setText] = useState<string>("https://www.thecodebrains.com");
   const [darkColor, setDarkColor] = useState<string>("#000000");
   const [lightColor, setLightColor] = useState<string>("#ffffff");
   const [qrSize, setQrSize] = useState<number>(300);
@@ -48,7 +48,7 @@ export default function QrGeneratorPage() {
   };
 
   const handlePreset = (type: string) => {
-    if (type === "url") setText("https://thecodebrains.com");
+    if (type === "url") setText("https://www.thecodebrains.com");
     if (type === "wifi") setText("WIFI:T:WPA;S:MyHomeWiFi;P:SecretPassword123;;");
     if (type === "whatsapp") setText("https://wa.me/919876543210?text=Hello%20TheCodeBrains");
   };
