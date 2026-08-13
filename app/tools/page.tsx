@@ -23,6 +23,7 @@ import {
   Sparkles,
   ArrowRight,
   Orbit,
+  Terminal,
 } from "lucide-react";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thecodebrains.com";
@@ -58,6 +59,14 @@ export const metadata = {
 
 export default function ToolsHubPage() {
   const tools = [
+    {
+      id: "api-playground",
+      title: "RapidAPI Playground & API Workbench",
+      description: "Interactive API testing console like RapidAPI & Postman. Test endpoints, generate multi-language code snippets (JS, Python, cURL), and view real-time JSON responses.",
+      icon: Terminal,
+      href: "/tools/api-playground",
+      badge: "⚡ API Workbench",
+    },
     {
       id: "space-observatory",
       title: "Global Space Observatory & Research Lab",

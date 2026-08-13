@@ -2,15 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Wrench, Calendar, QrCode, Image as ImageIcon, Code2, Database, ArrowRight, Home, Orbit } from "lucide-react";
+import { Wrench, Calendar, QrCode, Image as ImageIcon, Code2, Database, ArrowRight, Home, Orbit, Terminal } from "lucide-react";
 
 export default function ToolsNavbar() {
   const pathname = usePathname();
 
   const toolLinks = [
+    { name: "API Workbench", href: "/tools/api-playground", icon: Terminal },
     { name: "Space Observatory", href: "/space-observatory", icon: Orbit },
     { name: "Age Calculator", href: "/tools/age-calculator", icon: Calendar },
-    { name: "QR Code Generator", href: "/tools/qr-generator", icon: QrCode },
+    { name: "QR Generator", href: "/tools/qr-generator", icon: QrCode },
     { name: "Image Compressor", href: "/tools/image-compressor", icon: ImageIcon },
     { name: "JSON Formatter", href: "/tools/json-formatter", icon: Code2 },
     { name: "Dummy JSON", href: "/tools/dummy-json", icon: Database },
