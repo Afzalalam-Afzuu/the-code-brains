@@ -24,7 +24,7 @@ export default async function CourseLayout({
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
       {/* Top W3-Style Course Switcher Bar */}
-      <header className="sticky top-0 z-30 bg-slate-900 border-b border-slate-800 px-4 py-2 flex items-center justify-between overflow-x-auto scrollbar-none shrink-0">
+      <header className="relative bg-slate-900 border-b border-slate-800 px-4 py-2 flex items-center justify-between overflow-x-auto scrollbar-none shrink-0">
         <div className="flex items-center gap-1 sm:gap-2">
           <Link
             href="/learning"

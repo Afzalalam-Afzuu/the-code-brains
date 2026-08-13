@@ -179,10 +179,10 @@ export default function Navbar({ navItems }: NavbarProps) {
               <li>
                 <Link
                   href="/learning"
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100 transition font-black border border-emerald-200"
+                  className="flex items-center gap-1.5 px-3 py-2 whitespace-nowrap rounded-lg hover:text-[#2874f0] hover:bg-blue-50 transition text-slate-700 font-bold"
                 >
-                  <BookOpen size={14} className="text-emerald-600" />
-                  <span>Tutorials 📚</span>
+                  <BookOpen size={14} className="text-slate-400" />
+                  <span>Tutorials</span>
                 </Link>
               </li>
               {currentNavData.map((item) => {

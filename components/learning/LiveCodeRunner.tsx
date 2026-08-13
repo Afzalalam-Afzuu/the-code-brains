@@ -43,92 +43,91 @@ export default function LiveCodeRunner({ initialCode, title = "Try It Yourself E
         </div>
 
         {/* Action Controls */}
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {/* View Mode Toggle Buttons */}
-          <div className="hidden sm:flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs font-mono">
+          <div className="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 text-[11px] font-mono">
             <button
               onClick={() => setActiveTab("split")}
-              className={`px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1.5 ${
+              className={`px-2.5 py-1 rounded-lg font-bold transition flex items-center gap-1 ${
                 activeTab === "split" ? "bg-slate-800 text-white" : "text-slate-400 hover:text-slate-200"
               }`}
             >
-              <Monitor size={12} /> Split View
+              <Monitor size={11} /> <span className="hidden xs:inline">Split</span>
             </button>
             <button
               onClick={() => setActiveTab("editor")}
-              className={`px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1.5 ${
+              className={`px-2.5 py-1 rounded-lg font-bold transition flex items-center gap-1 ${
                 activeTab === "editor" ? "bg-slate-800 text-white" : "text-slate-400 hover:text-slate-200"
               }`}
             >
-              <Code size={12} /> Editor Only
+              <Code size={11} /> Code
             </button>
             <button
               onClick={() => setActiveTab("preview")}
-              className={`px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1.5 ${
+              className={`px-2.5 py-1 rounded-lg font-bold transition flex items-center gap-1 ${
                 activeTab === "preview" ? "bg-slate-800 text-white" : "text-slate-400 hover:text-slate-200"
               }`}
             >
-              <Play size={12} /> Result Only
+              <Play size={11} /> Result
             </button>
           </div>
 
           <button
             onClick={handleCopy}
-            className="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 border border-slate-700"
+            className="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-xl text-xs font-bold transition flex items-center gap-1 border border-slate-700"
             title="Copy Code"
           >
-            {copied ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
+            {copied ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
             <span className="hidden xs:inline">{copied ? "Copied!" : "Copy"}</span>
           </button>
 
           <button
             onClick={handleReset}
-            className="bg-slate-800 hover:bg-amber-950/60 hover:border-amber-700/60 text-slate-200 hover:text-amber-400 px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 border border-slate-700"
-            title="Reset Code to Original"
+            className="bg-slate-800 hover:bg-amber-950/60 hover:border-amber-700/60 text-slate-200 hover:text-amber-400 px-2.5 py-1 rounded-xl text-xs font-bold transition flex items-center gap-1 border border-slate-700"
+            title="Reset Code"
           >
-            <RotateCcw size={14} />
-            <span className="hidden xs:inline">Reset</span>
+            <RotateCcw size={13} />
           </button>
         </div>
       </div>
 
       {/* Editor & Preview Area */}
-      <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-800 min-h-[380px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-800">
         {/* Source Code Editor */}
         {(activeTab === "split" || activeTab === "editor") && (
-          <div className="p-4 bg-slate-950 flex flex-col">
+          <div className="p-3 sm:p-4 bg-slate-950 flex flex-col">
             <div className="flex items-center justify-between mb-2">
               <span className="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
                 <Code size={13} className="text-blue-400" /> Source Code Input
               </span>
-              <span className="text-[10px] text-slate-500 font-mono">HTML5 / CSS / JS</span>
+              <span className="text-[10px] text-slate-500 font-mono">HTML / CSS / JS</span>
             </div>
             <textarea
               value={code}
               onChange={(e) => setCode(e.target.value)}
               spellCheck={false}
-              className="w-full flex-1 min-h-[320px] bg-slate-900/90 text-emerald-300 font-mono text-xs p-4 rounded-xl border border-slate-800 focus:border-emerald-500 outline-none leading-relaxed resize-y shadow-inner"
+              className="w-full flex-1 min-h-[200px] sm:min-h-[280px] bg-slate-900/90 text-emerald-300 font-mono text-xs p-3.5 rounded-xl border border-slate-800 focus:border-emerald-500 outline-none leading-relaxed resize-y shadow-inner"
             />
           </div>
         )}
 
         {/* Live Preview Result Frame */}
         {(activeTab === "split" || activeTab === "preview") && (
-          <div className="p-4 bg-slate-900/60 flex flex-col">
+          <div className="p-3 sm:p-4 bg-slate-900/60 flex flex-col">
             <div className="flex items-center justify-between mb-2">
               <span className="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
                 <Monitor size={13} className="text-emerald-400" /> Live Browser Result
               </span>
               <span className="text-[10px] text-emerald-400 font-mono flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Sandbox Isolated
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Live Result
               </span>
             </div>
-            <div className="w-full flex-1 min-h-[320px] bg-white rounded-xl overflow-hidden border border-slate-700 shadow-lg">
+            <div className="w-full flex-1 min-h-[200px] sm:min-h-[280px] bg-white rounded-xl overflow-hidden border border-slate-700 shadow-lg">
               <iframe
                 srcDoc={code}
                 title="W3 Live Code Preview"
                 sandbox="allow-scripts allow-modals"
-                className="w-full h-full min-h-[320px] border-0"
+                className="w-full h-full min-h-[200px] sm:min-h-[280px] border-0"
               />
             </div>
           </div>
