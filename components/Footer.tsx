@@ -84,12 +84,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Free Web Tools */}
+          {/* Free Web Tools & Learning */}
           <div>
-            <h4 className="text-[11px] font-black text-amber-400 uppercase tracking-widest mb-3">FREE WEB TOOLS</h4>
+            <h4 className="text-[11px] font-black text-amber-400 uppercase tracking-widest mb-3">TOOLS & LEARNING</h4>
             <ul className="space-y-2 text-slate-300 font-semibold">
-              <li><Link href="/tools" className="hover:text-amber-400 transition">All Tools Hub</Link></li>
-              <li><Link href="/tools/age-calculator" className="hover:text-amber-400 transition">Age Calculator</Link></li>
+              <li><Link href="/learning" className="hover:text-emerald-400 transition text-emerald-400 font-bold">W3-Style Code Tutorials 📚</Link></li>
+              <li><Link href="/tools" className="hover:text-amber-400 transition">All Web Tools Hub</Link></li>
               <li><Link href="/tools/qr-generator" className="hover:text-amber-400 transition">QR Code Generator</Link></li>
               <li><Link href="/tools/image-compressor" className="hover:text-amber-400 transition">Image Compressor</Link></li>
               <li><Link href="/tools/json-formatter" className="hover:text-amber-400 transition">JSON Formatter</Link></li>

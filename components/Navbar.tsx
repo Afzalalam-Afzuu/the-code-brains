@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { Search, Mail, ChevronDown, Sparkles, ShieldCheck, Tag, Zap, Smartphone, Laptop, Tv, Home as HomeIcon, Award, X } from "lucide-react";
+import { Search, Mail, ChevronDown, Sparkles, ShieldCheck, Tag, Zap, Smartphone, Laptop, Tv, Home as HomeIcon, Award, X, BookOpen } from "lucide-react";
 import { navData, NavItem } from "../lib/nav-data";
 
 interface NavbarProps {
@@ -174,6 +174,15 @@ export default function Navbar({ navItems }: NavbarProps) {
                 >
                   <Tag size={14} />
                   <span>Top Offers</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/learning"
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100 transition font-black border border-emerald-200"
+                >
+                  <BookOpen size={14} className="text-emerald-600" />
+                  <span>Tutorials 📚</span>
                 </Link>
               </li>
               {currentNavData.map((item) => {
