@@ -128,7 +128,7 @@ export default async function Home() {
 
       {/* TRUST & AUTHORITY METRICS BAR */}
       <div className="bg-slate-900 text-white rounded-2xl p-4 sm:p-5 border border-slate-800 shadow-sm">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center divide-x divide-slate-800/80">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center divide-x divide-slate-800/80">
           <div className="px-2">
             <p className="text-lg sm:text-2xl font-black text-[#ffe500]">150,000+</p>
             <p className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider">Gadgets Tested</p>
@@ -145,6 +145,15 @@ export default async function Home() {
             <p className="text-lg sm:text-2xl font-black text-indigo-400">Live 24/7</p>
             <p className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider">Price Comparisons</p>
           </div>
+          <div className="px-2 col-span-2 md:col-span-1">
+            <p className="text-lg sm:text-2xl font-black text-orange-400 flex items-center justify-center gap-1 font-mono">
+              <svg className="w-5 h-5 fill-[#F38020]" viewBox="0 0 24 24">
+                <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+              </svg>
+              Cloudflare
+            </p>
+            <p className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider">DDoS & SSL Protection</p>
+          </div>
         </div>
       </div>
 
@@ -154,9 +163,17 @@ export default async function Home() {
 
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-3 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 bg-[#ffe500] text-slate-950 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
-              <Flame size={14} className="fill-slate-950" />
-              Big Tech Savings Sale • Live Verified Deals
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-2">
+              <div className="inline-flex items-center gap-2 bg-[#ffe500] text-slate-950 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                <Flame size={14} className="fill-slate-950" />
+                Big Tech Savings Sale • Live Verified Deals
+              </div>
+              <div className="inline-flex items-center gap-1.5 bg-slate-950/80 text-orange-400 border border-orange-500/40 text-xs font-mono font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                <svg className="w-3.5 h-3.5 fill-[#F38020]" viewBox="0 0 24 24">
+                  <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                </svg>
+                Cloudflare Protected Website
+              </div>
             </div>
             <h1 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
               India's #1 Tech Reviews & Multi-Store Price Comparison

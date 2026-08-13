@@ -365,7 +365,7 @@ export default function ToolsHubPage() {
         </div>
 
         {/* Privacy & Trust Metrics */}
-        <div className="bg-white border-2 border-slate-200 rounded-2xl p-6 sm:p-8 max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 text-center shadow-sm">
+        <div className="bg-white border-2 border-slate-200 rounded-2xl p-6 sm:p-8 max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center shadow-sm">
           <div className="space-y-1">
             <ShieldCheck size={28} className="text-emerald-600 mx-auto" />
             <h3 className="text-sm font-black text-slate-950">100% Client Side</h3>
@@ -378,8 +378,17 @@ export default function ToolsHubPage() {
           </div>
           <div className="space-y-1">
             <Sparkles size={28} className="text-[#2874f0] mx-auto" />
-            <h3 className="text-sm font-black text-slate-950">No Ads / No Registration</h3>
+            <h3 className="text-sm font-black text-slate-950">Free & Instant</h3>
             <p className="text-xs text-slate-800 font-extrabold">Use any tool freely without creating an account.</p>
+          </div>
+          <div className="space-y-1">
+            <div className="w-7 h-7 rounded-full bg-orange-100 border border-orange-300 mx-auto flex items-center justify-center">
+              <svg className="w-4 h-4 fill-[#F38020]" viewBox="0 0 24 24">
+                <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+              </svg>
+            </div>
+            <h3 className="text-sm font-black text-slate-950">Cloudflare Protected</h3>
+            <p className="text-xs text-slate-800 font-extrabold">Encrypted by 256-Bit SSL & DDoS Shield.</p>
           </div>
         </div>
       </main>

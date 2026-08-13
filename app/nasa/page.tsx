@@ -665,6 +665,12 @@ export default function SpaceObservatoryResearchPage() {
             <span className="bg-slate-100 text-slate-800 font-semibold px-2.5 py-1 rounded-md border border-slate-200">
               ISRO Feeds
             </span>
+            <span className="bg-orange-50 text-orange-950 font-bold px-2.5 py-1 rounded-md border border-orange-200 flex items-center gap-1.5 shadow-2xs">
+              <svg className="w-3.5 h-3.5 fill-[#F38020]" viewBox="0 0 24 24">
+                <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+              </svg>
+              Cloudflare Shield
+            </span>
             <span className="bg-blue-50 text-blue-700 font-bold px-2.5 py-1 rounded-md border border-blue-200 flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" /> ISS NORAD 25544
             </span>
@@ -2066,6 +2072,12 @@ export default function SpaceObservatoryResearchPage() {
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-mono">
+              <span className="bg-orange-50 text-orange-950 px-3 py-1.5 rounded-md border border-orange-200 font-bold flex items-center gap-1.5 shadow-2xs">
+                <svg className="w-3.5 h-3.5 fill-[#F38020]" viewBox="0 0 24 24">
+                  <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                </svg>
+                CLOUD FLARE DDOS SHIELD: ACTIVE
+              </span>
               <span className="bg-slate-100 text-slate-700 px-3 py-1.5 rounded-md border border-slate-200 font-bold">
                 STATION: GOLDSTONE DSS-14
               </span>

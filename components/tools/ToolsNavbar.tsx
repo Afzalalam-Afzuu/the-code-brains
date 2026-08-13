@@ -30,8 +30,14 @@ export default function ToolsNavbar() {
               <span className="bg-blue-100 text-[#2874f0] border border-blue-300 text-[10px] font-black px-2 py-0.5 rounded uppercase">
                 TOOLS
               </span>
+              <span className="hidden lg:inline-flex items-center gap-1 bg-orange-50 text-orange-950 border border-orange-200 text-[10px] font-black px-2 py-0.5 rounded uppercase shadow-2xs">
+                <svg className="w-3 h-3 fill-[#F38020]" viewBox="0 0 24 24">
+                  <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                </svg>
+                Cloudflare Secured
+              </span>
             </div>
-            <p className="text-[11px] text-slate-600 font-extrabold leading-none">Free Client-Side Web Utilities</p>
+            <p className="text-[11px] text-slate-600 font-extrabold leading-none mt-0.5">Free Client-Side Web Utilities</p>
           </div>
         </Link>
 

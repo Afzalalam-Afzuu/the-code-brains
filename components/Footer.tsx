@@ -48,9 +48,17 @@ export default function Footer() {
                 <span>Join WhatsApp</span>
               </a>
             </div>
-            <div className="flex items-center gap-2 font-bold text-slate-300 pt-1">
-              <ShieldCheck size={14} className="text-[#388e3c]" />
-              <span>100% Independent Editorial Trust</span>
+            <div className="flex flex-col gap-1.5 pt-1 text-slate-300">
+              <div className="flex items-center gap-2 font-bold">
+                <ShieldCheck size={14} className="text-[#388e3c]" />
+                <span>100% Independent Editorial Trust</span>
+              </div>
+              <div className="flex items-center gap-2 font-bold text-orange-400 text-[11px] bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700 w-fit">
+                <svg className="w-3.5 h-3.5 fill-[#F38020]" viewBox="0 0 24 24">
+                  <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                </svg>
+                <span>Secured & Accelerated by <strong>Cloudflare</strong></span>
+              </div>
             </div>
           </div>
 
@@ -89,26 +97,38 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Policy */}
+          {/* Policy & Security */}
           <div>
-            <h4 className="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-3">POLICY</h4>
+            <h4 className="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-3">POLICY & SECURITY</h4>
             <ul className="space-y-2 text-slate-300 font-semibold">
               <li><Link href="/terms-of-use" className="hover:text-[#2874f0] transition">Terms Of Use</Link></li>
               <li><Link href="/privacy-policy" className="hover:text-[#2874f0] transition">Privacy Policy</Link></li>
               <li><Link href="/affiliate-disclosure" className="hover:text-[#2874f0] transition">Affiliate Disclosure</Link></li>
+              <li className="pt-1 text-[11px] text-emerald-400 flex items-center gap-1 font-mono">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Cloudflare DDoS Shield Active
+              </li>
             </ul>
           </div>
 
         </div>
 
-        {/* Bottom Disclaimer Bar */}
+        {/* Bottom Security & Disclaimer Bar */}
         <div className="border-t border-slate-700/80 pt-6 space-y-3 text-[11px] text-slate-400 font-medium">
           <p>
             <strong className="text-slate-300 uppercase tracking-wider">Affiliate Transparency:</strong> TheCodeBrains is a participant in the Amazon Services LLC Associates Program and Flipkart Affiliate Program, designed to provide a means for sites to earn advertising fees by linking to Amazon.in and Flipkart.com.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 text-xs font-semibold text-slate-400">
             <p>&copy; {new Date().getFullYear()} TheCodeBrains Media. All Rights Reserved.</p>
-            <p>Made for Indian Tech Enthusiasts ⚡</p>
+            <div className="flex items-center gap-3">
+              <span className="text-slate-300 flex items-center gap-1 font-mono text-[11px]">
+                <svg className="w-3.5 h-3.5 fill-[#F38020]" viewBox="0 0 24 24">
+                  <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                </svg>
+                Cloudflare Protected
+              </span>
+              <span>•</span>
+              <p>Made for Indian Tech Enthusiasts ⚡</p>
+            </div>
           </div>
         </div>
 

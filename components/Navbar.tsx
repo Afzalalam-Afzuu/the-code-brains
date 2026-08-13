@@ -80,12 +80,18 @@ export default function Navbar({ navItems }: NavbarProps) {
               ⚡
             </div>
             <div className="flex flex-col leading-none shrink-0">
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1 sm:gap-1.5">
                 <span className="text-base sm:text-xl font-black italic tracking-tight text-white">
                   TheCodeBrains
                 </span>
                 <span className="bg-[#ffe500] text-slate-900 text-[8px] sm:text-[9px] font-black px-1 sm:px-1.5 py-0.5 rounded italic shadow-xs">
                   PLUS✦
+                </span>
+                <span className="hidden lg:inline-flex items-center gap-1 bg-slate-900/90 text-orange-400 border border-slate-700 text-[8px] sm:text-[9px] font-mono font-bold px-1.5 py-0.5 rounded uppercase shadow-xs">
+                  <svg className="w-2.5 h-2.5 fill-[#F38020]" viewBox="0 0 24 24">
+                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                  </svg>
+                  Cloudflare Secured
                 </span>
               </div>
               <span className="hidden sm:block text-[9px] text-blue-100 font-bold tracking-widest uppercase mt-0.5">

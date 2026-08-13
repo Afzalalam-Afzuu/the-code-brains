@@ -27,9 +27,15 @@ export default function ToolsFooter() {
               <span className="bg-emerald-100 text-emerald-800 text-[10px] font-black px-2.5 py-0.5 rounded-full flex items-center gap-1 border border-emerald-300">
                 <Lock size={11} /> 100% Client-Side Privacy
               </span>
+              <span className="bg-orange-50 text-orange-950 text-[10px] font-black px-2.5 py-0.5 rounded-full flex items-center gap-1 border border-orange-300">
+                <svg className="w-3.5 h-3.5 fill-[#F38020]" viewBox="0 0 24 24">
+                  <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                </svg>
+                Cloudflare Protected
+              </span>
             </div>
             <p className="text-xs text-slate-700 max-w-md font-bold leading-relaxed">
-              All calculations, text conversions, and file processing run entirely inside your browser. No private data is ever uploaded to external servers.
+              All calculations, text conversions, and file processing run entirely inside your browser. No private data is ever uploaded to external servers. Protected & accelerated by Cloudflare DDoS Shield.
             </p>
 
             {/* Official Social Channels */}
